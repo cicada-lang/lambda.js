@@ -10,3 +10,5 @@
 (define (B f g x) (f (g x)))
 
 (assert-equal (K I) (C K))
+
+(assert-equal (S K) (K I))
