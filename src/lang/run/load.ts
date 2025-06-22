@@ -1,7 +1,7 @@
 import { ParsingError } from "@xieyuheng/x-data.js"
 import fs from "node:fs"
 import { createMod, modResolve, type Mod } from "../mod/index.ts"
-import { parseStmts } from "../syntax/index.ts"
+import { parseStmts } from "../parse/index.ts"
 
 export async function load(
   url: URL,
