@@ -16,8 +16,8 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test:node": "node --test lib/**/*.test.js",
-    "test:lang": "test-runner snapshot 'node ./lib/main.js run' 'examples/**/*.scm' --exclude 'examples/**/*.error.scm'",
-    "test:lang:error": "test-runner snapshot-error 'node ./lib/main.js run' 'examples/**/*.error.scm'",
+    "test:lang": "test-runner snapshot 'node ./lib/main.js run' 'examples/**/*.lisp' --exclude 'examples/**/*.error.lisp'",
+    "test:lang:error": "test-runner snapshot-error 'node ./lib/main.js run' 'examples/**/*.error.lisp'",
     "test": "npm run test:node && npm run test:lang && npm run test:lang:error",
     "format": "prettier src --write"
   },

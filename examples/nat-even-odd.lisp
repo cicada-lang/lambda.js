@@ -1,7 +1,7 @@
-(import true false if and or not "./boolean.scm")
-(import zero add1 sub1 zero? "./nat-church.scm")
-(import one two three four "./nat-church.scm")
-(import Y "./fix.scm")
+(import true false if and or not "./boolean.lisp")
+(import zero add1 sub1 zero? "./nat-church.lisp")
+(import one two three four "./nat-church.lisp")
+(import Y "./fix.lisp")
 
 (define (even? n)
   (if (zero? n) true

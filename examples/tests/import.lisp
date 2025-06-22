@@ -1,4 +1,4 @@
-(import id compose (rename compose c) "./compose.scm")
+(import id compose (rename compose c) "./compose.lisp")
 
 (assert-equal
   (compose
