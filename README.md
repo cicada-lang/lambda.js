@@ -1,4 +1,4 @@
-# Lambda.js
+# lambda.js
 
 An interpreter of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
 
