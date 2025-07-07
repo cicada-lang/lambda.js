@@ -10,7 +10,7 @@
 (define (rec-List target nil-case li-case)
   (target nil-case li-case))
 
-(import zero add1 "./nat-church.lisp")
+(import zero add1 "nat-church.lisp")
 
 (define (length l)
   (rec-List l
@@ -18,7 +18,7 @@
     (lambda (head target almost)
       (add1 almost))))
 
-(import true "./bool.lisp")
+(import true "bool.lisp")
 
 (assert-equal (length nil) zero)
 (assert-equal (length (li true nil)) (add1 zero))

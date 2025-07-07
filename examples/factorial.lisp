@@ -1,6 +1,6 @@
-(import zero? add mul sub1 "./nat-church.lisp")
-(import zero one two three four "./nat-church.lisp")
-(import if true false "./bool.lisp")
+(import zero? add mul sub1 "nat-church.lisp")
+(import zero one two three four "nat-church.lisp")
+(import if true false "bool.lisp")
 
 ;; (claim factorial (-> Nat Nat))
 

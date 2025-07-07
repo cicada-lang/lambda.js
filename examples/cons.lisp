@@ -13,7 +13,7 @@
 
 ;; # Null
 
-(import true false "./bool.lisp")
+(import true false "bool.lisp")
 
 (define (null f) true)
 (define (null? pair) (pair (lambda (car cdr) false)))
