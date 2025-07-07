@@ -92,7 +92,7 @@
 
 ;; # zero?
 
-(import true false if and or not "./boolean.lisp")
+(import true false if and or not "./bool.lisp")
 
 (define (zero? n) (iter-Nat n true (lambda (x) false)))
 

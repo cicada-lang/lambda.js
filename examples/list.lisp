@@ -18,7 +18,7 @@
     (lambda (head target almost)
       (add1 almost))))
 
-(import true "./boolean.lisp")
+(import true "./bool.lisp")
 
 (assert-equal (length nil) zero)
 (assert-equal (length (li true nil)) (add1 zero))
