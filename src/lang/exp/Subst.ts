@@ -1,23 +1,21 @@
 import type { Exp } from "../exp/index.ts"
 
-export type Binding = {
+export type Bind = {
   name: string
   exp: Exp
 }
 
-export type Subst = Map<string, Binding>
+export type Subst = Map<string, Bind>
 
 export function substIsEmpty(subst: Subst): boolean {
   return subst.size === 0
 }
 
-export function substFromBindings(bindings: Array<Binding>): Subst {
-  return new Map([
-    ...bindings.map<[string, Binding]>((binding) => [binding.name, binding]),
-  ])
+export function substFromBinds(binds: Array<Bind>): Subst {
+  return new Map([...binds.map<[string, Bind]>((bind) => [bind.name, bind])])
 }
 
-export function substBindings(subst: Subst): Array<Binding> {
+export function substBinds(subst: Subst): Array<Bind> {
   return Array.from(subst.values())
 }
 
@@ -35,7 +33,7 @@ export function substMerge(left: Subst, right: Subst): Subst {
 
 export function substMapExp(subst: Subst, f: (exp: Exp) => Exp): Subst {
   return new Map([
-    ...Array.from(subst.values()).map<[string, Binding]>(({ name, exp }) => [
+    ...Array.from(subst.values()).map<[string, Bind]>(({ name, exp }) => [
       name,
       { name, exp: f(exp) },
     ]),

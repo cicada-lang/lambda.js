@@ -1,5 +1,5 @@
-import type { Binding } from "../../lang/exp/index.ts"
-import { substBindings, type Exp } from "../exp/index.ts"
+import type { Bind } from "../../lang/exp/index.ts"
+import { substBinds, type Exp } from "../exp/index.ts"
 
 export function formatExp(exp: Exp): string {
   switch (exp.kind) {
@@ -23,8 +23,8 @@ export function formatExp(exp: Exp): string {
     }
 
     case "Let": {
-      const bindings = substBindings(exp.subst).map(formatBinding)
-      return `(let (${bindings.join(" ")}) ${formatExp(exp.body)})`
+      const binds = substBinds(exp.subst).map(formatBind)
+      return `(let (${binds.join(" ")}) ${formatExp(exp.body)})`
     }
   }
 }
@@ -51,6 +51,6 @@ function formatAp(
   }
 }
 
-function formatBinding(binding: Binding): string {
-  return `[${binding.name} ${formatExp(binding.exp)}]`
+function formatBind(bind: Bind): string {
+  return `[${bind.name} ${formatExp(bind.exp)}]`
 }

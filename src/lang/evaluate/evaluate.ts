@@ -1,6 +1,6 @@
 import * as Actions from "../actions/index.ts"
 import { envExtend, envFindValue, type Env } from "../env/index.ts"
-import { substBindings, type Exp } from "../exp/index.ts"
+import { substBinds, type Exp } from "../exp/index.ts"
 import { modFindValue, type Mod } from "../mod/index.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
@@ -35,12 +35,8 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
 
     case "Let": {
       let newEnv = env
-      for (const binding of substBindings(exp.subst)) {
-        newEnv = envExtend(
-          newEnv,
-          binding.name,
-          evaluate(mod, env, binding.exp),
-        )
+      for (const bind of substBinds(exp.subst)) {
+        newEnv = envExtend(newEnv, bind.name, evaluate(mod, env, bind.exp))
       }
 
       return evaluate(mod, newEnv, exp.body)

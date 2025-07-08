@@ -1,4 +1,4 @@
-import { substBindings } from "../exp/index.ts"
+import { substBinds } from "../exp/index.ts"
 import { type Exp } from "./index.ts"
 
 export function expFreeNames(boundNames: Set<string>, exp: Exp): Set<string> {
@@ -23,15 +23,15 @@ export function expFreeNames(boundNames: Set<string>, exp: Exp): Set<string> {
     }
 
     case "Let": {
-      // NOTE All bindings in the subst are independent.
-      const bindings = substBindings(exp.subst)
-      const substFreeNames = bindings
-        .map((binding) => Array.from(expFreeNames(boundNames, binding.exp)))
+      // NOTE All binds in the subst are independent.
+      const binds = substBinds(exp.subst)
+      const substFreeNames = binds
+        .map((bind) => Array.from(expFreeNames(boundNames, bind.exp)))
         .flatMap((names) => names)
       return new Set([
         ...substFreeNames,
         ...expFreeNames(
-          new Set([...boundNames, ...bindings.map((binding) => binding.name)]),
+          new Set([...boundNames, ...binds.map((bind) => bind.name)]),
           exp.body,
         ),
       ])
