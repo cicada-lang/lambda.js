@@ -13,15 +13,15 @@ export function readback(ctx: ReadbackCtx, value: Value): Exp {
       return readbackNeutral(ctx, value.neutral)
     }
 
-    case "Fn": {
+    case "Lambda": {
       const freshName = freshen(ctx.usedNames, value.name)
       ctx = ctx.useName(freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))
       const ret = Actions.doAp(value, arg)
-      return Exps.Fn(freshName, readback(ctx, ret))
+      return Exps.Lambda(freshName, readback(ctx, ret))
     }
 
-    case "FnRec": {
+    case "LambdaRec": {
       return Exps.Var(value.recName)
     }
 

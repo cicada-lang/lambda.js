@@ -7,13 +7,13 @@ export function formatExp(exp: Exp): string {
       return exp.name
     }
 
-    case "Fn": {
-      const { names, ret } = formatFn([exp.name], exp.ret)
+    case "Lambda": {
+      const { names, ret } = formatLambda([exp.name], exp.ret)
       return `(lambda (${names.join(" ")}) ${ret})`
     }
 
-    case "FnRec": {
-      const { names, ret } = formatFn([exp.name], exp.ret)
+    case "LambdaRec": {
+      const { names, ret } = formatLambda([exp.name], exp.ret)
       return `(lambda (${names.join(" ")}) ${ret})`
     }
 
@@ -29,12 +29,12 @@ export function formatExp(exp: Exp): string {
   }
 }
 
-function formatFn(
+function formatLambda(
   names: Array<string>,
   ret: Exp,
 ): { names: Array<string>; ret: string } {
-  if (ret.kind === "Fn") {
-    return formatFn([...names, ret.name], ret.ret)
+  if (ret.kind === "Lambda") {
+    return formatLambda([...names, ret.name], ret.ret)
   } else {
     return { names, ret: formatExp(ret) }
   }

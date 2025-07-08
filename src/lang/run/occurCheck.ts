@@ -10,7 +10,7 @@ export function occurCheck(mod: Mod, definition: Definition): void {
 
   if (!indirectFreeNames.has(definition.name)) return
 
-  if (definition.exp.kind !== "Fn") {
+  if (definition.exp.kind !== "Lambda") {
     throw new Error(dedent`
       [occurCheck] Only function can be recursive.
 
@@ -19,7 +19,7 @@ export function occurCheck(mod: Mod, definition: Definition): void {
       `)
   }
 
-  definition.exp = Exps.FnRec(
+  definition.exp = Exps.LambdaRec(
     definition.name,
     definition.exp.name,
     definition.exp.ret,

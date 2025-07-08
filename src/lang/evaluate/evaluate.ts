@@ -19,12 +19,12 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
       throw new Error(`Unknown name: ${exp.name}`)
     }
 
-    case "Fn": {
-      return Values.Fn(mod, env, exp.name, exp.ret)
+    case "Lambda": {
+      return Values.Lambda(mod, env, exp.name, exp.ret)
     }
 
-    case "FnRec": {
-      return Values.FnRec(mod, env, exp.recName, exp.name, exp.ret)
+    case "LambdaRec": {
+      return Values.LambdaRec(mod, env, exp.recName, exp.name, exp.ret)
     }
 
     case "Ap": {
