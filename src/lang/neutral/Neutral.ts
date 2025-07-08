@@ -1,9 +1,13 @@
 import { type LambdaRec, type Value } from "../value/index.ts"
 
-export type Neutral = Var | Ap | ApRecursive
+export type Neutral = Var | Apply | ApplyRecursive
 export type Var = { kind: "Var"; name: string }
-export type Ap = { kind: "Ap"; target: Neutral; arg: Value }
-export type ApRecursive = { kind: "ApRecursive"; fn: LambdaRec; arg: Neutral }
+export type Apply = { kind: "Apply"; target: Neutral; arg: Value }
+export type ApplyRecursive = {
+  kind: "ApplyRecursive"
+  fn: LambdaRec
+  arg: Neutral
+}
 
 export function Var(name: string): Var {
   return {
@@ -12,17 +16,17 @@ export function Var(name: string): Var {
   }
 }
 
-export function Ap(target: Neutral, arg: Value): Ap {
+export function Apply(target: Neutral, arg: Value): Apply {
   return {
-    kind: "Ap",
+    kind: "Apply",
     target,
     arg,
   }
 }
 
-export function ApRecursive(fn: LambdaRec, arg: Neutral): ApRecursive {
+export function ApplyRecursive(fn: LambdaRec, arg: Neutral): ApplyRecursive {
   return {
-    kind: "ApRecursive",
+    kind: "ApplyRecursive",
     fn,
     arg,
   }

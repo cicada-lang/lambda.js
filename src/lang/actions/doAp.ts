@@ -4,7 +4,7 @@ import * as Neutrals from "../neutral/index.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 
-export function doAp(target: Value, arg: Value): Value {
+export function doApply(target: Value, arg: Value): Value {
   switch (target.kind) {
     case "Lambda": {
       return evaluate(
@@ -18,7 +18,7 @@ export function doAp(target: Value, arg: Value): Value {
       arg = Values.lazyActiveDeep(arg)
 
       if (arg.kind === "NotYet") {
-        return Values.NotYet(Neutrals.ApRecursive(target, arg.neutral))
+        return Values.NotYet(Neutrals.ApplyRecursive(target, arg.neutral))
       }
 
       return evaluate(
@@ -29,11 +29,11 @@ export function doAp(target: Value, arg: Value): Value {
     }
 
     case "Lazy": {
-      return doAp(Values.lazyActive(target), arg)
+      return doApply(Values.lazyActive(target), arg)
     }
 
     case "NotYet": {
-      return Values.NotYet(Neutrals.Ap(target.neutral, arg))
+      return Values.NotYet(Neutrals.Apply(target.neutral, arg))
     }
   }
 }

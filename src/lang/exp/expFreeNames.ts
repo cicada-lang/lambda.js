@@ -15,7 +15,7 @@ export function expFreeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       return expFreeNames(new Set([...boundNames, exp.name]), exp.ret)
     }
 
-    case "Ap": {
+    case "Apply": {
       return new Set([
         ...expFreeNames(boundNames, exp.target),
         ...expFreeNames(boundNames, exp.arg),

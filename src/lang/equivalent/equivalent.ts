@@ -31,7 +31,11 @@ export function equivalent(
       ctx = ctx.useName(freshName)
       const v = Neutrals.Var(freshName)
       const arg = Values.NotYet(v)
-      return equivalent(ctx, Actions.doAp(left, arg), Actions.doAp(right, arg))
+      return equivalent(
+        ctx,
+        Actions.doApply(left, arg),
+        Actions.doApply(right, arg),
+      )
     }
 
     case "Lazy": {

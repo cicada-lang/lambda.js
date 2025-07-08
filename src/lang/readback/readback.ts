@@ -17,7 +17,7 @@ export function readback(ctx: ReadbackCtx, value: Value): Exp {
       const freshName = freshen(ctx.usedNames, value.name)
       ctx = ctx.useName(freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))
-      const ret = Actions.doAp(value, arg)
+      const ret = Actions.doApply(value, arg)
       return Exps.Lambda(freshName, readback(ctx, ret))
     }
 

@@ -27,10 +27,10 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
       return Values.LambdaRec(mod, env, exp.recName, exp.name, exp.ret)
     }
 
-    case "Ap": {
+    case "Apply": {
       const target = evaluate(mod, env, exp.target)
       const arg = Values.Lazy(mod, env, exp.arg)
-      return Actions.doAp(target, arg)
+      return Actions.doApply(target, arg)
     }
 
     case "Let": {

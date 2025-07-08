@@ -19,7 +19,7 @@ const expMatcher: X.Matcher<Exp> = X.matcherChoice<Exp>([
   X.matcher("(cons target args)", ({ target, args }) =>
     X.dataToArray(args)
       .map(matchExp)
-      .reduce((result, arg) => Exps.Ap(result, arg), matchExp(target)),
+      .reduce((result, arg) => Exps.Apply(result, arg), matchExp(target)),
   ),
 
   X.matcher("name", ({ name }) => Exps.Var(X.dataToString(name))),

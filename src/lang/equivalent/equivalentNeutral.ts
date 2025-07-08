@@ -11,17 +11,17 @@ export function equivalentNeutral(
       return right.kind === "Var" && right.name === left.name
     }
 
-    case "Ap": {
+    case "Apply": {
       return (
-        right.kind === "Ap" &&
+        right.kind === "Apply" &&
         equivalentNeutral(ctx, left.target, right.target) &&
         equivalent(ctx, left.arg, right.arg)
       )
     }
 
-    case "ApRecursive": {
+    case "ApplyRecursive": {
       return (
-        right.kind === "ApRecursive" &&
+        right.kind === "ApplyRecursive" &&
         equivalent(ctx, left.fn, right.fn) &&
         equivalentNeutral(ctx, left.arg, right.arg)
       )
