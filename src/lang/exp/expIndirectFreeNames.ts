@@ -1,11 +1,11 @@
 import { setPop } from "../../utils/setPop.ts"
 import type { Mod } from "../mod/index.ts"
-import { modOwnDefinitions } from "../mod/modOwnDefinitions.ts"
+import { modOwnDefs } from "../mod/modOwnDefs.ts"
 import type { Exp } from "./Exp.ts"
 import { expFreeNames } from "./expFreeNames.ts"
 
 export function expIndirectFreeNames(mod: Mod, exp: Exp): Set<string> {
-  const ownDefinitions = modOwnDefinitions(mod)
+  const ownDefs = modOwnDefs(mod)
   const remainingNames = expFreeNames(new Set(), exp)
   const collectedNames = new Set<string>()
 
@@ -15,10 +15,10 @@ export function expIndirectFreeNames(mod: Mod, exp: Exp): Set<string> {
 
     collectedNames.add(name)
 
-    const definition = ownDefinitions.get(name)
-    if (definition === undefined) continue
+    const def = ownDefs.get(name)
+    if (def === undefined) continue
 
-    for (const freeName of definition.freeNames) {
+    for (const freeName of def.freeNames) {
       if (!collectedNames.has(freeName)) {
         remainingNames.add(freeName)
       }

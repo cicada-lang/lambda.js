@@ -9,7 +9,7 @@ export function createMod(options: {
   return {
     url,
     loadedMods,
-    definitions: new Map(),
+    defs: new Map(),
     stmts: [],
   }
 }

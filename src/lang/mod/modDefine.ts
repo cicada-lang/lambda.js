@@ -1,14 +1,10 @@
-import type { Definition } from "../definition/Definition.ts"
+import type { Def } from "../def/Def.ts"
 import type { Mod } from "./Mod.ts"
 import { modFind } from "./modFind.ts"
 
-export function modDefine(
-  mod: Mod,
-  name: string,
-  definition: Definition,
-): void {
+export function modDefine(mod: Mod, name: string, def: Def): void {
   assertNotRedefine(mod, name)
-  mod.definitions.set(name, definition)
+  mod.defs.set(name, def)
 }
 
 function assertNotRedefine(mod: Mod, name: string): void {
