@@ -1,4 +1,4 @@
-import { type Subst } from "../subst/index.ts"
+import { type Subst } from "../exp/index.ts"
 
 export type Exp = Var | Fn | FnRec | Ap | Let
 export type Var = { kind: "Var"; name: string }

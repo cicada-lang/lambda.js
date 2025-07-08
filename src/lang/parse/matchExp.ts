@@ -1,7 +1,6 @@
 import * as X from "@xieyuheng/x-data.js"
 import * as Exps from "../exp/index.ts"
-import { type Exp } from "../exp/index.ts"
-import { substFromBindings, type Binding } from "../subst/index.ts"
+import { substFromBindings, type Binding, type Exp } from "../exp/index.ts"
 
 const expMatcher: X.Matcher<Exp> = X.matcherChoice<Exp>([
   X.matcher("`(lambda ,names ,exp)", ({ names, exp }) =>

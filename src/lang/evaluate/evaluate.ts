@@ -1,8 +1,7 @@
 import * as Actions from "../actions/index.ts"
 import { envExtend, envFindValue, type Env } from "../env/index.ts"
-import { type Exp } from "../exp/index.ts"
+import { substBindings, type Exp } from "../exp/index.ts"
 import { modFindValue, type Mod } from "../mod/index.ts"
-import { substBindings } from "../subst/index.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 

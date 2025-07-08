@@ -1,4 +1,4 @@
-import { substBindings } from "../subst/index.ts"
+import { substBindings } from "../exp/index.ts"
 import { type Exp } from "./index.ts"
 
 export function expFreeNames(boundNames: Set<string>, exp: Exp): Set<string> {
