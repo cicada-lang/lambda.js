@@ -1,4 +1,4 @@
-import * as Actions from "../actions/index.ts"
+import { apply } from "../apply/index.ts"
 import { envExtend, envFindValue, type Env } from "../env/index.ts"
 import { bindsToArray, type Exp } from "../exp/index.ts"
 import { modFindValue, type Mod } from "../mod/index.ts"
@@ -30,7 +30,7 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
     case "Apply": {
       const target = evaluate(mod, env, exp.target)
       const arg = Values.Lazy(mod, env, exp.arg)
-      return Actions.doApply(target, arg)
+      return apply(target, arg)
     }
 
     case "Let": {

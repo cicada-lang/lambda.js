@@ -1,4 +1,4 @@
-import * as Actions from "../actions/index.ts"
+import { apply } from "../apply/index.ts"
 import { EquivalentCtx, equivalentNeutral } from "../equivalent/index.ts"
 import * as Neutrals from "../neutral/index.ts"
 import { freshen } from "../utils/freshen.ts"
@@ -31,11 +31,7 @@ export function equivalent(
       ctx = ctx.useName(freshName)
       const v = Neutrals.Var(freshName)
       const arg = Values.NotYet(v)
-      return equivalent(
-        ctx,
-        Actions.doApply(left, arg),
-        Actions.doApply(right, arg),
-      )
+      return equivalent(ctx, apply(left, arg), apply(right, arg))
     }
 
     case "Lazy": {

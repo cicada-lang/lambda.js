@@ -4,7 +4,7 @@ import * as Neutrals from "../neutral/index.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 
-export function doApply(target: Value, arg: Value): Value {
+export function apply(target: Value, arg: Value): Value {
   switch (target.kind) {
     case "Lambda": {
       return evaluate(
@@ -29,7 +29,7 @@ export function doApply(target: Value, arg: Value): Value {
     }
 
     case "Lazy": {
-      return doApply(Values.lazyActive(target), arg)
+      return apply(Values.lazyActive(target), arg)
     }
 
     case "NotYet": {

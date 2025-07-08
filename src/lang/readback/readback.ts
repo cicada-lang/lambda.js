@@ -1,4 +1,4 @@
-import * as Actions from "../actions/index.ts"
+import { apply } from "../apply/index.ts"
 import * as Exps from "../exp/index.ts"
 import { type Exp } from "../exp/index.ts"
 import * as Neutrals from "../neutral/index.ts"
@@ -17,7 +17,7 @@ export function readback(ctx: ReadbackCtx, value: Value): Exp {
       const freshName = freshen(ctx.usedNames, value.name)
       ctx = ctx.useName(freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))
-      const ret = Actions.doApply(value, arg)
+      const ret = apply(value, arg)
       return Exps.Lambda(freshName, readback(ctx, ret))
     }
 
