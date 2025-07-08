@@ -1,4 +1,4 @@
-import { envExtend } from "../env/Env.ts"
+import { envUpdate } from "../env/Env.ts"
 import { evaluate } from "../evaluate/index.ts"
 import * as Neutrals from "../neutral/index.ts"
 import * as Values from "../value/index.ts"
@@ -9,7 +9,7 @@ export function apply(target: Value, arg: Value): Value {
     case "Lambda": {
       return evaluate(
         target.mod,
-        envExtend(target.env, target.name, arg),
+        envUpdate(target.env, target.name, arg),
         target.ret,
       )
     }
@@ -23,7 +23,7 @@ export function apply(target: Value, arg: Value): Value {
 
       return evaluate(
         target.mod,
-        envExtend(target.env, target.name, arg),
+        envUpdate(target.env, target.name, arg),
         target.ret,
       )
     }

@@ -1,5 +1,5 @@
 import { apply } from "../apply/index.ts"
-import { envExtend, envFindValue, type Env } from "../env/index.ts"
+import { envFindValue, envUpdate, type Env } from "../env/index.ts"
 import { bindsToArray, type Exp } from "../exp/index.ts"
 import { modFindValue, type Mod } from "../mod/index.ts"
 import * as Values from "../value/index.ts"
@@ -36,7 +36,7 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
     case "Let": {
       let newEnv = env
       for (const bind of bindsToArray(exp.binds)) {
-        newEnv = envExtend(newEnv, bind.name, evaluate(mod, env, bind.exp))
+        newEnv = envUpdate(newEnv, bind.name, evaluate(mod, env, bind.exp))
       }
 
       return evaluate(mod, newEnv, exp.body)

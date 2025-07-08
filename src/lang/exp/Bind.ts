@@ -23,7 +23,7 @@ export function bindsInitial(name: string, exp: Exp): Binds {
   return new Map([[name, { name, exp }]])
 }
 
-export function bindsExtend(binds: Binds, name: string, exp: Exp): Binds {
+export function bindsUpdate(binds: Binds, name: string, exp: Exp): Binds {
   return new Map([...binds, [name, { name, exp }]])
 }
 

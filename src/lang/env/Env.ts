@@ -14,6 +14,6 @@ export function envFindValue(env: Env, name: string): undefined | Value {
   return env.get(name)
 }
 
-export function envExtend(env: Env, name: string, value: Value): Env {
+export function envUpdate(env: Env, name: string, value: Value): Env {
   return new Map([...env, [name, value]])
 }
