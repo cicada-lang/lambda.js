@@ -7,7 +7,7 @@ import type { Stmt } from "../stmt/Stmt.ts"
 import { assertEqual } from "./assertEqual.ts"
 import { assertNotEqual } from "./assertNotEqual.ts"
 
-export function execute(mod: Mod, stmt: Stmt): null | string {
+export function execute(mod: Mod, stmt: Stmt): null {
   switch (stmt.kind) {
     case "AssertEqual": {
       for (let i = 0; i < stmt.exps.length - 1; i++) {
@@ -28,7 +28,8 @@ export function execute(mod: Mod, stmt: Stmt): null | string {
     case "Compute": {
       const value = evaluate(mod, envEmpty(), stmt.exp)
       const exp = readback(ReadbackCtx.init(), value)
-      return formatExp(exp)
+      console.log(formatExp(exp))
+      return null
     }
 
     default: {

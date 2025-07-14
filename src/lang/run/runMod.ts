@@ -10,10 +10,7 @@ export function runMod(mod: Mod): void {
 
   for (const def of modOwnDefs(mod).values()) assertAllNamesDefined(mod, def)
 
-  for (const stmt of mod.stmts) {
-    const output = execute(mod, stmt)
-    if (output) console.log(output)
-  }
+  for (const stmt of mod.stmts) execute(mod, stmt)
 
   mod.isFinished = true
 }
