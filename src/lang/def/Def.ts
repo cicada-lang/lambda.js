@@ -6,6 +6,5 @@ export type Def = {
   mod: Mod
   name: string
   exp: Exp
-  freeNames: Set<string>
   cache?: Value
 }
