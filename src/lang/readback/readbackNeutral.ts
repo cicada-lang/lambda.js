@@ -15,12 +15,5 @@ export function readbackNeutral(ctx: ReadbackCtx, neutral: Neutral): Exp {
         readback(ctx, neutral.arg),
       )
     }
-
-    case "ApplyRecursive": {
-      return Exps.Apply(
-        readback(ctx, neutral.fn),
-        readbackNeutral(ctx, neutral.arg),
-      )
-    }
   }
 }

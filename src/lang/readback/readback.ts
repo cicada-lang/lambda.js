@@ -21,10 +21,6 @@ export function readback(ctx: ReadbackCtx, value: Value): Exp {
       return Exps.Lambda(freshName, readback(ctx, ret))
     }
 
-    case "LambdaRec": {
-      return Exps.Var(value.recName)
-    }
-
     case "Lazy": {
       return readback(ctx, Values.lazyActive(value))
     }

@@ -14,20 +14,6 @@ export function apply(target: Value, arg: Value): Value {
       )
     }
 
-    case "LambdaRec": {
-      arg = Values.lazyActiveDeep(arg)
-
-      if (arg.kind === "NotYet") {
-        return Values.NotYet(Neutrals.ApplyRecursive(target, arg.neutral))
-      }
-
-      return evaluate(
-        target.mod,
-        envUpdate(target.env, target.name, arg),
-        target.ret,
-      )
-    }
-
     case "Lazy": {
       return apply(Values.lazyActive(target), arg)
     }

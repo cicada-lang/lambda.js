@@ -13,10 +13,6 @@ export function equivalent(
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
 
-  if (right.kind === "LambdaRec" && left.kind === "LambdaRec") {
-    return left.name === right.name && left.mod === right.mod
-  }
-
   switch (left.kind) {
     case "NotYet": {
       return (
@@ -25,8 +21,7 @@ export function equivalent(
       )
     }
 
-    case "Lambda":
-    case "LambdaRec": {
+    case "Lambda": {
       const freshName = freshen(ctx.usedNames, left.name)
       ctx = ctx.useName(freshName)
       const v = Neutrals.Var(freshName)

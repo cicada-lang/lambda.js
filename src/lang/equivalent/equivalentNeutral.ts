@@ -18,13 +18,5 @@ export function equivalentNeutral(
         equivalent(ctx, left.arg, right.arg)
       )
     }
-
-    case "ApplyRecursive": {
-      return (
-        right.kind === "ApplyRecursive" &&
-        equivalent(ctx, left.fn, right.fn) &&
-        equivalentNeutral(ctx, left.arg, right.arg)
-      )
-    }
   }
 }

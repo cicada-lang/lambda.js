@@ -11,10 +11,6 @@ export function expFreeNames(boundNames: Set<string>, exp: Exp): Set<string> {
       return expFreeNames(new Set([...boundNames, exp.name]), exp.ret)
     }
 
-    case "LambdaRec": {
-      return expFreeNames(new Set([...boundNames, exp.name]), exp.ret)
-    }
-
     case "Apply": {
       return new Set([
         ...expFreeNames(boundNames, exp.target),

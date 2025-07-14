@@ -12,11 +12,6 @@ export function formatExp(exp: Exp): string {
       return `(lambda (${names.join(" ")}) ${ret})`
     }
 
-    case "LambdaRec": {
-      const { names, ret } = formatLambda([exp.name], exp.ret)
-      return `(lambda (${names.join(" ")}) ${ret})`
-    }
-
     case "Apply": {
       const { target, args } = formatApply(exp.target, [formatExp(exp.arg)])
       return `(${target} ${args.join(" ")})`

@@ -23,10 +23,6 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
       return Values.Lambda(mod, env, exp.name, exp.ret)
     }
 
-    case "LambdaRec": {
-      return Values.LambdaRec(mod, env, exp.recName, exp.name, exp.ret)
-    }
-
     case "Apply": {
       const target = evaluate(mod, env, exp.target)
       const arg = Values.Lazy(mod, env, exp.arg)
