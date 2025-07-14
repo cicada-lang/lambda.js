@@ -6,5 +6,5 @@ export type Def = {
   mod: Mod
   name: string
   exp: Exp
-  cache?: Value
+  value: Value
 }
