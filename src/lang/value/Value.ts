@@ -31,12 +31,11 @@ export function Lambda(mod: Mod, env: Env, name: string, ret: Exp): Lambda {
   }
 }
 
-export function Lazy(mod: Mod, env: Env, exp: Exp, cache?: Value): Lazy {
+export function Lazy(mod: Mod, env: Env, exp: Exp): Lazy {
   return {
     kind: "Lazy",
     mod,
     env,
     exp,
-    cache,
   }
 }
