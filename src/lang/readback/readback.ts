@@ -7,11 +7,11 @@ import { freshen } from "../utils/freshen.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 
-type ReadbackCtx = {
+type Ctx = {
   usedNames: Set<string>
 }
 
-export function readback(ctx: ReadbackCtx, value: Value): Exp {
+export function readback(ctx: Ctx, value: Value): Exp {
   switch (value.kind) {
     case "NotYet": {
       return readbackNeutral(ctx, value.neutral)
@@ -34,7 +34,7 @@ export function readback(ctx: ReadbackCtx, value: Value): Exp {
   }
 }
 
-function readbackNeutral(ctx: ReadbackCtx, neutral: Neutral): Exp {
+function readbackNeutral(ctx: Ctx, neutral: Neutral): Exp {
   switch (neutral.kind) {
     case "Var": {
       return Exps.Var(neutral.name)
