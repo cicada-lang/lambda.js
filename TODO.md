@@ -1,8 +1,7 @@
-`ReadbackCtx` as simple type
-merge file `readbackNeutral`
-
-`EquivalentCtx` as simple type
 merge file `equivalentNeutral`
+
+`ReadbackCtx` as simple type
+`EquivalentCtx` as simple type
 
 rename `Lambda`'s `name` to `variableName`
 Lambda has optional `definedName`
