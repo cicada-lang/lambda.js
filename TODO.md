@@ -9,4 +9,6 @@ Lambda has optional `definedName`
 
 rename `Lazy` `cache` to `value`
 
-use trail to implement equivalent for recursive functions
+`readback` handle recursive circle
+
+implement `equivalent` by `readback`
