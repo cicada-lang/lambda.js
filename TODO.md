@@ -1,10 +1,9 @@
+move `importOne` to `define`
 move `Neutral` to `value/`
-
-rename `Lambda`'s `name` to `variableName`
-Lambda has optional `definedName`
 
 rename `Lazy` `cache` to `value`
 
+rename `Lambda`'s `name` to `variableName`
+Lambda has optional `definedName`
 `readback` handle recursive circle
-
 implement `equivalent` by `readback`
