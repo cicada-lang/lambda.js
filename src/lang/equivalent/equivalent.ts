@@ -1,9 +1,8 @@
 import { apply } from "../apply/index.ts"
-import * as Neutrals from "../neutral/index.ts"
-import { type Neutral } from "../neutral/index.ts"
 import { freshen } from "../utils/freshen.ts"
+import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
-import { type Value } from "../value/index.ts"
+import { type Neutral, type Value } from "../value/index.ts"
 
 type Ctx = {
   usedNames: Set<string>

@@ -1,5 +1,3 @@
-move `Neutral` to `value/`
-
 rename `Lazy` `cache` to `value`
 
 rename `Lambda`'s `name` to `variableName`

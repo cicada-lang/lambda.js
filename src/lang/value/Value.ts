@@ -1,7 +1,7 @@
 import { type Env } from "../env/index.ts"
 import { type Exp } from "../exp/index.ts"
 import { type Mod } from "../mod/index.ts"
-import { type Neutral } from "../neutral/index.ts"
+import { type Neutral } from "../value/index.ts"
 
 export type Value = NotYet | Lambda | Lazy
 export type NotYet = { kind: "NotYet"; neutral: Neutral }
