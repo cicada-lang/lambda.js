@@ -3,12 +3,12 @@ import type * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 
 export function lazyActive(lazy: Values.Lazy): Value {
-  if (lazy.cache !== undefined) {
-    return lazy.cache
+  if (lazy.value !== undefined) {
+    return lazy.value
   }
 
   const value = evaluate(lazy.mod, lazy.env, lazy.exp)
-  lazy.cache = value
+  lazy.value = value
   return value
 }
 
