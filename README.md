@@ -1,9 +1,7 @@
 # lambda.js
 
-An interpreter of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
-
-- Implement call-by-need lazy evaluation.
-- Support direct and indirect recursion.
+An interpreter of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus),
+that implements call-by-need lazy evaluation.
 
 ```scheme
 (define name body)
