@@ -1,5 +1,6 @@
-`ReadbackCtx` as simple type
 `EquivalentCtx` as simple type
+
+move `Neutral` to `value/`
 
 rename `Lambda`'s `name` to `variableName`
 Lambda has optional `definedName`
