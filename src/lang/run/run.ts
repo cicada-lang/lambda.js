@@ -23,7 +23,7 @@ function assertAllNamesDefined(mod: Mod, def: Def): void {
     if (modFind(mod, name) === undefined) {
       throw new Error(
         [
-          `I find undefined name: ${name}`,
+          `[run] I find undefined name: ${name}`,
           `  defining: ${def.name}`,
           `  body: ${formatExp(def.exp)}`,
         ].join("\n"),
