@@ -1,5 +1,3 @@
-merge file `equivalentNeutral`
-
 `ReadbackCtx` as simple type
 `EquivalentCtx` as simple type
 

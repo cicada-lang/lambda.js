@@ -1,9 +1,30 @@
 import { apply } from "../apply/index.ts"
-import { EquivalentCtx, equivalentNeutral } from "../equivalent/index.ts"
 import * as Neutrals from "../neutral/index.ts"
+import { type Neutral } from "../neutral/index.ts"
 import { freshen } from "../utils/freshen.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
+
+export class EquivalentCtx {
+  usedNames: Set<string>
+
+  constructor(options: { usedNames: Set<string> }) {
+    this.usedNames = options.usedNames
+  }
+
+  static init(): EquivalentCtx {
+    return new EquivalentCtx({
+      usedNames: new Set(),
+    })
+  }
+
+  useName(name: string): EquivalentCtx {
+    return new EquivalentCtx({
+      ...this,
+      usedNames: new Set([...this.usedNames, name]),
+    })
+  }
+}
 
 export function equivalent(
   ctx: EquivalentCtx,
@@ -31,6 +52,26 @@ export function equivalent(
 
     case "Lazy": {
       return equivalent(ctx, Values.lazyActive(left), right)
+    }
+  }
+}
+
+function equivalentNeutral(
+  ctx: EquivalentCtx,
+  left: Neutral,
+  right: Neutral,
+): boolean {
+  switch (left.kind) {
+    case "Var": {
+      return right.kind === "Var" && right.name === left.name
+    }
+
+    case "Apply": {
+      return (
+        right.kind === "Apply" &&
+        equivalentNeutral(ctx, left.target, right.target) &&
+        equivalent(ctx, left.arg, right.arg)
+      )
     }
   }
 }

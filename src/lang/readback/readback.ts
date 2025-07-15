@@ -48,7 +48,7 @@ export function readback(ctx: ReadbackCtx, value: Value): Exp {
   }
 }
 
-export function readbackNeutral(ctx: ReadbackCtx, neutral: Neutral): Exp {
+function readbackNeutral(ctx: ReadbackCtx, neutral: Neutral): Exp {
   switch (neutral.kind) {
     case "Var": {
       return Exps.Var(neutral.name)
