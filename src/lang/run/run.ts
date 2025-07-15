@@ -3,7 +3,7 @@ import { assertAllNamesDefined } from "./assertAllNamesDefined.ts"
 import { define } from "./define.ts"
 import { execute } from "./execute.ts"
 
-export function runMod(mod: Mod): void {
+export function run(mod: Mod): void {
   if (mod.isFinished) return
 
   for (const stmt of mod.stmts) define(mod, stmt)
