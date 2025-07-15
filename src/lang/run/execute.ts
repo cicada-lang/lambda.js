@@ -1,5 +1,5 @@
 import dedent from "dedent"
-import { envEmpty } from "../env/index.ts"
+import { emptyEnv } from "../env/index.ts"
 import { equivalent } from "../equivalent/index.ts"
 import { evaluate } from "../evaluate/index.ts"
 import { type Exp } from "../exp/index.ts"
@@ -27,7 +27,7 @@ export function execute(mod: Mod, stmt: Stmt): null {
     }
 
     case "Compute": {
-      const value = evaluate(mod, envEmpty(), stmt.exp)
+      const value = evaluate(mod, emptyEnv(), stmt.exp)
       const exp = readback({ usedNames: new Set() }, value)
       console.log(formatExp(exp))
       return null
@@ -40,8 +40,8 @@ export function execute(mod: Mod, stmt: Stmt): null {
 }
 
 function assertEqual(mod: Mod, left: Exp, right: Exp): void {
-  const leftValue = evaluate(mod, envEmpty(), left)
-  const rightValue = evaluate(mod, envEmpty(), right)
+  const leftValue = evaluate(mod, emptyEnv(), left)
+  const rightValue = evaluate(mod, emptyEnv(), right)
   if (!equivalent({ usedNames: new Set() }, leftValue, rightValue)) {
     throw new Error(dedent`
       [assertEqual] Fail to assert equal.
@@ -53,8 +53,8 @@ function assertEqual(mod: Mod, left: Exp, right: Exp): void {
 }
 
 function assertNotEqual(mod: Mod, left: Exp, right: Exp): void {
-  const leftValue = evaluate(mod, envEmpty(), left)
-  const rightValue = evaluate(mod, envEmpty(), right)
+  const leftValue = evaluate(mod, emptyEnv(), left)
+  const rightValue = evaluate(mod, emptyEnv(), right)
   if (equivalent({ usedNames: new Set() }, leftValue, rightValue)) {
     throw new Error(dedent`
       [assertNotEqual] Fail to assert NOT equal.

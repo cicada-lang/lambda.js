@@ -2,7 +2,7 @@ import { type Value } from "../value/index.ts"
 
 export type Env = Map<string, Value>
 
-export function envEmpty(): Env {
+export function emptyEnv(): Env {
   return new Map()
 }
 

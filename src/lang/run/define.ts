@@ -1,4 +1,4 @@
-import { envEmpty } from "../env/Env.ts"
+import { emptyEnv } from "../env/Env.ts"
 import { evaluate } from "../evaluate/evaluate.ts"
 import { modDefine, modFind, modResolve } from "../mod/index.ts"
 import type { Mod } from "../mod/Mod.ts"
@@ -12,7 +12,7 @@ export function define(mod: Mod, stmt: Stmt): null {
         mod,
         name: stmt.name,
         exp: stmt.exp,
-        value: evaluate(mod, envEmpty(), stmt.exp),
+        value: evaluate(mod, emptyEnv(), stmt.exp),
       })
 
       return null
