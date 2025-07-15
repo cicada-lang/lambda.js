@@ -1,5 +1,4 @@
-`EquivalentCtx` as simple type
-
+move `assertEqual` and `assertEqual` to `execute`
 move `Neutral` to `value/`
 
 rename `Lambda`'s `name` to `variableName`

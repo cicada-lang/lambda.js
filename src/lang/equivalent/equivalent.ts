@@ -5,32 +5,11 @@ import { freshen } from "../utils/freshen.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 
-export class EquivalentCtx {
+type Ctx = {
   usedNames: Set<string>
-
-  constructor(options: { usedNames: Set<string> }) {
-    this.usedNames = options.usedNames
-  }
-
-  static init(): EquivalentCtx {
-    return new EquivalentCtx({
-      usedNames: new Set(),
-    })
-  }
-
-  useName(name: string): EquivalentCtx {
-    return new EquivalentCtx({
-      ...this,
-      usedNames: new Set([...this.usedNames, name]),
-    })
-  }
 }
 
-export function equivalent(
-  ctx: EquivalentCtx,
-  left: Value,
-  right: Value,
-): boolean {
+export function equivalent(ctx: Ctx, left: Value, right: Value): boolean {
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
 
@@ -44,7 +23,10 @@ export function equivalent(
 
     case "Lambda": {
       const freshName = freshen(ctx.usedNames, left.name)
-      ctx = ctx.useName(freshName)
+      ctx = {
+        ...ctx,
+        usedNames: new Set([...ctx.usedNames, freshName]),
+      }
       const v = Neutrals.Var(freshName)
       const arg = Values.NotYet(v)
       return equivalent(ctx, apply(left, arg), apply(right, arg))
@@ -56,11 +38,7 @@ export function equivalent(
   }
 }
 
-function equivalentNeutral(
-  ctx: EquivalentCtx,
-  left: Neutral,
-  right: Neutral,
-): boolean {
+function equivalentNeutral(ctx: Ctx, left: Neutral, right: Neutral): boolean {
   switch (left.kind) {
     case "Var": {
       return right.kind === "Var" && right.name === left.name
