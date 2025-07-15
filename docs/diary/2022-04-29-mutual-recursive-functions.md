@@ -42,6 +42,9 @@ If we implement mutual recursive by inlining,
 we must check whether inlining will eliminate
 all the indirect recursive references.
 
+[2025-07-15] 可以不是 eager inlining，
+而是在判断 equivalence 的时候 lazy inlining。
+
 # General Fixpoint
 
 Another way to implement mutual recursion is to
