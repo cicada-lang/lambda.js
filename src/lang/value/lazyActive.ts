@@ -7,9 +7,7 @@ export function lazyActive(lazy: Values.Lazy): Value {
     return lazy.value
   }
 
-  const value = evaluate(lazy.mod, lazy.env, lazy.exp)
-  lazy.value = value
-  return value
+  return (lazy.value = evaluate(lazy.mod, lazy.env, lazy.exp))
 }
 
 export function lazyActiveDeep(value: Value): Value {
