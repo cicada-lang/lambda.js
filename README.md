@@ -29,9 +29,9 @@ The command-line program is called `lambda.js`.
 ## Development
 
 ```sh
-npm install     # Install dependencies
-npm run build   # Compile `src/` to `lib/`
-npm run test    # Run test
+npm install
+npm run build
+npm run test
 ```
 
 ## Contributions
