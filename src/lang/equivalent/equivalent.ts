@@ -8,6 +8,13 @@ type Ctx = {
   usedNames: Set<string>
 }
 
+function ctxUseName(ctx: Ctx, name: string): Ctx {
+  return {
+    ...ctx,
+    usedNames: new Set([...ctx.usedNames, name]),
+  }
+}
+
 export function equivalent(ctx: Ctx, left: Value, right: Value): boolean {
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
@@ -22,10 +29,7 @@ export function equivalent(ctx: Ctx, left: Value, right: Value): boolean {
 
     case "Lambda": {
       const freshName = freshen(ctx.usedNames, left.name)
-      ctx = {
-        ...ctx,
-        usedNames: new Set([...ctx.usedNames, freshName]),
-      }
+      ctx = ctxUseName(ctx, freshName)
       const v = Neutrals.Var(freshName)
       const arg = Values.NotYet(v)
       return equivalent(ctx, apply(left, arg), apply(right, arg))

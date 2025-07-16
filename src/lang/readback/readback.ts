@@ -10,6 +10,13 @@ type Ctx = {
   usedNames: Set<string>
 }
 
+function ctxUseName(ctx: Ctx, name: string): Ctx {
+  return {
+    ...ctx,
+    usedNames: new Set([...ctx.usedNames, name]),
+  }
+}
+
 export function readback(ctx: Ctx, value: Value): Exp {
   switch (value.kind) {
     case "NotYet": {
@@ -18,10 +25,7 @@ export function readback(ctx: Ctx, value: Value): Exp {
 
     case "Lambda": {
       const freshName = freshen(ctx.usedNames, value.name)
-      ctx = {
-        ...ctx,
-        usedNames: new Set([...ctx.usedNames, freshName]),
-      }
+      ctx = ctxUseName(ctx, freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))
       const ret = apply(value, arg)
       return Exps.Lambda(freshName, readback(ctx, ret))
