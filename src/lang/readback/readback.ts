@@ -10,6 +10,12 @@ type Ctx = {
   usedNames: Set<string>
 }
 
+export function emptyReadbackCtx(): Ctx {
+  return {
+    usedNames: new Set(),
+  }
+}
+
 function ctxUseName(ctx: Ctx, name: string): Ctx {
   return {
     ...ctx,
