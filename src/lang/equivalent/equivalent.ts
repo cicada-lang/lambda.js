@@ -1,5 +1,5 @@
+import { freshen } from "../../utils/freshen.ts"
 import { apply } from "../apply/index.ts"
-import { freshen } from "../utils/freshen.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import { type Neutral, type Value } from "../value/index.ts"

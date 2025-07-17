@@ -1,4 +1,4 @@
-import { stringToSubscript } from "../../utils/stringToSubscript.ts"
+import { stringToSubscript } from "./stringToSubscript.ts"
 
 export function freshen(usedNames: Set<string>, name: string): string {
   let counter = 1
