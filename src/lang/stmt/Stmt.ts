@@ -1,4 +1,4 @@
-import { type Exp } from "../exp/Exp.ts"
+import { type Exp } from "../exp/index.ts"
 
 export type Stmt = AssertEqual | AssertNotEqual | Compute | Define | Import
 export type AssertEqual = { kind: "AssertEqual"; exps: Array<Exp> }
