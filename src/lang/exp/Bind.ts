@@ -1,4 +1,4 @@
-import type { Exp } from "./index.ts"
+import { type Exp } from "../Exp.ts"
 
 export type Bind = {
   name: string
