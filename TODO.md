@@ -1,7 +1,7 @@
-refactor `equivalent` to `equivalentInCtx`
+extract `equivalent`
 
-`equivalent` with `ctx.trail` handle recursive function
-`equivalent` call `applyOneStep`
+`equivalentInCtx` with `ctx.trail` handle recursive function
+`equivalentInCtx` call `applyOneStep`
 
 `readback` handle recursive function
 
