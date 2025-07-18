@@ -30,12 +30,12 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
     }
 
     case "Let": {
-      let newEnv = env
+      const oldEnv = env
       for (const bind of bindsToArray(exp.binds)) {
-        newEnv = envUpdate(newEnv, bind.name, evaluate(mod, env, bind.exp))
+        env = envUpdate(env, bind.name, evaluate(mod, oldEnv, bind.exp))
       }
 
-      return evaluate(mod, newEnv, exp.body)
+      return evaluate(mod, env, exp.body)
     }
   }
 }
