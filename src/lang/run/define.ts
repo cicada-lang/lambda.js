@@ -6,30 +6,26 @@ import type { ImportEntry, Stmt } from "../stmt/Stmt.ts"
 import { run } from "./run.ts"
 
 export function define(mod: Mod, stmt: Stmt): null {
-  switch (stmt.kind) {
-    case "Define": {
-      modDefine(mod, stmt.name, {
-        mod,
-        name: stmt.name,
-        exp: stmt.exp,
-        value: evaluate(mod, emptyEnv(), stmt.exp),
-      })
-
-      return null
+  if (stmt.kind === "Define") {
+    const value = evaluate(mod, emptyEnv(), stmt.exp)
+    if (value.kind === "Lambda") {
+      value.definedName = stmt.name
     }
 
-    case "Import": {
-      for (const entry of stmt.entries) {
-        importOne(mod, stmt.path, entry)
-      }
-
-      return null
-    }
-
-    default: {
-      return null
-    }
+    const def = { mod, name: stmt.name, exp: stmt.exp, value }
+    modDefine(mod, stmt.name, def)
+    return null
   }
+
+  if (stmt.kind === "Import") {
+    for (const entry of stmt.entries) {
+      importOne(mod, stmt.path, entry)
+    }
+
+    return null
+  }
+
+  return null
 }
 
 function importOne(mod: Mod, path: string, entry: ImportEntry): void {

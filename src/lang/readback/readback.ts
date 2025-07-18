@@ -30,6 +30,10 @@ export function readback(ctx: Ctx, value: Value): Exp {
     }
 
     case "Lambda": {
+      // if (value.definedName) {
+      //   return Exps.Var(value.definedName)
+      // }
+
       const freshName = freshen(ctx.usedNames, value.name)
       ctx = ctxUseName(ctx, freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))

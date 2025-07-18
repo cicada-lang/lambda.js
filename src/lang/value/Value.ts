@@ -12,6 +12,7 @@ export type Lambda = {
   env: Env
   name: string
   ret: Exp
+  definedName?: string
 }
 
 export function NotYet(neutral: Neutral): NotYet {
