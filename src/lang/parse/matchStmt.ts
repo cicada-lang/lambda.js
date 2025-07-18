@@ -33,6 +33,14 @@ const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
     Stmts.AssertNotEqual(X.dataToArray(exps).map(matchExp)),
   ),
 
+  X.matcher("(cons 'assert-same exps)", ({ exps }) =>
+    Stmts.AssertSame(X.dataToArray(exps).map(matchExp)),
+  ),
+
+  X.matcher("(cons 'assert-not-same exps)", ({ exps }) =>
+    Stmts.AssertNotSame(X.dataToArray(exps).map(matchExp)),
+  ),
+
   X.matcher("exp", ({ exp }) => Stmts.Compute(matchExp(exp))),
 ])
 
