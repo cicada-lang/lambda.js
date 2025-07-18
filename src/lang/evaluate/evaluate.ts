@@ -30,6 +30,15 @@ export function apply(target: Value, arg: Value): Value {
 }
 
 export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
+  const value = evaluateWithDelay(mod, env, exp)
+  if (value.kind === "DelayedApply") {
+    return apply(value.target, value.arg)
+  }
+
+  return value
+}
+
+export function evaluateWithDelay(mod: Mod, env: Env, exp: Exp): Value {
   switch (exp.kind) {
     case "Var": {
       let value = undefined
@@ -48,18 +57,22 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
     }
 
     case "Apply": {
-      const target = evaluate(mod, env, exp.target)
+      const target = evaluateWithDelay(mod, env, exp.target)
       const arg = Values.Lazy(mod, env, exp.arg)
-      return apply(target, arg)
+      return Values.DelayedApply(target, arg)
     }
 
     case "Let": {
       const oldEnv = env
       for (const bind of bindsToArray(exp.binds)) {
-        env = envUpdate(env, bind.name, evaluate(mod, oldEnv, bind.exp))
+        env = envUpdate(
+          env,
+          bind.name,
+          evaluateWithDelay(mod, oldEnv, bind.exp),
+        )
       }
 
-      return evaluate(mod, env, exp.body)
+      return evaluateWithDelay(mod, env, exp.body)
     }
   }
 }
