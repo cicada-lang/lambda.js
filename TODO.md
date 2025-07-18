@@ -1,4 +1,3 @@
-`readback` -- extract `Ctx` (again)
 `equivalent` -- extract `Ctx` (again)
 
 `equivalentInCtx` with `ctx.trail` handle recursive function
