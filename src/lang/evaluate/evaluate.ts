@@ -1,9 +1,9 @@
-import { apply } from "../apply/index.ts"
 import { envFindValue, envUpdate, type Env } from "../env/index.ts"
 import { bindsToArray, type Exp } from "../exp/index.ts"
 import { modFindValue, type Mod } from "../mod/index.ts"
 import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
+import { apply } from "./apply.ts"
 
 export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
   switch (exp.kind) {

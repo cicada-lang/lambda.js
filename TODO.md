@@ -1,4 +1,4 @@
-move `Env` to `evaluate/`
+move `Def` to `mod/`
 
 `Lambda` has optional `definedName`
 `readback` handle recursive function
