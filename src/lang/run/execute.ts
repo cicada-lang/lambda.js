@@ -5,7 +5,7 @@ import { evaluate } from "../evaluate/index.ts"
 import { type Exp } from "../exp/index.ts"
 import { formatExp } from "../format/formatExp.ts"
 import type { Mod } from "../mod/Mod.ts"
-import { emptyReadbackCtx, readback } from "../readback/index.ts"
+import { readback } from "../readback/index.ts"
 import type { Stmt } from "../stmt/Stmt.ts"
 
 export function execute(mod: Mod, stmt: Stmt): null {
@@ -27,7 +27,7 @@ export function execute(mod: Mod, stmt: Stmt): null {
 
   if (stmt.kind === "Compute") {
     const value = evaluate(mod, emptyEnv(), stmt.exp)
-    const exp = readback(emptyReadbackCtx(), value)
+    const exp = readback(value)
     console.log(formatExp(exp))
     return null
   }
