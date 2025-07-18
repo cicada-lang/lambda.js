@@ -1,5 +1,5 @@
-extract `ReadbackCtx` (again)
-extract `EquivalentCtx` (again)
+`readback` -- extract `Ctx` (again)
+`equivalent` -- extract `Ctx` (again)
 
 `equivalentInCtx` with `ctx.trail` handle recursive function
 `equivalentInCtx` call `applyOneStep`
