@@ -6,27 +6,12 @@ import * as Values from "../value/index.ts"
 import { type Value } from "../value/index.ts"
 
 export function apply(target: Value, arg: Value): Value {
-  switch (target.kind) {
-    case "NotYet": {
-      return Values.NotYet(Neutrals.Apply(target.neutral, arg))
-    }
-
-    case "Lambda": {
-      return evaluate(
-        target.mod,
-        envUpdate(target.env, target.name, arg),
-        target.ret,
-      )
-    }
-
-    case "Lazy": {
-      return apply(Values.lazyActive(target), arg)
-    }
-
-    case "DelayedApply": {
-      return apply(apply(target.target, target.arg), arg)
-    }
+  let result = applyOneStep(target, arg)
+  while (result.kind === "DelayedApply") {
+    result = apply(result.target, result.arg)
   }
+
+  return result
 }
 
 export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
@@ -36,6 +21,30 @@ export function evaluate(mod: Mod, env: Env, exp: Exp): Value {
   }
 
   return value
+}
+
+export function applyOneStep(target: Value, arg: Value): Value {
+  switch (target.kind) {
+    case "NotYet": {
+      return Values.NotYet(Neutrals.Apply(target.neutral, arg))
+    }
+
+    case "Lambda": {
+      return evaluateWithDelay(
+        target.mod,
+        envUpdate(target.env, target.name, arg),
+        target.ret,
+      )
+    }
+
+    case "Lazy": {
+      return applyOneStep(Values.lazyActive(target), arg)
+    }
+
+    case "DelayedApply": {
+      return Values.DelayedApply(applyOneStep(target.target, target.arg), arg)
+    }
+  }
 }
 
 export function evaluateWithDelay(mod: Mod, env: Env, exp: Exp): Value {
