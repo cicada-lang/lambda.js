@@ -1,9 +1,20 @@
+move `Env` to `evaluate/`
+
 `Lambda` has optional `definedName`
 `readback` handle recursive function
-`equivalent` handle recursive function
+`equivalent` handle recursive function -- simple way
 
-[maybe] call `run` in `load` -- this will forbid circular imports
+move test from `todo/` back to `examples/`
+
+refactor `load` to support circular imports
 
 - if we can support mutually defined recursive function,
   we should also support circular imports.
-- if so, this task should be: refactor `load` to support circular imports
+
+`DelayedApply` as value
+refactor `apply` to `delay` and `apply`
+`equivalent` with `ctx.trail` handle recursive function -- the right way
+
+# later
+
+`let-one` vs `let` and `let*`
