@@ -1,3 +1,6 @@
+refactor `readback` to `readbackInCtx`
+refactor `equivalent` to `equivalentInCtx`
+
 `equivalent` with `ctx.trail` handle recursive function
 `equivalent` call `applyOneStep`
 
