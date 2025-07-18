@@ -21,7 +21,7 @@ that implements call-by-need lazy evaluation.
 Install it by the following command:
 
 ```sh
-npm install -g @cicada-lang/lambda.js
+npm install -g @xieyuheng/lambda.js
 ```
 
 The command-line program is called `lambda.js`.
