@@ -40,6 +40,10 @@ export function readback(ctx: Ctx, value: Value): Exp {
     case "Lazy": {
       return readback(ctx, Values.lazyActive(value))
     }
+
+    case "DelayedApply": {
+      return readback(ctx, apply(value.target, value.arg))
+    }
   }
 }
 

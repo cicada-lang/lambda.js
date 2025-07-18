@@ -1,5 +1,4 @@
-`DelayedApply` as value
-refactor `apply` to `delay` and `apply`
+`evaluate` and `apply` to `evaluateWithDelay`
 `equivalent` with `ctx.trail` handle recursive function
 `readback` handle recursive function
 
