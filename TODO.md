@@ -1,5 +1,7 @@
-`equivalentInCtx` with `ctx.trail` handle recursive function
-`equivalentInCtx` call `applyOneStep`
+`same` and `sameInCtx` -- do not expend function with `definedName`
+
+`equalInCtx` with `ctx.trail` handle recursive function
+`equalInCtx` call `applyOneStep`
 
 `readback` handle recursive function
 

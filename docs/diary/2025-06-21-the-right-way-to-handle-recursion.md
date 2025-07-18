@@ -254,43 +254,46 @@ f3
 设计一个带有 solution 的 relation 作为 judgement：
 
 ```scheme
-(claim equivalent solution-t exp-t exp-t judgement-t)
+(claim equal solution-t exp-t exp-t judgement-t)
 ```
 
 先不定义推演规则，直接用命题的列表来写证明：
 
 ```scheme
-(equivalent
+(equal
+ []
+ f2 f3)
+(equal
  [(== f2 f3)]
  (F (F f2)) (F (F (F f3))))
-(equivalent
+(equal
  [(== f2 f3)]
  f2 (F f3))
-(equivalent
+(equal
  [(== f2 f3)
   (== f2 (F f3))]
  (F (F f2)) (F f3))
-(equivalent
+(equal
  [(== f2 f3)
   (== f2 (F f3))]
  (F f2) f3)
-(equivalent
+(equal
  [(== f2 f3)
   (== f2 (F f3))
   (== f3 (F f2))]
  (F f2) (F (F (F f3))))
-(equivalent
+(equal
  [(== f2 f3)
   (== f2 (F f3))
   (== f3 (F f2))]
  f2 (F (F f3)))
-(equivalent
+(equal
  [(== f2 f3)
   (== f2 (F f3))
   (== f3 (F f2))
   (== f2 (F (F f3)))]
  (F (F f2)) (F (F f3)))
-(equivalent
+(equal
  [(== f2 f3)
   (== f2 (F f3))
   (== f3 (F f2))
@@ -304,13 +307,13 @@ f3
 而是带有相位差的表达式相等呢？
 
 ```scheme
-(equivalent
+(equal
  []
  f2 (F f2))
-(equivalent
+(equal
  [(== f2 (F f2))]
  (F (F f2)) (F f2))
-(equivalent
+(equal
  [(== f2 (F f2))]
  (F f2) f2)
 ;; prove by lookup the substitution

@@ -1,6 +1,6 @@
 import dedent from "dedent"
 import { emptyEnv } from "../env/index.ts"
-import { equivalent } from "../equivalent/index.ts"
+import { equal } from "../equal/index.ts"
 import { evaluate } from "../evaluate/index.ts"
 import { type Exp } from "../exp/index.ts"
 import { formatExp } from "../format/formatExp.ts"
@@ -38,7 +38,7 @@ export function execute(mod: Mod, stmt: Stmt): null {
 function assertEqual(mod: Mod, left: Exp, right: Exp): void {
   const leftValue = evaluate(mod, emptyEnv(), left)
   const rightValue = evaluate(mod, emptyEnv(), right)
-  if (!equivalent(leftValue, rightValue)) {
+  if (!equal(leftValue, rightValue)) {
     throw new Error(dedent`
       [assertEqual] Fail to assert equal.
 
@@ -51,7 +51,7 @@ function assertEqual(mod: Mod, left: Exp, right: Exp): void {
 function assertNotEqual(mod: Mod, left: Exp, right: Exp): void {
   const leftValue = evaluate(mod, emptyEnv(), left)
   const rightValue = evaluate(mod, emptyEnv(), right)
-  if (equivalent(leftValue, rightValue)) {
+  if (equal(leftValue, rightValue)) {
     throw new Error(dedent`
       [assertNotEqual] Fail to assert NOT equal.
 

@@ -5,12 +5,12 @@ import * as Values from "../value/index.ts"
 import { type Neutral, type Value } from "../value/index.ts"
 import { ctxUseName, type Ctx } from "./Ctx.ts"
 
-export function equivalentInCtx(ctx: Ctx, left: Value, right: Value): boolean {
+export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
 
   if (left.kind === "NotYet" && right.kind === "NotYet") {
-    return equivalentNeutralInCtx(ctx, left.neutral, right.neutral)
+    return equalNeutralInCtx(ctx, left.neutral, right.neutral)
   }
 
   if (left.kind === "Lambda" && right.kind === "Lambda") {
@@ -18,25 +18,21 @@ export function equivalentInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
-    return equivalentInCtx(ctx, apply(left, arg), apply(right, arg))
+    return equalInCtx(ctx, apply(left, arg), apply(right, arg))
   }
 
   return false
 }
 
-function equivalentNeutralInCtx(
-  ctx: Ctx,
-  left: Neutral,
-  right: Neutral,
-): boolean {
+function equalNeutralInCtx(ctx: Ctx, left: Neutral, right: Neutral): boolean {
   if (left.kind === "Var" && right.kind === "Var") {
     return right.name === left.name
   }
 
   if (left.kind === "Apply" && right.kind === "Apply") {
     return (
-      equivalentNeutralInCtx(ctx, left.target, right.target) &&
-      equivalentInCtx(ctx, left.arg, right.arg)
+      equalNeutralInCtx(ctx, left.target, right.target) &&
+      equalInCtx(ctx, left.arg, right.arg)
     )
   }
 
