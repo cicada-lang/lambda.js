@@ -1,5 +1,6 @@
-`equivalent` call `applyOneStep`
 `equivalent` with `ctx.trail` handle recursive function
+`equivalent` call `applyOneStep`
+
 `readback` handle recursive function
 
 fix `examples/factorial.lisp`

@@ -4,23 +4,6 @@ import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import { type Neutral, type Value } from "../value/index.ts"
 
-type Ctx = {
-  usedNames: Set<string>
-}
-
-export function emptyEquivalentCtx(): Ctx {
-  return {
-    usedNames: new Set(),
-  }
-}
-
-function ctxUseName(ctx: Ctx, name: string): Ctx {
-  return {
-    ...ctx,
-    usedNames: new Set([...ctx.usedNames, name]),
-  }
-}
-
 export function equivalent(ctx: Ctx, left: Value, right: Value): boolean {
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
@@ -53,4 +36,21 @@ function equivalentNeutral(ctx: Ctx, left: Neutral, right: Neutral): boolean {
   }
 
   return false
+}
+
+type Ctx = {
+  usedNames: Set<string>
+}
+
+export function emptyEquivalentCtx(): Ctx {
+  return {
+    usedNames: new Set(),
+  }
+}
+
+function ctxUseName(ctx: Ctx, name: string): Ctx {
+  return {
+    ...ctx,
+    usedNames: new Set([...ctx.usedNames, name]),
+  }
 }
