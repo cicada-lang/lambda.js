@@ -1,5 +1,3 @@
-`sameInCtx` -- do not partial evaluate function with `definedName`
-
 `assert-same`
 `assert-not-same`
 
