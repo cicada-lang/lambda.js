@@ -30,6 +30,7 @@ export function createMod(options: {
     stmts: [],
   }
 }
+
 export function modDefine(mod: Mod, name: string, def: Def): void {
   assertNotRedefine(mod, name)
   mod.defs.set(name, def)

@@ -1,14 +1,15 @@
+`DelayedApply` as value
+refactor `apply` to `delay` and `apply`
+`equivalent` with `ctx.trail` handle recursive function
 `readback` handle recursive function
-`equivalent` handle recursive function -- simple way
+
+fix `examples/factorial.lisp`
+fix `examples/nat-even-odd.lisp`
 
 refactor `load` to support circular imports
 
 - if we can support mutually defined recursive function,
   we should also support circular imports.
-
-`DelayedApply` as value
-refactor `apply` to `delay` and `apply`
-`equivalent` with `ctx.trail` handle recursive function -- the right way
 
 # later
 

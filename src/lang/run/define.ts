@@ -12,8 +12,13 @@ export function define(mod: Mod, stmt: Stmt): null {
       value.definedName = stmt.name
     }
 
-    const def = { mod, name: stmt.name, exp: stmt.exp, value }
-    modDefine(mod, stmt.name, def)
+    modDefine(mod, stmt.name, {
+      mod,
+      name: stmt.name,
+      exp: stmt.exp,
+      value,
+    })
+
     return null
   }
 
