@@ -46,7 +46,7 @@ type Ctx = {
   usedNames: Set<string>
 }
 
-export function emptyEquivalentCtx(): Ctx {
+export function emptyCtx(): Ctx {
   return {
     usedNames: new Set(),
   }

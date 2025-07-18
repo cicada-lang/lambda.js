@@ -49,7 +49,7 @@ type Ctx = {
   usedNames: Set<string>
 }
 
-export function emptyReadbackCtx(): Ctx {
+export function emptyCtx(): Ctx {
   return {
     usedNames: new Set(),
   }

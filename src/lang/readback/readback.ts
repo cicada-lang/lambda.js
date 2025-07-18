@@ -1,7 +1,7 @@
 import { type Exp } from "../exp/index.ts"
 import { type Value } from "../value/index.ts"
-import { emptyReadbackCtx, readbackInCtx } from "./readbackInCtx.ts"
+import { emptyCtx, readbackInCtx } from "./readbackInCtx.ts"
 
 export function readback(value: Value): Exp {
-  return readbackInCtx(emptyReadbackCtx(), value)
+  return readbackInCtx(emptyCtx(), value)
 }
