@@ -1,4 +1,4 @@
-# lambda.js
+# lambda-lisp.js
 
 An interpreter of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus),
 that implements call-by-need lazy evaluation.
@@ -21,10 +21,10 @@ that implements call-by-need lazy evaluation.
 Install it by the following command:
 
 ```sh
-npm install -g @xieyuheng/lambda.js
+npm install -g @xieyuheng/lambda-lisp.js
 ```
 
-The command-line program is called `lambda.js`.
+The command-line program is called `lambda-lisp.js`.
 
 ## Development
 
