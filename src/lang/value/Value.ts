@@ -4,8 +4,12 @@ import { type Mod } from "../mod/index.ts"
 import { type Neutral } from "../value/index.ts"
 
 export type Value = NotYet | Lambda | Lazy
-export type NotYet = { kind: "NotYet"; neutral: Neutral }
-export type Lazy = { kind: "Lazy"; mod: Mod; env: Env; exp: Exp; value?: Value }
+
+export type NotYet = {
+  kind: "NotYet"
+  neutral: Neutral
+}
+
 export type Lambda = {
   kind: "Lambda"
   mod: Mod
@@ -13,6 +17,14 @@ export type Lambda = {
   name: string
   ret: Exp
   definedName?: string
+}
+
+export type Lazy = {
+  kind: "Lazy"
+  mod: Mod
+  env: Env
+  exp: Exp
+  value?: Value
 }
 
 export function NotYet(neutral: Neutral): NotYet {
