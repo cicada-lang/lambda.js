@@ -9,7 +9,7 @@ import { type Neutral, type Value } from "../value/index.ts"
 export function readbackInCtx(ctx: Ctx, value: Value): Exp {
   switch (value.kind) {
     case "NotYet": {
-      return readbackNeutral(ctx, value.neutral)
+      return readbackNeutralInCtx(ctx, value.neutral)
     }
 
     case "Lambda": {
@@ -30,7 +30,7 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
   }
 }
 
-function readbackNeutral(ctx: Ctx, neutral: Neutral): Exp {
+function readbackNeutralInCtx(ctx: Ctx, neutral: Neutral): Exp {
   switch (neutral.kind) {
     case "Var": {
       return Exps.Var(neutral.name)
@@ -38,7 +38,7 @@ function readbackNeutral(ctx: Ctx, neutral: Neutral): Exp {
 
     case "Apply": {
       return Exps.Apply(
-        readbackNeutral(ctx, neutral.target),
+        readbackNeutralInCtx(ctx, neutral.target),
         readbackInCtx(ctx, neutral.arg),
       )
     }
