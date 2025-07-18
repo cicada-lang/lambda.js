@@ -1,5 +1,3 @@
-extract `equivalent`
-
 `equivalentInCtx` with `ctx.trail` handle recursive function
 `equivalentInCtx` call `applyOneStep`
 
