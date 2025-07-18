@@ -1,4 +1,7 @@
-`same` and `sameInCtx` -- do not expend function with `definedName`
+`same` and `sameInCtx` -- do not partial evaluate function with `definedName`
+
+`assert-same`
+`assert-not-same`
 
 `equalInCtx` with `ctx.trail` handle recursive function
 `equalInCtx` call `applyOneStep`
@@ -16,3 +19,7 @@ refactor `load` to support circular imports
 # later
 
 `let-one` vs `let` and `let*`
+
+# builtin
+
+add builtin
