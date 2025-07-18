@@ -1,6 +1,14 @@
 import { type Exp } from "../exp/index.ts"
 
-export type Stmt = AssertEqual | AssertNotEqual | Compute | Define | Import
+export type Stmt =
+  | AssertEqual
+  | AssertNotEqual
+  | AssertSame
+  | AssertNotSame
+  | Compute
+  | Define
+  | Import
+
 export type AssertEqual = { kind: "AssertEqual"; exps: Array<Exp> }
 export type AssertNotEqual = { kind: "AssertNotEqual"; exps: Array<Exp> }
 export type AssertSame = { kind: "AssertSame"; exps: Array<Exp> }
