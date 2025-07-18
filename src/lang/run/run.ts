@@ -1,7 +1,6 @@
-import { type Def } from "../def/Def.ts"
 import { expFreeNames } from "../exp/expFreeNames.ts"
 import { formatExp } from "../format/formatExp.ts"
-import { modFind, modOwnDefs, type Mod } from "../mod/index.ts"
+import { modFind, modOwnDefs, type Def, type Mod } from "../mod/index.ts"
 import { define } from "./define.ts"
 import { execute } from "./execute.ts"
 

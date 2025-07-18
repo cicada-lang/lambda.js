@@ -1,5 +1,3 @@
-move `Def` to `mod/`
-
 `Lambda` has optional `definedName`
 `readback` handle recursive function
 `equivalent` handle recursive function -- simple way
