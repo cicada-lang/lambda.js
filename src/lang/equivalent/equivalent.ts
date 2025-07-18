@@ -25,40 +25,32 @@ export function equivalent(ctx: Ctx, left: Value, right: Value): boolean {
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
 
-  switch (left.kind) {
-    case "NotYet": {
-      return (
-        right.kind === "NotYet" &&
-        equivalentNeutral(ctx, left.neutral, right.neutral)
-      )
-    }
-
-    case "Lambda": {
-      const freshName = freshen(ctx.usedNames, left.name)
-      ctx = ctxUseName(ctx, freshName)
-      const v = Neutrals.Var(freshName)
-      const arg = Values.NotYet(v)
-      return equivalent(ctx, apply(left, arg), apply(right, arg))
-    }
-
-    case "Lazy": {
-      return equivalent(ctx, Values.lazyActive(left), right)
-    }
+  if (left.kind === "NotYet" && right.kind === "NotYet") {
+    return equivalentNeutral(ctx, left.neutral, right.neutral)
   }
+
+  if (left.kind === "Lambda" && right.kind === "Lambda") {
+    const freshName = freshen(ctx.usedNames, left.name)
+    ctx = ctxUseName(ctx, freshName)
+    const v = Neutrals.Var(freshName)
+    const arg = Values.NotYet(v)
+    return equivalent(ctx, apply(left, arg), apply(right, arg))
+  }
+
+  return false
 }
 
 function equivalentNeutral(ctx: Ctx, left: Neutral, right: Neutral): boolean {
-  switch (left.kind) {
-    case "Var": {
-      return right.kind === "Var" && right.name === left.name
-    }
-
-    case "Apply": {
-      return (
-        right.kind === "Apply" &&
-        equivalentNeutral(ctx, left.target, right.target) &&
-        equivalent(ctx, left.arg, right.arg)
-      )
-    }
+  if (left.kind === "Var" && right.kind === "Var") {
+    return right.name === left.name
   }
+
+  if (left.kind === "Apply" && right.kind === "Apply") {
+    return (
+      equivalentNeutral(ctx, left.target, right.target) &&
+      equivalent(ctx, left.arg, right.arg)
+    )
+  }
+
+  return false
 }
