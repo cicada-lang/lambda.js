@@ -2,7 +2,12 @@ import { freshen } from "../../utils/name/freshen.ts"
 import { applyOneStep } from "../evaluate/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
-import { type Neutral, type Value } from "../value/index.ts"
+import {
+  lambdaIsDefined,
+  lambdaSameDefined,
+  type Neutral,
+  type Value,
+} from "../value/index.ts"
 import { ctxUseName, type Ctx } from "./Ctx.ts"
 
 export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
@@ -14,17 +19,13 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   }
 
   if (left.kind === "Lambda" && right.kind === "Lambda") {
-    if (
-      left.definedName !== undefined &&
-      right.definedName !== undefined &&
-      left.definedName === right.definedName
-    ) {
+    if (lambdaSameDefined(left, right)) {
       return true
     }
   }
 
-  if (left.kind === "Lambda" && left.definedName === undefined) {
-    if (right.kind === "Lambda" && right.definedName !== undefined) {
+  if (left.kind === "Lambda" && !lambdaIsDefined(left)) {
+    if (right.kind === "Lambda" && lambdaIsDefined(right)) {
       return false
     }
 
@@ -34,8 +35,8 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     return sameInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
   }
 
-  if (right.kind === "Lambda" && right.definedName === undefined) {
-    if (left.kind === "Lambda" && left.definedName !== undefined) {
+  if (right.kind === "Lambda" && !lambdaIsDefined(right)) {
+    if (left.kind === "Lambda" && lambdaIsDefined(left)) {
       return false
     }
 
@@ -56,14 +57,14 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
 
   if (
     left.kind === "DelayedApply" &&
-    !(left.target.kind === "Lambda" && left.target.definedName !== undefined)
+    !(left.target.kind === "Lambda" && lambdaIsDefined(left.target))
   ) {
     return sameInCtx(ctx, applyOneStep(left.target, left.arg), right)
   }
 
   if (
     right.kind === "DelayedApply" &&
-    !(right.target.kind === "Lambda" && right.target.definedName !== undefined)
+    !(right.target.kind === "Lambda" && lambdaIsDefined(right.target))
   ) {
     return sameInCtx(ctx, left, applyOneStep(right.target, right.arg))
   }
