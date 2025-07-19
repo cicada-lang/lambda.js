@@ -13,7 +13,7 @@ export async function load(url: URL): Promise<Mod> {
   const text = await fs.promises.readFile(url.pathname, "utf8")
 
   try {
-    const mod = createMod({ url })
+    const mod = createMod(url)
     mod.stmts = parseStmts(text)
     globalLoadedMods.set(url.href, { mod, text })
 

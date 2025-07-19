@@ -16,9 +16,7 @@ export type Mod = {
   isFinished?: boolean
 }
 
-export function createMod(options: { url: URL }): Mod {
-  const { url } = options
-
+export function createMod(url: URL): Mod {
   return {
     url,
     defs: new Map(),
