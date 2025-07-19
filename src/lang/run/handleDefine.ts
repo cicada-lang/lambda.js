@@ -6,7 +6,7 @@ import type { ImportEntry, Stmt } from "../stmt/Stmt.ts"
 import { globalLoadedMods } from "./globalLoadedMods.ts"
 import { run } from "./run.ts"
 
-export function define(mod: Mod, stmt: Stmt): void {
+export function handleDefine(mod: Mod, stmt: Stmt): void {
   if (stmt.kind === "Define") {
     const value = evaluate(mod, emptyEnv(), stmt.exp)
     if (value.kind === "Lambda") {

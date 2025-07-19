@@ -1,13 +1,13 @@
 import { expFreeNames } from "../exp/expFreeNames.ts"
 import { formatExp } from "../format/formatExp.ts"
 import { modFind, modOwnDefs, type Def, type Mod } from "../mod/index.ts"
-import { define } from "./define.ts"
 import { execute } from "./execute.ts"
+import { handleDefine } from "./handleDefine.ts"
 
 export function run(mod: Mod): void {
   if (mod.isFinished) return
 
-  for (const stmt of mod.stmts) define(mod, stmt)
+  for (const stmt of mod.stmts) handleDefine(mod, stmt)
 
   for (const def of modOwnDefs(mod).values()) assertAllNamesDefined(mod, def)
 
