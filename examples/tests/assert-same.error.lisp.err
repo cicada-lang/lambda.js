@@ -1,4 +1,3 @@
-[assertSame] Fail to assert equal.
-
-  left: id1
-  right: id2
+[assert-same] fail:
+  lhs: id1
+  rhs: id2

@@ -1,4 +1,3 @@
-[assertNotEqual] Fail to assert NOT equal.
-
-  left: (lambda (x y) (x y))
-  right: (lambda (y x) (y x))
+[assert-not-equal] fail:
+  lhs: (lambda (x y) (x y))
+  rhs: (lambda (y x) (y x))

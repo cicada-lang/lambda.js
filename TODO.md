@@ -1,4 +1,3 @@
-`execute` inline assert functions
 [example] move typing of nat encoding to `person/xieyuheng/lambda-calculus`
 
 # let
