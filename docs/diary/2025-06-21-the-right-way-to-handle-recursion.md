@@ -352,7 +352,18 @@ f3
 
 现在为了主要实验，暂时取消了惰性求值，
 但是我能想到办法如何把惰性求值添加回来。
+
 其实在使用的语言中惰性求值并不重要，因为不好编译。
+我计划在 lambda-lisp 这个项目中保持惰性求值，
+这样更贴近 lambda calculus 本身。
+
+在下一个 occam-lisp 中，取消惰性求值，
+并且添加 builtin value 和 function，
+使得整个语言成为一个实用的无类型语言
+
+注意，为了突破 meta language（javascript）中，
+递归函数栈的深度的限制，
+可能需要编译到 Peter Landin 的 SECD lambda machine。
 
 做一些首尾工作之后，
 就可以模仿 Luca 来证明我的算法是正确的。
