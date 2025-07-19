@@ -1,4 +1,4 @@
-# module
+inline `run` to `load`
 
 refactor `load` to support circular imports
 
