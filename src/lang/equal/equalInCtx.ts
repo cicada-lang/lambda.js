@@ -56,17 +56,17 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
       return true
     }
 
-    if (
-      equalInCtx(ctx, applyOneStep(left.target, left.arg), right) ||
-      equalInCtx(ctx, left, applyOneStep(right.target, right.arg)) ||
-      equalInCtx(
-        ctx,
-        applyOneStep(left.target, left.arg),
-        applyOneStep(right.target, right.arg),
-      )
-    ) {
-      return true
-    }
+    // if (
+    //   equalInCtx(ctx, applyOneStep(left.target, left.arg), right) ||
+    //   equalInCtx(ctx, left, applyOneStep(right.target, right.arg)) ||
+    //   equalInCtx(
+    //     ctx,
+    //     applyOneStep(left.target, left.arg),
+    //     applyOneStep(right.target, right.arg),
+    //   )
+    // ) {
+    //   return true
+    // }
   }
 
   if (left.kind === "DelayedApply") {
