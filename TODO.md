@@ -1,4 +1,4 @@
-[utils/array] -- `arraySlideMap`
+`execute` use `arraySlide2`
 
 test `assert-same` & `assert-not-same`
 
