@@ -16,7 +16,9 @@ export function evaluateWithDelay(mod: Mod, env: Env, exp: Exp): Value {
       value = modFindValue(mod, exp.name)
       if (value !== undefined) return value
 
-      throw new Error(`Unknown name: ${exp.name}`)
+      throw new Error(
+        `[evaluateWithDelay] I meet undefined name: ${exp.name}, in mod: ${mod.url}`,
+      )
     }
 
     case "Lambda": {

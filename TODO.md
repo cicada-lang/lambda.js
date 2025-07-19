@@ -1,5 +1,3 @@
-test circular imports
-
 # lazy evaluation
 
 [problem] we can use `Y`! -- `DelayedApply` can replace `Lazy`? -- what evaluation strategy is this?
