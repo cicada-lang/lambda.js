@@ -3,7 +3,6 @@
 > - if we can support mutually defined recursive function,
 >   we should also support circular imports.
 
-rename `execute` to `handleEffect`
 extract `handleImport` from `handleDefine`
 `run` should be async
 call `run` in `load`
