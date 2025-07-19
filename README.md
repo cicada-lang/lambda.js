@@ -1,7 +1,6 @@
 # lambda-lisp.js
 
-An interpreter of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus),
-that implements call-by-need lazy evaluation.
+An implementation of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 ```scheme
 (define name body)
