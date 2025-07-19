@@ -1,7 +1,7 @@
 import { modDefine, modFind, modResolve } from "../mod/index.ts"
 import type { Mod } from "../mod/Mod.ts"
 import type { ImportEntry, Stmt } from "../stmt/Stmt.ts"
-import { globalLoadedMods } from "./globalLoadedMods.ts"
+import { load } from "./load.ts"
 
 export async function handleImport(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "Import") {
@@ -20,20 +20,16 @@ async function importOne(
 ): Promise<void> {
   const url = modResolve(mod, path)
   if (url.href === mod.url.href) {
-    throw new Error(`I can not circular import: ${path}`)
+    throw new Error(`[import] A module can not import itself: ${path}`)
   }
 
-  const found = globalLoadedMods.get(url.href)
-  if (found === undefined) {
-    throw new Error(`Mod is not loaded: ${path}`)
-  }
+  const importedMod = await load(url)
 
   const { name, rename } = entry
-
-  const def = modFind(found.mod, name)
+  const def = modFind(importedMod, name)
   if (def === undefined) {
     throw new Error(
-      `I can not import undefined name: ${name}, from path: ${path}`,
+      `[import] I can not import undefined name: ${name}, from path: ${path}`,
     )
   }
 

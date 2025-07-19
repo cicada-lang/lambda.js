@@ -8,11 +8,9 @@ import { handleImport } from "./handleImport.ts"
 export async function run(mod: Mod): Promise<void> {
   if (mod.isFinished) return
 
-  for (const stmt of mod.stmts) await handleImport(mod, stmt)
   for (const stmt of mod.stmts) await handleDefine(mod, stmt)
-
+  for (const stmt of mod.stmts) await handleImport(mod, stmt)
   for (const def of modOwnDefs(mod).values()) assertAllNamesDefined(mod, def)
-
   for (const stmt of mod.stmts) await handleEffect(mod, stmt)
 
   mod.isFinished = true

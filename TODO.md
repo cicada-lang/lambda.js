@@ -1,7 +1,4 @@
-call `handleImport` after `handleDefine` -- to support circular imports
-
-- if we can support mutually defined recursive function,
-  we should also support circular imports.
+test circular imports
 
 # lazy evaluation
 

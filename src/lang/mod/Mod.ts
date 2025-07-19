@@ -1,3 +1,5 @@
+import { emptyEnv } from "../env/Env.ts"
+import { evaluate } from "../evaluate/evaluate.ts"
 import { type Exp } from "../exp/index.ts"
 import { type Stmt } from "../stmt/index.ts"
 import { type Value } from "../value/index.ts"
@@ -6,7 +8,7 @@ export type Def = {
   mod: Mod
   name: string
   exp: Exp
-  value: Value
+  value?: Value
 }
 
 export type Mod = {
@@ -42,7 +44,16 @@ export function modFind(mod: Mod, name: string): Def | undefined {
 export function modFindValue(mod: Mod, name: string): Value | undefined {
   const def = modFind(mod, name)
   if (def === undefined) return undefined
-  return def.value
+
+  if (def.value) return def.value
+
+  const value = evaluate(def.mod, emptyEnv(), def.exp)
+  if (value.kind === "Lambda") {
+    value.definedName = def.name
+  }
+
+  def.value = value
+  return value
 }
 
 export function modResolve(mod: Mod, href: string): URL {
