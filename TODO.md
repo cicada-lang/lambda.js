@@ -1,4 +1,5 @@
-`equalInCtx` compare current pair to `ctx.trail` handle recursive function
+prepare to remove lazy
+remove lazy for now
 
 `readback` handle recursive function
 

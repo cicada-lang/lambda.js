@@ -1,11 +1,14 @@
 import { freshen } from "../../utils/name/freshen.ts"
 import { applyOneStep } from "../evaluate/index.ts"
+import { same } from "../same/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
-import { type Neutral, type Value } from "../value/index.ts"
-import { ctxUseName, type Ctx } from "./Ctx.ts"
+import { lambdaIsDefined, type Neutral, type Value } from "../value/index.ts"
+import { ctxBlaseOccurred, ctxBlaseTrail, ctxUseName, type Ctx } from "./Ctx.ts"
 
 export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
+  if (same(left, right)) return true
+
   left = Values.lazyActiveDeep(left)
   right = Values.lazyActiveDeep(right)
 
@@ -14,6 +17,14 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   }
 
   if (left.kind === "Lambda") {
+    if (lambdaIsDefined(left)) {
+      if (ctxBlaseOccurred(ctx, left, right)) {
+        return true
+      } else {
+        ctx = ctxBlaseTrail(ctx, left, right)
+      }
+    }
+
     const freshName = freshen(ctx.usedNames, left.name)
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
@@ -22,6 +33,14 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   }
 
   if (right.kind === "Lambda") {
+    if (lambdaIsDefined(right)) {
+      if (ctxBlaseOccurred(ctx, right, left)) {
+        return true
+      } else {
+        ctx = ctxBlaseTrail(ctx, right, left)
+      }
+    }
+
     const freshName = freshen(ctx.usedNames, right.name)
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
@@ -33,6 +52,18 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     if (
       equalInCtx(ctx, left.target, right.target) &&
       equalInCtx(ctx, left.arg, right.arg)
+    ) {
+      return true
+    }
+
+    if (
+      equalInCtx(ctx, applyOneStep(left.target, left.arg), right) ||
+      equalInCtx(ctx, left, applyOneStep(right.target, right.arg)) ||
+      equalInCtx(
+        ctx,
+        applyOneStep(left.target, left.arg),
+        applyOneStep(right.target, right.arg),
+      )
     ) {
       return true
     }
