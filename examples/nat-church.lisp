@@ -2,30 +2,6 @@
 (define (add1 prev) (lambda (base step) (step (prev base step))))
 (define (iter-Nat n base step) (n base step))
 
-;; ## Typing
-
-;; The type of `zero` is the `Nat`.
-;; We know
-
-;; (claim zero
-;;   (nu (X)
-;;     (-> X (-> X X) X)))
-
-;; Thus
-
-;; (define Nat
-;;   (nu (X)
-;;     (-> X (-> X X) X)))
-
-;; (claim add1
-;;   (-> Nat Nat)
-;;   (nu (X)
-;;     (-> Nat (-> X (-> X X) X))))
-
-;; (claim iter-Nat
-;;   (nu (X)
-;;     (-> Nat (-> X (-> X X) X))))
-
 (define one (add1 zero))
 (define two (add1 one))
 (define three (add1 two))

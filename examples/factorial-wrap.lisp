@@ -3,10 +3,6 @@
 (import if true false "bool.lisp")
 (import Y "fixpoint.lisp")
 
-;; (claim factorial-wrap (-> (-> Nat Nat) (-> Nat Nat)))
-;; (claim (Y factorial-wrap) (-> Nat Nat))
-;; (claim Y (nu (A) (-> (-> A A) A)))
-
 (define factorial-wrap
   (lambda (factorial)
     (lambda (n)
@@ -14,7 +10,11 @@
         one
         (mul n (factorial (sub1 n)))))))
 
+;; test readback of functions
+
 factorial-wrap
+
+;; test equivalence of functions
 
 (assert-equal
   (lambda (factorial)
