@@ -1,9 +1,14 @@
-inline `run` to `load`
+> refactor `load` to support circular imports
+>
+> - if we can support mutually defined recursive function,
+>   we should also support circular imports.
 
-refactor `load` to support circular imports
-
-- if we can support mutually defined recursive function,
-  we should also support circular imports.
+`run` should be async
+call `run` in `load`
+rename `define` to `handleDefine`
+extract `handleImport` from `handleDefine`
+rename `execute` to `handleEffect`
+rename `run/` to `load/`
 
 # lazy evaluation
 
