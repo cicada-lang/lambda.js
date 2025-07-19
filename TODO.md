@@ -1,4 +1,5 @@
 [refactor] improve `Ctx` of `readback` and `equal` -- `usedNames` is not clear
+[diary] about practical set theory
 
 # let
 
