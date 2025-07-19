@@ -1,7 +1,7 @@
 (import zero? add mul sub1 "nat-church.lisp")
 (import zero one two three four "nat-church.lisp")
 (import if true false "bool.lisp")
-(import Y "fixpoint.lisp")
+(import Y turing "fixpoint.lisp")
 
 (define factorial-wrap
   (lambda (factorial)
@@ -48,6 +48,12 @@ factorial-wrap
 (assert-equal ((Y factorial-wrap) two) two)
 (assert-equal ((Y factorial-wrap) three) (mul three two))
 (assert-equal ((Y factorial-wrap) four) (mul four (mul three two)))
+
+(assert-equal ((turing factorial-wrap) zero) one)
+(assert-equal ((turing factorial-wrap) one) one)
+(assert-equal ((turing factorial-wrap) two) two)
+(assert-equal ((turing factorial-wrap) three) (mul three two))
+(assert-equal ((turing factorial-wrap) four) (mul four (mul three two)))
 
 (define factorial (Y factorial-wrap))
 

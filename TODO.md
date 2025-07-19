@@ -17,5 +17,7 @@ refactor `load` to support circular imports
 
 bring lazy evaluation back
 
-[example] bring back `factorial-half.lisp`
-[example] bring back turing for fixpoint
+# study
+
+[problem] why `turing` need no lazy evaluation?
+[problem] why `factorial-half.lisp` need no lazy evaluation?

@@ -1,9 +1,8 @@
 ;; If lazy evaluation is NOT supported:
 
-(define Y
-  (lambda (f)
-    ((lambda (u) (u u))
-     (lambda (x) (f (lambda (t) ((x x) t)))))))
+(define (Y f)
+  ((lambda (u) (u u))
+   (lambda (x) (f (lambda (t) ((x x) t))))))
 
 ;; If lazy evaluation is supported:
 
@@ -14,5 +13,5 @@
 ;; Another function to find fixpoint is `turing`,
 ;; which also need lazy evaluation:
 
-;; (define (turing-half x y) (y (x x y)))
-;; (define turing (turing-half turing-half))
+(define (turing-half x y) (y (x x y)))
+(define turing (turing-half turing-half))
