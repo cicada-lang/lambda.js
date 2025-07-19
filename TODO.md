@@ -1,4 +1,3 @@
-prepare to remove lazy
 remove lazy for now
 
 `readback` handle recursive function

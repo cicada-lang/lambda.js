@@ -23,9 +23,14 @@
 
 ;; The following `Y` is one way of defining `Y`.
 
-(define (Y f)
-  ((lambda (x) (f (x x)))
-   (lambda (x) (f (x x)))))
+(define Y
+  (lambda (f)
+    ((lambda (u) (u u))
+     (lambda (x) (f (lambda (t) ((x x) t)))))))
+
+;; (define (Y f)
+;;   ((lambda (x) (f (x x)))
+;;    (lambda (x) (f (x x)))))
 
 ;; We will have
 
@@ -38,8 +43,8 @@
 
 ;; Another function to find fixpoint is `turing`.
 
-(define (turing-half x y) (y (x x y)))
-(define turing (turing-half turing-half))
+;; (define (turing-half x y) (y (x x y)))
+;; (define turing (turing-half turing-half))
 
 ;; We will have
 
