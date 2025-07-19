@@ -1,6 +1,8 @@
 import { type Lambda } from "./Value.ts"
 
-export function lambdaIsDefined(lambda: Lambda): boolean {
+type DefinedLambda = Lambda & { definedName: string }
+
+export function lambdaIsDefined(lambda: Lambda): lambda is DefinedLambda {
   return lambda.definedName !== undefined
 }
 

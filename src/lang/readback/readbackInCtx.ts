@@ -1,11 +1,11 @@
 import { freshen } from "../../utils/name/freshen.ts"
-import { apply } from "../evaluate/index.ts"
+import { applyWithDelay } from "../evaluate/index.ts"
 import * as Exps from "../exp/index.ts"
 import { type Exp } from "../exp/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
-import { type Neutral, type Value } from "../value/index.ts"
-import { ctxUseName, type Ctx } from "./Ctx.ts"
+import { lambdaIsDefined, type Neutral, type Value } from "../value/index.ts"
+import { ctxBlazeOccurred, ctxBlazeTrail, ctxUseName, type Ctx } from "./Ctx.ts"
 
 export function readbackInCtx(ctx: Ctx, value: Value): Exp {
   switch (value.kind) {
@@ -14,10 +14,18 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
     }
 
     case "Lambda": {
+      if (lambdaIsDefined(value)) {
+        if (ctxBlazeOccurred(ctx, value)) {
+          return Exps.Var(value.definedName)
+        } else {
+          ctx = ctxBlazeTrail(ctx, value)
+        }
+      }
+
       const freshName = freshen(ctx.usedNames, value.name)
       ctx = ctxUseName(ctx, freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))
-      const ret = apply(value, arg)
+      const ret = applyWithDelay(value, arg)
       return Exps.Lambda(freshName, readbackInCtx(ctx, ret))
     }
 
@@ -26,7 +34,20 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
     }
 
     case "DelayedApply": {
-      return readbackInCtx(ctx, apply(value.target, value.arg))
+      if (value.target.kind === "Lambda") {
+        if (lambdaIsDefined(value.target)) {
+          if (ctxBlazeOccurred(ctx, value.target)) {
+            return Exps.Apply(
+              Exps.Var(value.target.definedName),
+              readbackInCtx(ctx, value.arg),
+            )
+          } else {
+            ctx = ctxBlazeTrail(ctx, value.target)
+          }
+        }
+      }
+
+      return readbackInCtx(ctx, applyWithDelay(value.target, value.arg))
     }
   }
 }

@@ -25,4 +25,4 @@
 
 ;; TODO test readback of recursive functions
 
-;; factorial
+factorial
