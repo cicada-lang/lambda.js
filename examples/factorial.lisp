@@ -19,21 +19,21 @@
 
 ;; factorial
 
-;; (assert-equal factorial factorial)
+(assert-equal factorial factorial)
 
-;; (assert-not-same
-;;   factorial
-;;   (lambda (x) (factorial x)))
+(assert-not-same
+  factorial
+  (lambda (x) (factorial x)))
 
-;; (assert-equal
-;;   factorial
-;;   (lambda (x) (factorial x)))
+(assert-equal
+  factorial
+  (lambda (x) (factorial x)))
 
-;; (assert-equal
-;;   factorial
-;;   (lambda (x) (factorial x))
-;;   (lambda (y) (factorial y)))
+(assert-equal
+  factorial
+  (lambda (x) (factorial x))
+  (lambda (y) (factorial y)))
 
-;; (assert-equal
-;;   (lambda (x) (factorial x))
-;;   factorial)
+(assert-equal
+  (lambda (x) (factorial x))
+  factorial)

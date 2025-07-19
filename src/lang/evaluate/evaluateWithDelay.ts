@@ -25,7 +25,8 @@ export function evaluateWithDelay(mod: Mod, env: Env, exp: Exp): Value {
 
     case "Apply": {
       const target = evaluateWithDelay(mod, env, exp.target)
-      const arg = Values.Lazy(mod, env, exp.arg)
+      const arg = evaluateWithDelay(mod, env, exp.arg)
+      // const arg = Values.Lazy(mod, env, exp.arg)
       return Values.DelayedApply(target, arg)
     }
 
@@ -63,7 +64,8 @@ export function applyOneStep(target: Value, arg: Value): Value {
     }
 
     case "DelayedApply": {
-      return Values.DelayedApply(applyOneStep(target.target, target.arg), arg)
+      // return Values.DelayedApply(applyOneStep(target.target, target.arg), arg)
+      return applyOneStep(applyOneStep(target.target, target.arg), arg)
     }
   }
 }

@@ -1,9 +1,9 @@
-remove lazy for now
+remove lazy evaluation
+
+`assert-equal` and `assert-not-equal` only take two args
+`assert-same` and `assert-not-same` only take two args
 
 `readback` handle recursive function
-
-fix `examples/factorial.lisp`
-fix `examples/nat-even-odd.lisp`
 
 refactor `load` to support circular imports
 
