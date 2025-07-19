@@ -13,8 +13,16 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     return equalNeutralInCtx(ctx, left.neutral, right.neutral)
   }
 
-  if (left.kind === "Lambda" && right.kind === "Lambda") {
+  if (left.kind === "Lambda") {
     const freshName = freshen(ctx.usedNames, left.name)
+    ctx = ctxUseName(ctx, freshName)
+    const v = Neutrals.Var(freshName)
+    const arg = Values.NotYet(v)
+    return equalInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
+  }
+
+  if (right.kind === "Lambda") {
+    const freshName = freshen(ctx.usedNames, right.name)
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
