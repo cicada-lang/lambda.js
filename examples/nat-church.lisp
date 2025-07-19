@@ -1,7 +1,5 @@
 ;; Church Encoding of Natural Number
 
-;; # zero & add1 & which-Nat
-
 (define zero (lambda (base step) base))
 (define (add1 prev) (lambda (base step) (step (prev base step))))
 (define (iter-Nat n base step) (n base step))
@@ -30,8 +28,6 @@
 ;;   (nu (X)
 ;;     (-> Nat (-> X (-> X X) X))))
 
-;; # one to ten
-
 (define one (add1 zero))
 (define two (add1 one))
 (define three (add1 two))
@@ -43,14 +39,10 @@
 (define nine (add1 eight))
 (define ten (add1 nine))
 
-;; # add
-
 (define (add m n) (iter-Nat m n add1))
 
 (assert-equal (add two five) seven)
 (assert-equal (add three three) six)
-
-;; # add-rosser
 
 ;; The above `add` is `O(n)`,
 ;; Rosser has a `O(4)` `add`, which takes
@@ -64,8 +56,6 @@
 (assert-equal (add-rosser two five) seven)
 (assert-equal (add-rosser three three) six)
 
-;; # mul
-
 (define (mul m n) (iter-Nat m zero (add n)))
 
 (assert-equal (mul two five) ten)
@@ -75,8 +65,6 @@
 (assert-equal
   (mul two (mul two (mul two two)))
   (mul (mul two two) (mul two two)))
-
-;; # power-of & power
 
 (define (power-of m n) (iter-Nat m one (mul n)))
 (define (power m n) (power-of n m))
@@ -88,8 +76,6 @@
 (assert-equal (power two four) (mul four four))
 (assert-equal (power two four) (mul (mul two two) (mul two two)))
 
-;; # zero?
-
 (import true false if and or not "bool.lisp")
 
 (define (zero? n) (iter-Nat n true (lambda (x) false)))
@@ -97,8 +83,6 @@
 (assert-equal (zero? zero) true)
 (assert-equal (zero? one) false)
 (assert-equal (zero? two) false)
-
-;; # sub1
 
 ;; The `sub1` about is `O(n)`,
 ;; while `sub1` for Scott encoding is `O(3)`.
@@ -115,8 +99,6 @@
 (assert-equal (sub1 one) zero)
 (assert-equal (sub1 zero) zero)
 
-;; # sub
-
 (define (sub m n) (iter-Nat n m sub1))
 
 (assert-equal (sub three zero) three)
@@ -124,8 +106,6 @@
 (assert-equal (sub three two) one)
 (assert-equal (sub three three) zero)
 (assert-equal (sub three four) zero)
-
-;; # lteq
 
 (define (lteq m n) (zero? (sub m n)))
 

@@ -2,8 +2,6 @@
 (import zero one two three four "nat-church.lisp")
 (import if true false "bool.lisp")
 
-;; (claim factorial (-> Nat Nat))
-
 (define (factorial n)
   (if (zero? n)
     one
