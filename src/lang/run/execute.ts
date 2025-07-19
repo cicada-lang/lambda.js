@@ -1,4 +1,5 @@
 import dedent from "dedent"
+import { arraySlide2 } from "../../utils/array/arraySlide2.ts"
 import { emptyEnv } from "../env/index.ts"
 import { equal } from "../equal/index.ts"
 import { evaluate } from "../evaluate/index.ts"
@@ -10,18 +11,12 @@ import type { Stmt } from "../stmt/Stmt.ts"
 
 export function execute(mod: Mod, stmt: Stmt): null {
   if (stmt.kind === "AssertEqual") {
-    for (let i = 0; i < stmt.exps.length - 1; i++) {
-      assertEqual(mod, stmt.exps[i], stmt.exps[i + 1])
-    }
-
+    arraySlide2(stmt.exps, (x, y) => assertEqual(mod, x, y))
     return null
   }
 
   if (stmt.kind === "AssertNotEqual") {
-    for (let i = 0; i < stmt.exps.length - 1; i++) {
-      assertNotEqual(mod, stmt.exps[i], stmt.exps[i + 1])
-    }
-
+    arraySlide2(stmt.exps, (x, y) => assertNotEqual(mod, x, y))
     return null
   }
 
