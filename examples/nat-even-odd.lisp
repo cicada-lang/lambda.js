@@ -11,6 +11,30 @@
   (if (zero? n) false
       (even? (sub1 n))))
 
+(assert-equal
+  (even? zero)
+  (even? two)
+  (even? four)
+  true)
+
+(assert-equal
+  (even? one)
+  (even? three)
+  false)
+
+(assert-equal
+  (odd? zero)
+  (odd? two)
+  (odd? four)
+  false)
+
+(assert-equal
+  (odd? one)
+  (odd? three)
+  true)
+
+;; equivalence between recursive functions:
+
 ;; (assert-equal even? even?)
 ;; (assert-equal odd? odd?)
 
@@ -20,25 +44,3 @@
 ;;   (lambda (n)
 ;;     (if (zero? n) true
 ;;         (odd? (sub1 n)))))
-
-;; (assert-equal
-;;   (even? zero)
-;;   (even? two)
-;;   (even? four)
-;;   true)
-
-;; (assert-equal
-;;   (even? one)
-;;   (even? three)
-;;   false)
-
-;; (assert-equal
-;;   (odd? zero)
-;;   (odd? two)
-;;   (odd? four)
-;;   false)
-
-;; (assert-equal
-;;   (odd? one)
-;;   (odd? three)
-;;   true)
