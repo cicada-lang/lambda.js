@@ -9,25 +9,23 @@ import type { Mod } from "../mod/Mod.ts"
 import { readback } from "../readback/index.ts"
 import type { Stmt } from "../stmt/Stmt.ts"
 
-export function execute(mod: Mod, stmt: Stmt): null {
+export function execute(mod: Mod, stmt: Stmt): void {
   if (stmt.kind === "AssertEqual") {
     arraySlide2(stmt.exps, (x, y) => assertEqual(mod, x, y))
-    return null
+    return
   }
 
   if (stmt.kind === "AssertNotEqual") {
     arraySlide2(stmt.exps, (x, y) => assertNotEqual(mod, x, y))
-    return null
+    return
   }
 
   if (stmt.kind === "Compute") {
     const value = evaluate(mod, emptyEnv(), stmt.exp)
     const exp = readback(value)
     console.log(formatExp(exp))
-    return null
+    return
   }
-
-  return null
 }
 
 function assertEqual(mod: Mod, left: Exp, right: Exp): void {

@@ -5,7 +5,7 @@ import type { Mod } from "../mod/Mod.ts"
 import type { ImportEntry, Stmt } from "../stmt/Stmt.ts"
 import { run } from "./run.ts"
 
-export function define(mod: Mod, stmt: Stmt): null {
+export function define(mod: Mod, stmt: Stmt): void {
   if (stmt.kind === "Define") {
     const value = evaluate(mod, emptyEnv(), stmt.exp)
     if (value.kind === "Lambda") {
@@ -19,7 +19,7 @@ export function define(mod: Mod, stmt: Stmt): null {
       value,
     })
 
-    return null
+    return
   }
 
   if (stmt.kind === "Import") {
@@ -27,10 +27,8 @@ export function define(mod: Mod, stmt: Stmt): null {
       importOne(mod, stmt.path, entry)
     }
 
-    return null
+    return
   }
-
-  return null
 }
 
 function importOne(mod: Mod, path: string, entry: ImportEntry): void {
