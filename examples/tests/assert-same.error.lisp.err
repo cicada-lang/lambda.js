@@ -1,0 +1,4 @@
+[assertSame] Fail to assert equal.
+
+  left: id1
+  right: id2

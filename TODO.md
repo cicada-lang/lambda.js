@@ -1,4 +1,3 @@
-[example] error test about assertion fail
 [stmt] `assert-equal` and `assert-not-equal` only support two args
 [stmt] `assert-same` and `assert-not-same` only support two args
 [example] move typing of nat encoding to `person/xieyuheng/lambda-calculus`

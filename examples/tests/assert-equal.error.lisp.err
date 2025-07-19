@@ -1,0 +1,4 @@
+[assertEqual] Fail to assert equal.
+
+  left: (lambda (x y) (x y))
+  right: (lambda (x y) (y x))
