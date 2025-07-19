@@ -3,6 +3,7 @@ import fs from "node:fs"
 import { createMod, modResolve, type Mod } from "../mod/index.ts"
 import { parseStmts } from "../parse/index.ts"
 import { globalLoadedMods } from "./globalLoadedMods.ts"
+import { run } from "./run.ts"
 
 export async function load(url: URL): Promise<Mod> {
   const found = globalLoadedMods.get(url.href)
@@ -24,6 +25,7 @@ export async function load(url: URL): Promise<Mod> {
       }
     }
 
+    await run(mod)
     return mod
   } catch (error) {
     if (error instanceof ParsingError) {

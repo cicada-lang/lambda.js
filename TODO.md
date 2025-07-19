@@ -1,4 +1,3 @@
-call `run` in `load`
 rename `run/` to `load/`
 
 call `handleImport` after `handleDefine` -- to support circular imports

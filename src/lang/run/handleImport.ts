@@ -2,7 +2,6 @@ import { modDefine, modFind, modResolve } from "../mod/index.ts"
 import type { Mod } from "../mod/Mod.ts"
 import type { ImportEntry, Stmt } from "../stmt/Stmt.ts"
 import { globalLoadedMods } from "./globalLoadedMods.ts"
-import { run } from "./run.ts"
 
 export async function handleImport(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "Import") {
@@ -28,8 +27,6 @@ async function importOne(
   if (found === undefined) {
     throw new Error(`Mod is not loaded: ${path}`)
   }
-
-  await run(found.mod)
 
   const { name, rename } = entry
 
