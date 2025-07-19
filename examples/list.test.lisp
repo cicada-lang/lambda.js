@@ -1,0 +1,15 @@
+(import nil li length append "list.lisp")
+(import true "bool.lisp")
+(import zero add1 "nat-church.lisp")
+
+(assert-equal (length nil) zero)
+(assert-equal (length (li true nil)) (add1 zero))
+(assert-equal (length (li true (li true nil))) (add1 (add1 zero)))
+
+(assert-equal (append nil nil) nil)
+(assert-equal (append nil (li true nil)) (li true nil))
+(assert-equal (append (li true nil) nil) (li true nil))
+(assert-equal (append (li true nil) (li true nil)) (li true (li true nil)))
+(assert-equal (append (li true (li true nil))
+                      (li true (li true nil)))
+              (li true (li true (li true (li true nil)))))
