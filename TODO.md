@@ -1,4 +1,3 @@
-[example] rename `fix` to `fixpoint`
 [example] fix `list.test.lisp`
 [example] error test about assertion fail
 [stmt] `assert-equal` and `assert-not-equal` only support two args
