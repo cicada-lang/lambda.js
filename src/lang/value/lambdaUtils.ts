@@ -8,6 +8,9 @@ export function lambdaIsDefined(lambda: Lambda): lambda is DefinedLambda {
 
 export function lambdaSameDefined(x: Lambda, y: Lambda): boolean {
   return (
-    lambdaIsDefined(x) && lambdaIsDefined(y) && x.definedName === y.definedName
+    lambdaIsDefined(x) &&
+    lambdaIsDefined(y) &&
+    x.definedName === y.definedName &&
+    x.mod === y.mod
   )
 }
