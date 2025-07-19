@@ -1,5 +1,5 @@
-`equalInCtx` with `ctx.trail` handle recursive function
-`equalInCtx` call `applyOneStep`
+`equalInCtx` call `applyOneStep` instead of `apply`
+`equalInCtx` compare current pair to `ctx.trail` handle recursive function
 
 `readback` handle recursive function
 
