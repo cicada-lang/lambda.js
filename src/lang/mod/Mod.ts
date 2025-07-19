@@ -27,14 +27,11 @@ export function createMod(url: URL): Mod {
 }
 
 export function modDefine(mod: Mod, name: string, def: Def): void {
-  assertNotRedefine(mod, name)
-  mod.defs.set(name, def)
-}
-
-function assertNotRedefine(mod: Mod, name: string): void {
   if (modFind(mod, name)) {
-    throw new Error(`I can not redefine name: ${name}`)
+    throw new Error(`[modDefine] I can not redefine name: ${name}`)
   }
+
+  mod.defs.set(name, def)
 }
 
 export function modFind(mod: Mod, name: string): Def | undefined {

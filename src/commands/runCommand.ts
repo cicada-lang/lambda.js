@@ -40,6 +40,6 @@ function createURL(path: string): URL {
       return new URL(`file:${fullPath}`)
     }
 
-    throw new Error(`I can not create URL from path: ${path}`)
+    throw new Error(`[createURL] I can not create URL from path: ${path}`)
   }
 }
