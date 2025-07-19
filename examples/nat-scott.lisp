@@ -1,29 +1,8 @@
 (import Y "fixpoint.lisp")
 
-;; Scott Encoding of Natural Number
-
 (define zero (lambda (base step) base))
 (define (add1 prev) (lambda (base step) (step prev)))
 (define (which-Nat n base step) (n base step))
-
-;; ## Typing
-
-;; (claim zero
-;;   (nu (X)
-;;     (-> X (-> Nat X) X)))
-
-;; (define Nat
-;;   (nu (X)
-;;     (-> X (-> Nat X) X)))
-
-;; (claim add1
-;;   (-> Nat Nat)
-;;   (nu (X)
-;;     (-> Nat (-> X (-> Nat X) X))))
-
-;; (claim which-Nat
-;;   (nu (X)
-;;     (-> Nat (-> X (-> Nat X) X))))
 
 (define one (add1 zero))
 (define two (add1 one))

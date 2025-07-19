@@ -1,5 +1,3 @@
-;; Church Encoding of Natural Number
-
 (define zero (lambda (base step) base))
 (define (add1 prev) (lambda (base step) (step (prev base step))))
 (define (iter-Nat n base step) (n base step))

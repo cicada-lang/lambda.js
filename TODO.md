@@ -1,5 +1,3 @@
-[example] move typing of nat encoding to `person/xieyuheng/lambda-calculus`
-
 # let
 
 `let-one` vs `let` and `let*`
