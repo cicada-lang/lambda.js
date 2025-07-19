@@ -16,9 +16,14 @@ export const runCommand: Command = {
   },
 
   async run(commander) {
-    const url = createURL(String(commander.args[0]))
-
     try {
+      if (typeof commander.args[0] !== "string") {
+        throw new Error(
+          `[run] I expect the first argument to be a path, instead of: ${commander.args[0]}`,
+        )
+      }
+
+      const url = createURL(commander.args[0])
       await load(url)
     } catch (error) {
       if (error instanceof Error) {

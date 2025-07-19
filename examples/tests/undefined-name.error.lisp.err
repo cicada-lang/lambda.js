@@ -1,3 +1,3 @@
-[run] I find undefined name: g
+[load] I find undefined name: g
   defining: f
   body: (lambda (x) (g x))
