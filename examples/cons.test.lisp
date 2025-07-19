@@ -1,24 +1,12 @@
 (import cons car cdr null null? "cons.lisp")
-
 (import true false "bool.lisp")
 
-(assert-equal
-  (null? null)
-  (null (lambda (car cdr) false))
-  true)
-
-(assert-equal
-  (null? (cons null null))
-  false)
-
-(assert-equal
-  (null? (cons null null))
-  ((cons null null) (lambda (car cdr) false))
-  ((lambda (car cdr) false) null null)
-  false)
-
-(assert-equal
-  (null? (car (cons null null)))
-  (null? (cdr (cons null null)))
-  (null? null)
-  true)
+(assert-equal true (null? null))
+(assert-equal true (null (lambda (car cdr) false)))
+(assert-equal false (null? (cons null null)))
+(assert-equal false (null? (cons null null)))
+(assert-equal false ((cons null null) (lambda (car cdr) false)))
+(assert-equal false ((lambda (car cdr) false) null null))
+(assert-equal true (null? (car (cons null null))))
+(assert-equal true (null? (cdr (cons null null))))
+(assert-equal true (null? null))

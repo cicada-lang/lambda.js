@@ -1,17 +1,24 @@
-`assert-equal` and `assert-not-equal` only take two args
-`assert-same` and `assert-not-same` only take two args
+[example] `assert-equal` only take two args
 
-# lazy evaluation
+`assert-equal` and `assert-not-equal` only support two args
+`assert-same` and `assert-not-same` only support two args
 
-[maybe] remove lazy evaluation
+# readback
 
 `readback` handle recursive function
+
+# module
 
 refactor `load` to support circular imports
 
 - if we can support mutually defined recursive function,
   we should also support circular imports.
 
-# later
+# let
 
 `let-one` vs `let` and `let*`
+
+# lazy evaluation
+
+bring lazy evaluation back
+[example] bring back `factorial-half.lisp`
