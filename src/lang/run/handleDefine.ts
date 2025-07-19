@@ -4,7 +4,7 @@ import { modDefine } from "../mod/index.ts"
 import type { Mod } from "../mod/Mod.ts"
 import type { Stmt } from "../stmt/Stmt.ts"
 
-export function handleDefine(mod: Mod, stmt: Stmt): void {
+export async function handleDefine(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "Define") {
     const value = evaluate(mod, emptyEnv(), stmt.exp)
     if (value.kind === "Lambda") {

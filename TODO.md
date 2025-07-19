@@ -1,4 +1,3 @@
-`run` should be async
 call `run` in `load`
 rename `run/` to `load/`
 

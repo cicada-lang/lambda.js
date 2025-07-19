@@ -8,7 +8,7 @@ import { readback } from "../readback/index.ts"
 import { same } from "../same/index.ts"
 import type { Stmt } from "../stmt/Stmt.ts"
 
-export function handleEffect(mod: Mod, stmt: Stmt): void {
+export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "AssertEqual") {
     if (
       equal(

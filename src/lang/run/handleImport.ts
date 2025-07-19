@@ -4,17 +4,21 @@ import type { ImportEntry, Stmt } from "../stmt/Stmt.ts"
 import { globalLoadedMods } from "./globalLoadedMods.ts"
 import { run } from "./run.ts"
 
-export function handleImport(mod: Mod, stmt: Stmt): void {
+export async function handleImport(mod: Mod, stmt: Stmt): Promise<void> {
   if (stmt.kind === "Import") {
     for (const entry of stmt.entries) {
-      importOne(mod, stmt.path, entry)
+      await importOne(mod, stmt.path, entry)
     }
 
     return
   }
 }
 
-function importOne(mod: Mod, path: string, entry: ImportEntry): void {
+async function importOne(
+  mod: Mod,
+  path: string,
+  entry: ImportEntry,
+): Promise<void> {
   const url = modResolve(mod, path)
   if (url.href === mod.url.href) {
     throw new Error(`I can not circular import: ${path}`)
@@ -25,7 +29,7 @@ function importOne(mod: Mod, path: string, entry: ImportEntry): void {
     throw new Error(`Mod is not loaded: ${path}`)
   }
 
-  run(found.mod)
+  await run(found.mod)
 
   const { name, rename } = entry
 

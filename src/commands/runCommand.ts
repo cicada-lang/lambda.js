@@ -20,7 +20,7 @@ export const runCommand: Command = {
 
     try {
       const mod = await load(url)
-      run(mod)
+      await run(mod)
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message)
