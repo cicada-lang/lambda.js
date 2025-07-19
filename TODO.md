@@ -1,6 +1,9 @@
-[stmt] `assert-equal` and `assert-not-equal` only support two args
-[stmt] `assert-same` and `assert-not-same` only support two args
+`execute` inline assert functions
 [example] move typing of nat encoding to `person/xieyuheng/lambda-calculus`
+
+# let
+
+`let-one` vs `let` and `let*`
 
 # readback
 
@@ -12,10 +15,6 @@ refactor `load` to support circular imports
 
 - if we can support mutually defined recursive function,
   we should also support circular imports.
-
-# let
-
-`let-one` vs `let` and `let*`
 
 # lazy evaluation
 

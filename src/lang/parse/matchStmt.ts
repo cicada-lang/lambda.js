@@ -25,20 +25,20 @@ const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
     return Stmts.Import(X.dataToString(url), entries.map(matchImportEntry))
   }),
 
-  X.matcher("(cons 'assert-equal exps)", ({ exps }) =>
-    Stmts.AssertEqual(X.dataToArray(exps).map(matchExp)),
+  X.matcher("`(assert-equal ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertEqual(matchExp(lhs), matchExp(rhs)),
   ),
 
-  X.matcher("(cons 'assert-not-equal exps)", ({ exps }) =>
-    Stmts.AssertNotEqual(X.dataToArray(exps).map(matchExp)),
+  X.matcher("`(assert-not-equal ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertNotEqual(matchExp(lhs), matchExp(rhs)),
   ),
 
-  X.matcher("(cons 'assert-same exps)", ({ exps }) =>
-    Stmts.AssertSame(X.dataToArray(exps).map(matchExp)),
+  X.matcher("`(assert-same ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertSame(matchExp(lhs), matchExp(rhs)),
   ),
 
-  X.matcher("(cons 'assert-not-same exps)", ({ exps }) =>
-    Stmts.AssertNotSame(X.dataToArray(exps).map(matchExp)),
+  X.matcher("`(assert-not-same ,lhs ,rhs)", ({ lhs, rhs }) =>
+    Stmts.AssertNotSame(matchExp(lhs), matchExp(rhs)),
   ),
 
   X.matcher("exp", ({ exp }) => Stmts.Compute(matchExp(exp))),

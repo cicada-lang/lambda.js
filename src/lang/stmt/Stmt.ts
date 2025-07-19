@@ -9,10 +9,10 @@ export type Stmt =
   | Define
   | Import
 
-export type AssertEqual = { kind: "AssertEqual"; exps: Array<Exp> }
-export type AssertNotEqual = { kind: "AssertNotEqual"; exps: Array<Exp> }
-export type AssertSame = { kind: "AssertSame"; exps: Array<Exp> }
-export type AssertNotSame = { kind: "AssertNotSame"; exps: Array<Exp> }
+export type AssertEqual = { kind: "AssertEqual"; lhs: Exp; rhs: Exp }
+export type AssertNotEqual = { kind: "AssertNotEqual"; lhs: Exp; rhs: Exp }
+export type AssertSame = { kind: "AssertSame"; lhs: Exp; rhs: Exp }
+export type AssertNotSame = { kind: "AssertNotSame"; lhs: Exp; rhs: Exp }
 export type Compute = { kind: "Compute"; exp: Exp }
 export type Define = { kind: "Define"; name: string; exp: Exp }
 export type Import = {
@@ -26,31 +26,35 @@ export type ImportEntry = {
   rename?: string
 }
 
-export function AssertEqual(exps: Array<Exp>): AssertEqual {
+export function AssertEqual(lhs: Exp, rhs: Exp): AssertEqual {
   return {
     kind: "AssertEqual",
-    exps,
+    lhs,
+    rhs,
   }
 }
 
-export function AssertNotEqual(exps: Array<Exp>): AssertNotEqual {
+export function AssertNotEqual(lhs: Exp, rhs: Exp): AssertNotEqual {
   return {
     kind: "AssertNotEqual",
-    exps,
+    lhs,
+    rhs,
   }
 }
 
-export function AssertSame(exps: Array<Exp>): AssertSame {
+export function AssertSame(lhs: Exp, rhs: Exp): AssertSame {
   return {
     kind: "AssertSame",
-    exps,
+    lhs,
+    rhs,
   }
 }
 
-export function AssertNotSame(exps: Array<Exp>): AssertNotSame {
+export function AssertNotSame(lhs: Exp, rhs: Exp): AssertNotSame {
   return {
     kind: "AssertNotSame",
-    exps,
+    lhs,
+    rhs,
   }
 }
 
