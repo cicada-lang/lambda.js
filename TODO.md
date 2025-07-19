@@ -1,4 +1,3 @@
-`equalInCtx` call `applyOneStep` instead of `apply`
 `equalInCtx` compare current pair to `ctx.trail` handle recursive function
 
 `readback` handle recursive function

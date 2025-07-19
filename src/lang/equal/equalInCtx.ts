@@ -1,5 +1,5 @@
 import { freshen } from "../../utils/name/freshen.ts"
-import { apply } from "../evaluate/index.ts"
+import { applyOneStep } from "../evaluate/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import { type Neutral, type Value } from "../value/index.ts"
@@ -18,7 +18,15 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
-    return equalInCtx(ctx, apply(left, arg), apply(right, arg))
+    return equalInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
+  }
+
+  if (left.kind === "DelayedApply") {
+    return equalInCtx(ctx, applyOneStep(left.target, left.arg), right)
+  }
+
+  if (right.kind === "DelayedApply") {
+    return equalInCtx(ctx, left, applyOneStep(right.target, right.arg))
   }
 
   return false
