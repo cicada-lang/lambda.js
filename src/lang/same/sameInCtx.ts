@@ -14,7 +14,11 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   }
 
   if (left.kind === "Lambda" && right.kind === "Lambda") {
-    if (left.definedName === right.definedName) {
+    if (
+      left.definedName !== undefined &&
+      right.definedName !== undefined &&
+      left.definedName === right.definedName
+    ) {
       return true
     }
   }

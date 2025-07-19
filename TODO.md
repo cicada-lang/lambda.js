@@ -1,5 +1,3 @@
-test `assert-same` & `assert-not-same`
-
 `equalInCtx` with `ctx.trail` handle recursive function
 `equalInCtx` call `applyOneStep`
 
