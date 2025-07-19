@@ -1,9 +1,7 @@
-remove lazy evaluation
-
 `assert-equal` and `assert-not-equal` only take two args
 `assert-same` and `assert-not-same` only take two args
 
-use `assert-same` as much as possible
+remove lazy evaluation
 
 `readback` handle recursive function
 
