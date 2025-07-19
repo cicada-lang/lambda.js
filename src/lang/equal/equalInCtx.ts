@@ -21,6 +21,15 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     return equalInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
   }
 
+  if (left.kind === "DelayedApply" && right.kind === "DelayedApply") {
+    if (
+      equalInCtx(ctx, left.target, right.target) &&
+      equalInCtx(ctx, left.arg, right.arg)
+    ) {
+      return true
+    }
+  }
+
   if (left.kind === "DelayedApply") {
     return equalInCtx(ctx, applyOneStep(left.target, left.arg), right)
   }
