@@ -1,4 +1,3 @@
-[utils] org by topic
 [utils/array] -- `arraySlideMap`
 
 test `assert-same` & `assert-not-same`

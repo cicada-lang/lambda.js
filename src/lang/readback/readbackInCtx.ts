@@ -1,4 +1,4 @@
-import { freshen } from "../../utils/freshen.ts"
+import { freshen } from "../../utils/name/freshen.ts"
 import { apply } from "../evaluate/index.ts"
 import * as Exps from "../exp/index.ts"
 import { type Exp } from "../exp/index.ts"
