@@ -19,5 +19,4 @@ bring lazy evaluation back
 
 # study
 
-[problem] why `turing` need no lazy evaluation?
-[problem] why `factorial-half.lisp` need no lazy evaluation?
+[problem] we can use `Y`! -- `DelayedApply` can replace `Lazy`? -- what evaluation strategy is this?

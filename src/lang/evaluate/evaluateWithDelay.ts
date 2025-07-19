@@ -45,7 +45,7 @@ export function evaluateWithDelay(mod: Mod, env: Env, exp: Exp): Value {
   }
 }
 
-export function applyOneStep(target: Value, arg: Value): Value {
+export function applyWithDelay(target: Value, arg: Value): Value {
   switch (target.kind) {
     case "NotYet": {
       return Values.NotYet(Neutrals.Apply(target.neutral, arg))
@@ -60,12 +60,12 @@ export function applyOneStep(target: Value, arg: Value): Value {
     }
 
     case "Lazy": {
-      return applyOneStep(Values.lazyActive(target), arg)
+      return applyWithDelay(Values.lazyActive(target), arg)
     }
 
     case "DelayedApply": {
-      // return Values.DelayedApply(applyOneStep(target.target, target.arg), arg)
-      return applyOneStep(applyOneStep(target.target, target.arg), arg)
+      // return Values.DelayedApply(applyWithDelay(target.target, target.arg), arg)
+      return applyWithDelay(applyWithDelay(target.target, target.arg), arg)
     }
   }
 }

@@ -2,10 +2,10 @@ import { type Env } from "../env/index.ts"
 import { type Exp } from "../exp/index.ts"
 import { type Mod } from "../mod/index.ts"
 import { type Value } from "../value/index.ts"
-import { applyOneStep, evaluateWithDelay } from "./evaluateWithDelay.ts"
+import { applyWithDelay, evaluateWithDelay } from "./evaluateWithDelay.ts"
 
 export function apply(target: Value, arg: Value): Value {
-  let result = applyOneStep(target, arg)
+  let result = applyWithDelay(target, arg)
   while (result.kind === "DelayedApply") {
     result = apply(result.target, result.arg)
   }

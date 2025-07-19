@@ -1,5 +1,5 @@
 import { freshen } from "../../utils/name/freshen.ts"
-import { applyOneStep } from "../evaluate/index.ts"
+import { applyWithDelay } from "../evaluate/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import {
@@ -32,7 +32,7 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     const freshName = freshen(ctx.usedNames, left.name)
     ctx = ctxUseName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
-    return sameInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
+    return sameInCtx(ctx, applyWithDelay(left, arg), applyWithDelay(right, arg))
   }
 
   if (right.kind === "Lambda" && !lambdaIsDefined(right)) {
@@ -43,7 +43,7 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     const freshName = freshen(ctx.usedNames, right.name)
     ctx = ctxUseName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
-    return sameInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
+    return sameInCtx(ctx, applyWithDelay(left, arg), applyWithDelay(right, arg))
   }
 
   if (left.kind === "DelayedApply" && right.kind === "DelayedApply") {
@@ -59,14 +59,14 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     left.kind === "DelayedApply" &&
     !(left.target.kind === "Lambda" && lambdaIsDefined(left.target))
   ) {
-    return sameInCtx(ctx, applyOneStep(left.target, left.arg), right)
+    return sameInCtx(ctx, applyWithDelay(left.target, left.arg), right)
   }
 
   if (
     right.kind === "DelayedApply" &&
     !(right.target.kind === "Lambda" && lambdaIsDefined(right.target))
   ) {
-    return sameInCtx(ctx, left, applyOneStep(right.target, right.arg))
+    return sameInCtx(ctx, left, applyWithDelay(right.target, right.arg))
   }
 
   return false

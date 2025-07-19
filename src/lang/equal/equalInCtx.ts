@@ -1,5 +1,5 @@
 import { freshen } from "../../utils/name/freshen.ts"
-import { applyOneStep } from "../evaluate/index.ts"
+import { applyWithDelay } from "../evaluate/index.ts"
 import { same } from "../same/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
@@ -29,7 +29,11 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
-    return equalInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
+    return equalInCtx(
+      ctx,
+      applyWithDelay(left, arg),
+      applyWithDelay(right, arg),
+    )
   }
 
   if (right.kind === "Lambda") {
@@ -45,7 +49,11 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     ctx = ctxUseName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
-    return equalInCtx(ctx, applyOneStep(left, arg), applyOneStep(right, arg))
+    return equalInCtx(
+      ctx,
+      applyWithDelay(left, arg),
+      applyWithDelay(right, arg),
+    )
   }
 
   if (left.kind === "DelayedApply" && right.kind === "DelayedApply") {
@@ -57,12 +65,12 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     }
 
     // if (
-    //   equalInCtx(ctx, applyOneStep(left.target, left.arg), right) ||
-    //   equalInCtx(ctx, left, applyOneStep(right.target, right.arg)) ||
+    //   equalInCtx(ctx, applyWithDelay(left.target, left.arg), right) ||
+    //   equalInCtx(ctx, left, applyWithDelay(right.target, right.arg)) ||
     //   equalInCtx(
     //     ctx,
-    //     applyOneStep(left.target, left.arg),
-    //     applyOneStep(right.target, right.arg),
+    //     applyWithDelay(left.target, left.arg),
+    //     applyWithDelay(right.target, right.arg),
     //   )
     // ) {
     //   return true
@@ -70,11 +78,11 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   }
 
   if (left.kind === "DelayedApply") {
-    return equalInCtx(ctx, applyOneStep(left.target, left.arg), right)
+    return equalInCtx(ctx, applyWithDelay(left.target, left.arg), right)
   }
 
   if (right.kind === "DelayedApply") {
-    return equalInCtx(ctx, left, applyOneStep(right.target, right.arg))
+    return equalInCtx(ctx, left, applyWithDelay(right.target, right.arg))
   }
 
   return false
