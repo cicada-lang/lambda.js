@@ -1,6 +1,9 @@
 # readback
 
-`readback` handle recursive function
+[readback] `readbackInCtx` -- use `ctxBlazeTrail`
+[readback] `readbackInCtx` -- use `ctxBlazeOccurred` to handle recursive function
+
+[refactor] improve `Ctx` of `readback` and `equal` -- `usedNames` is not clear
 
 # let
 
