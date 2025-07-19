@@ -1,5 +1,3 @@
-rename `run/` to `load/`
-
 call `handleImport` after `handleDefine` -- to support circular imports
 
 - if we can support mutually defined recursive function,

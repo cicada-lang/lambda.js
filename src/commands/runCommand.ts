@@ -1,7 +1,7 @@
 import { type Command } from "@xieyuheng/commander.js"
 import fs from "fs"
 import Path from "path"
-import { load } from "../lang/run/index.ts"
+import { load } from "../lang/load/index.ts"
 
 export const runCommand: Command = {
   name: "run",
