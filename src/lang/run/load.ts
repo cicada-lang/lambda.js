@@ -2,12 +2,10 @@ import { ParsingError } from "@xieyuheng/x-data.js"
 import fs from "node:fs"
 import { createMod, modResolve, type Mod } from "../mod/index.ts"
 import { parseStmts } from "../parse/index.ts"
+import { globalLoadedMods } from "./globalLoadedMods.ts"
 
-export async function load(
-  url: URL,
-  loadedMods: Map<string, { mod: Mod; text: string }>,
-): Promise<Mod> {
-  const found = loadedMods.get(url.href)
+export async function load(url: URL): Promise<Mod> {
+  const found = globalLoadedMods.get(url.href)
   if (found !== undefined) {
     return found.mod
   }
@@ -15,14 +13,14 @@ export async function load(
   const text = await fs.promises.readFile(url.pathname, "utf8")
 
   try {
-    const mod = createMod({ url, loadedMods })
+    const mod = createMod({ url })
     mod.stmts = parseStmts(text)
-    loadedMods.set(url.href, { mod, text })
+    globalLoadedMods.set(url.href, { mod, text })
 
     for (const stmt of mod.stmts) {
       if (stmt.kind === "Import") {
         const importedUrl = modResolve(mod, stmt.path)
-        await load(importedUrl, loadedMods)
+        await load(importedUrl)
       }
     }
 
