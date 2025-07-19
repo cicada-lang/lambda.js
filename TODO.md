@@ -1,5 +1,3 @@
-[refactor] improve `Ctx` of `readback` and `equal` -- `usedNames` is not clear
-
 # let
 
 `let-one` vs `let` and `let*`

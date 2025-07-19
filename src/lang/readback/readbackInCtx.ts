@@ -5,7 +5,12 @@ import { type Exp } from "../exp/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import { lambdaIsDefined, type Neutral, type Value } from "../value/index.ts"
-import { ctxBlazeOccurred, ctxBlazeTrail, ctxUseName, type Ctx } from "./Ctx.ts"
+import {
+  ctxBindName,
+  ctxBlazeOccurred,
+  ctxBlazeTrail,
+  type Ctx,
+} from "./Ctx.ts"
 
 export function readbackInCtx(ctx: Ctx, value: Value): Exp {
   switch (value.kind) {
@@ -22,8 +27,8 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
         }
       }
 
-      const freshName = freshen(ctx.usedNames, value.name)
-      ctx = ctxUseName(ctx, freshName)
+      const freshName = freshen(ctx.boundNames, value.name)
+      ctx = ctxBindName(ctx, freshName)
       const arg = Values.NotYet(Neutrals.Var(freshName))
       const ret = applyWithDelay(value, arg)
       return Exps.Lambda(freshName, readbackInCtx(ctx, ret))

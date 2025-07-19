@@ -8,7 +8,7 @@ import {
   type Neutral,
   type Value,
 } from "../value/index.ts"
-import { ctxUseName, type Ctx } from "./Ctx.ts"
+import { ctxBindName, type Ctx } from "./Ctx.ts"
 
 export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   left = Values.lazyActiveDeep(left)
@@ -29,8 +29,8 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
       return false
     }
 
-    const freshName = freshen(ctx.usedNames, left.name)
-    ctx = ctxUseName(ctx, freshName)
+    const freshName = freshen(ctx.boundNames, left.name)
+    ctx = ctxBindName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
     return sameInCtx(ctx, applyWithDelay(left, arg), applyWithDelay(right, arg))
   }
@@ -40,8 +40,8 @@ export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
       return false
     }
 
-    const freshName = freshen(ctx.usedNames, right.name)
-    ctx = ctxUseName(ctx, freshName)
+    const freshName = freshen(ctx.boundNames, right.name)
+    ctx = ctxBindName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
     return sameInCtx(ctx, applyWithDelay(left, arg), applyWithDelay(right, arg))
   }

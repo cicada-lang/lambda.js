@@ -4,7 +4,12 @@ import { same } from "../same/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import { lambdaIsDefined, type Neutral, type Value } from "../value/index.ts"
-import { ctxBlazeOccurred, ctxBlazeTrail, ctxUseName, type Ctx } from "./Ctx.ts"
+import {
+  ctxBindName,
+  ctxBlazeOccurred,
+  ctxBlazeTrail,
+  type Ctx,
+} from "./Ctx.ts"
 
 export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   if (same(left, right)) return true
@@ -25,8 +30,8 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
       }
     }
 
-    const freshName = freshen(ctx.usedNames, left.name)
-    ctx = ctxUseName(ctx, freshName)
+    const freshName = freshen(ctx.boundNames, left.name)
+    ctx = ctxBindName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
     return equalInCtx(
@@ -45,8 +50,8 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
       }
     }
 
-    const freshName = freshen(ctx.usedNames, right.name)
-    ctx = ctxUseName(ctx, freshName)
+    const freshName = freshen(ctx.boundNames, right.name)
+    ctx = ctxBindName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
     return equalInCtx(

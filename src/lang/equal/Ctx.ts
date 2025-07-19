@@ -7,21 +7,21 @@ export type Blaze = {
 }
 
 export type Ctx = {
-  usedNames: Set<string>
+  boundNames: Set<string>
   trail: Array<Blaze>
 }
 
 export function emptyCtx(): Ctx {
   return {
-    usedNames: new Set(),
+    boundNames: new Set(),
     trail: new Array(),
   }
 }
 
-export function ctxUseName(ctx: Ctx, name: string): Ctx {
+export function ctxBindName(ctx: Ctx, name: string): Ctx {
   return {
     ...ctx,
-    usedNames: new Set([...ctx.usedNames, name]),
+    boundNames: new Set([...ctx.boundNames, name]),
   }
 }
 
