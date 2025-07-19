@@ -4,7 +4,7 @@ import { same } from "../same/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import { lambdaIsDefined, type Neutral, type Value } from "../value/index.ts"
-import { ctxBlaseOccurred, ctxBlaseTrail, ctxUseName, type Ctx } from "./Ctx.ts"
+import { ctxBlazeOccurred, ctxBlazeTrail, ctxUseName, type Ctx } from "./Ctx.ts"
 
 export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   if (same(left, right)) return true
@@ -18,10 +18,10 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
 
   if (left.kind === "Lambda") {
     if (lambdaIsDefined(left)) {
-      if (ctxBlaseOccurred(ctx, left, right)) {
+      if (ctxBlazeOccurred(ctx, left, right)) {
         return true
       } else {
-        ctx = ctxBlaseTrail(ctx, left, right)
+        ctx = ctxBlazeTrail(ctx, left, right)
       }
     }
 
@@ -38,10 +38,10 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
 
   if (right.kind === "Lambda") {
     if (lambdaIsDefined(right)) {
-      if (ctxBlaseOccurred(ctx, right, left)) {
+      if (ctxBlazeOccurred(ctx, right, left)) {
         return true
       } else {
-        ctx = ctxBlaseTrail(ctx, right, left)
+        ctx = ctxBlazeTrail(ctx, right, left)
       }
     }
 

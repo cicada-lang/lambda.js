@@ -25,14 +25,14 @@ export function ctxUseName(ctx: Ctx, name: string): Ctx {
   }
 }
 
-export function ctxBlaseTrail(ctx: Ctx, lhs: Value, rhs: Value): Ctx {
+export function ctxBlazeTrail(ctx: Ctx, lhs: Value, rhs: Value): Ctx {
   return {
     ...ctx,
     trail: [...ctx.trail, { lhs, rhs }],
   }
 }
 
-export function ctxBlaseOccurred(ctx: Ctx, lhs: Value, rhs: Value): boolean {
+export function ctxBlazeOccurred(ctx: Ctx, lhs: Value, rhs: Value): boolean {
   for (const blaze of ctx.trail) {
     if (same(lhs, blaze.lhs) && same(rhs, blaze.rhs)) {
       return true

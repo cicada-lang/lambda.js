@@ -1,10 +1,10 @@
-# let
-
-`let-one` vs `let` and `let*`
-
 # readback
 
 `readback` handle recursive function
+
+# let
+
+`let-one` vs `let` and `let*`
 
 # module
 
@@ -15,8 +15,6 @@ refactor `load` to support circular imports
 
 # lazy evaluation
 
-bring lazy evaluation back
-
-# study
-
 [problem] we can use `Y`! -- `DelayedApply` can replace `Lazy`? -- what evaluation strategy is this?
+[maybe] bring lazy evaluation back
+[maybe] remove lazy -- if the new evaluation strategy is good!
