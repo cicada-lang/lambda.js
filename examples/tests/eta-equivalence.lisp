@@ -9,7 +9,6 @@
   ((lambda (f) f) id)
   ((lambda (f) (lambda (x) (f x))) id))
 
-(assert-equal
-  ((lambda (f) (lambda (x) (f x))) id)
-  (lambda (x) (id x))
-  (lambda (x) x))
+(assert-equal id (lambda (x) x))
+(assert-equal id (lambda (x) (id x)))
+(assert-equal id ((lambda (f) (lambda (x) (f x))) id))

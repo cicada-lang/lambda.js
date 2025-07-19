@@ -10,29 +10,21 @@
   (if (zero? n) false
       (even? (sub1 n))))
 
-(assert-equal
-  (even? zero)
-  (even? two)
-  (even? four)
-  true)
+(assert-equal true (even? zero))
+(assert-equal true (even? two))
+(assert-equal true (even? four))
 
-(assert-equal
-  (even? one)
-  (even? three)
-  false)
+(assert-equal false (even? one))
+(assert-equal false (even? three))
 
-(assert-equal
-  (odd? zero)
-  (odd? two)
-  (odd? four)
-  false)
+(assert-equal false (odd? zero))
+(assert-equal false (odd? two))
+(assert-equal false (odd? four))
 
-(assert-equal
-  (odd? one)
-  (odd? three)
-  true)
+(assert-equal true (odd? one))
+(assert-equal true (odd? three))
 
-;; equivalence between recursive functions:
+;; test equivalence between recursive functions
 
 (assert-equal even? even?)
 (assert-equal odd? odd?)

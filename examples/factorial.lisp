@@ -15,25 +15,16 @@
 (assert-equal (factorial three) (mul three two))
 (assert-equal (factorial four) (mul four (mul three two)))
 
-;; equivalence between recursive functions:
+;; test equivalence between recursive functions
 
-;; factorial
-
+(assert-same factorial factorial)
 (assert-equal factorial factorial)
 
-(assert-not-same
-  factorial
-  (lambda (x) (factorial x)))
+(assert-not-same factorial (lambda (x) (factorial x)))
+(assert-equal factorial (lambda (y) (factorial y)))
+(assert-equal factorial (lambda (x) (factorial x)))
+(assert-equal (lambda (x) (factorial x)) (lambda (y) (factorial y)))
 
-(assert-equal
-  factorial
-  (lambda (x) (factorial x)))
+;; TODO test readback of recursive functions
 
-(assert-equal
-  factorial
-  (lambda (x) (factorial x))
-  (lambda (y) (factorial y)))
-
-(assert-equal
-  (lambda (x) (factorial x))
-  factorial)
+;; factorial

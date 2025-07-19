@@ -84,11 +84,9 @@
 (assert-equal (power two three) eight)
 (assert-equal (power three two) nine)
 
-(assert-equal
-  (power two four)
-  (mul (mul two two) (mul two two))
-  (power four two)
-  (mul four four))
+(assert-equal (power two four) (power four two))
+(assert-equal (power two four) (mul four four))
+(assert-equal (power two four) (mul (mul two two) (mul two two)))
 
 ;; # zero?
 
@@ -124,7 +122,8 @@
 (assert-equal (sub three zero) three)
 (assert-equal (sub three one) two)
 (assert-equal (sub three two) one)
-(assert-equal (sub three three) zero (sub three four))
+(assert-equal (sub three three) zero)
+(assert-equal (sub three four) zero)
 
 ;; # lteq
 
