@@ -1,12 +1,11 @@
-> refactor `load` to support circular imports
->
-> - if we can support mutually defined recursive function,
->   we should also support circular imports.
-
-extract `handleImport` from `handleDefine`
 `run` should be async
 call `run` in `load`
 rename `run/` to `load/`
+
+call `handleImport` after `handleDefine` -- to support circular imports
+
+- if we can support mutually defined recursive function,
+  we should also support circular imports.
 
 # lazy evaluation
 
