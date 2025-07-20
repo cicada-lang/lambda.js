@@ -7,7 +7,9 @@
   "main": "./lib/index.js",
   "files": [
     "src",
-    "lib"
+    "lib",
+    "docs",
+    "examples"
   ],
   "bin": {
     "lambda-lisp.js": "lib/main.js"
