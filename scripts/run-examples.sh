@@ -9,11 +9,11 @@ for example in $(find examples -name "*.${ext}" -not -name "*.test.${ext}" -not 
 done
 
 for example in $(find examples -name "*.test.${ext}"); do
-    echo "[test] $example"
+    echo "[out] $example"
     ${bin} $example > $example.out
 done
 
 for example in $(find examples -name "*.error.${ext}"); do
-    echo "[error] $example"
+    echo "[err] $example"
     ${bin} $example > $example.err || true
 done
