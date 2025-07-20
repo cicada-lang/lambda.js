@@ -7,7 +7,11 @@
     (add1 n)
     (if (zero? n)
       (ackermann (sub1 m) one)
-      (ackermann (sub1 m) (ackermann m n)))))
+      (ackermann (sub1 m) (ackermann m (sub1 n))))))
+
+;; TODO fail:
+
+;; ackermann
 
 (define ackermann-wrap
   (lambda (ackermann)
@@ -16,7 +20,7 @@
         (add1 n)
         (if (zero? n)
           (ackermann (sub1 m) one)
-          (ackermann (sub1 m) (ackermann m n)))))))
+          (ackermann (sub1 m) (ackermann m (sub1 n))))))))
 
 (assert-equal ackermann ackermann)
 (assert-equal ackermann (ackermann-wrap ackermann))
