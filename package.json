@@ -16,9 +16,8 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test:node": "node --test lib/**/*.test.js",
-    "test:lang": "test-runner snapshot 'node ./lib/main.js run' 'examples/**/*.lisp' --exclude 'examples/**/*.error.lisp'",
-    "test:lang:error": "test-runner snapshot-error 'node ./lib/main.js run' 'examples/**/*.error.lisp'",
-    "test": "npm run test:node && npm run test:lang && npm run test:lang:error",
+    "test:lang": "bash scripts/run-examples.sh",
+    "test": "npm run test:node && npm run test:lang",
     "format": "prettier src --write"
   },
   "dependencies": {
@@ -28,7 +27,6 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.15",
-    "@xieyuheng/test-runner": "^0.2.10",
     "prettier": "^3.6.2",
     "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "^5.8.3"
