@@ -2,7 +2,7 @@
 (import zero one two three four "nat-church.lisp")
 (import if true false "bool.lisp")
 
-(import factorial "factorial")
+(import factorial "factorial.lisp")
 
 (assert-equal (factorial zero) one)
 (assert-equal (factorial one) one)
