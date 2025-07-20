@@ -1,6 +1,5 @@
 (import zero add1 sub1 zero? "nat-church.lisp")
 (import one two "nat-church.lisp")
-
 (import if "bool.lisp")
 
 (define (ackermann m n)
@@ -9,15 +8,6 @@
     (if (zero? n)
       (ackermann (sub1 m) one)
       (ackermann (sub1 m) (ackermann m n)))))
-
-(assert-equal ackermann ackermann)
-
-(ackermann zero zero)
-(ackermann one zero)
-(ackermann zero one)
-(ackermann one zero)
-;; (ackermann one two)
-;; (ackermann two one)
 
 (define ackermann-wrap
   (lambda (ackermann)
@@ -28,7 +18,9 @@
           (ackermann (sub1 m) one)
           (ackermann (sub1 m) (ackermann m n)))))))
 
-ackermann-wrap
+(assert-equal ackermann ackermann)
+(assert-equal ackermann (ackermann-wrap ackermann))
+(assert-equal ackermann (ackermann-wrap (ackermann-wrap ackermann)))
 
 (define (ackermann-1 m n)
   ((ackermann-wrap ackermann-1)
@@ -45,8 +37,8 @@ ackermann-wrap
      (ackermann-wrap ackermann-3)))
    m n))
 
-;; (assert-equal ackermann ackermann-1)
-;; (assert-equal ackermann ackermann-2)
+;; TODO fail:
+
 ;; (assert-equal ackermann-1 ackermann-2)
 ;; (assert-equal ackermann-1 ackermann-3)
 ;; (assert-equal ackermann-2 ackermann-3)
