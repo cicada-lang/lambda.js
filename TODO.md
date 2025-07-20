@@ -1,5 +1,7 @@
-# lazy evaluation
+be able to readback ackermann function
+be able to check equivalence of ackermann function
 
-[problem] we can use `Y`! -- `DelayedApply` can replace `Lazy`? -- what evaluation strategy is this?
-[maybe] bring lazy evaluation back
-[maybe] remove lazy -- if the new evaluation strategy is good!
+[maybe] remove lazy evaluation
+[problem] understand current evaluation strategy
+
+- we can use `Y`! -- `DelayedApply` can replace `Lazy`
