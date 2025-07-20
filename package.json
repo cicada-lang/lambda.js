@@ -8,7 +8,6 @@
   "files": [
     "src",
     "lib",
-    "docs",
     "examples"
   ],
   "bin": {
