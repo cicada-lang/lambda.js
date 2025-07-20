@@ -28,6 +28,11 @@ odd?
 (assert-equal even? even?)
 (assert-equal odd? odd?)
 
+(import direct-even? direct-odd? "nat-even-odd.lisp")
+
+(assert-equal even? direct-even?)
+(assert-equal odd? direct-odd?)
+
 (assert-equal
   even?
   (lambda (n)
