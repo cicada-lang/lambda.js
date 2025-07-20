@@ -6,8 +6,8 @@ An implementation of [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calc
 (define name body)
 (define (name arg ...) body)
 (import name ... "./file.scm")
-(assert-equal exp ...)
-(assert-not-equal exp ...)
+(assert-equal lhs rhs)
+(assert-not-equal lhs rhs)
 
 (lambda (name) ret)
 (let ((name exp) ...) body)
