@@ -10,6 +10,11 @@
   (if (zero? n) false
       (even? (sub1 n))))
 
+;; test readback of recursive functions
+
+even?
+odd?
+
 (assert-equal true (even? zero))
 (assert-equal true (even? two))
 (assert-equal true (even? four))
