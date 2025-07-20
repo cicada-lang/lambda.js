@@ -13,12 +13,17 @@
           (ackermann (sub1 m) one)
           (ackermann (sub1 m) (ackermann m (sub1 n))))))))
 
+
 (assert-equal ((Y ackermann-wrap) zero zero) one)
 (assert-equal ((Y ackermann-wrap) one zero) two)
 (assert-equal ((Y ackermann-wrap) zero one) two)
+(assert-equal ((Y ackermann-wrap) two zero) three)
 (assert-equal ((Y ackermann-wrap) one one) three)
-(assert-equal ((Y ackermann-wrap) one two) four)
+(assert-equal ((Y ackermann-wrap) zero two) three)
+(assert-equal ((Y ackermann-wrap) three zero) five)
 (assert-equal ((Y ackermann-wrap) two one) five)
+(assert-equal ((Y ackermann-wrap) one two) four)
+(assert-equal ((Y ackermann-wrap) zero three) four)
 
 (assert-equal ackermann (ackermann-wrap ackermann))
 (assert-equal ackermann (ackermann-wrap (ackermann-wrap ackermann)))
@@ -30,9 +35,13 @@
 (assert-equal (ackermann-1 zero zero) one)
 (assert-equal (ackermann-1 one zero) two)
 (assert-equal (ackermann-1 zero one) two)
+(assert-equal (ackermann-1 two zero) three)
 (assert-equal (ackermann-1 one one) three)
-(assert-equal (ackermann-1 one two) four)
+(assert-equal (ackermann-1 zero two) three)
+(assert-equal (ackermann-1 three zero) five)
 (assert-equal (ackermann-1 two one) five)
+(assert-equal (ackermann-1 one two) four)
+(assert-equal (ackermann-1 zero three) four)
 
 (define (ackermann-2 m n)
   ((ackermann-wrap
@@ -42,9 +51,13 @@
 (assert-equal (ackermann-2 zero zero) one)
 (assert-equal (ackermann-2 one zero) two)
 (assert-equal (ackermann-2 zero one) two)
+(assert-equal (ackermann-2 two zero) three)
 (assert-equal (ackermann-2 one one) three)
-(assert-equal (ackermann-2 one two) four)
+(assert-equal (ackermann-2 zero two) three)
+(assert-equal (ackermann-2 three zero) five)
 (assert-equal (ackermann-2 two one) five)
+(assert-equal (ackermann-2 one two) four)
+(assert-equal (ackermann-2 zero three) four)
 
 (define (ackermann-3 m n)
   ((ackermann-wrap
@@ -55,9 +68,13 @@
 (assert-equal (ackermann-3 zero zero) one)
 (assert-equal (ackermann-3 one zero) two)
 (assert-equal (ackermann-3 zero one) two)
+(assert-equal (ackermann-3 two zero) three)
 (assert-equal (ackermann-3 one one) three)
-(assert-equal (ackermann-3 one two) four)
+(assert-equal (ackermann-3 zero two) three)
+(assert-equal (ackermann-3 three zero) five)
 (assert-equal (ackermann-3 two one) five)
+(assert-equal (ackermann-3 one two) four)
+(assert-equal (ackermann-3 zero three) four)
 
 ;; TODO fail:
 

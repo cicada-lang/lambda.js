@@ -16,9 +16,13 @@
 (assert-equal (ackermann zero zero) one)
 (assert-equal (ackermann one zero) two)
 (assert-equal (ackermann zero one) two)
+(assert-equal (ackermann two zero) three)
 (assert-equal (ackermann one one) three)
-(assert-equal (ackermann one two) four)
+(assert-equal (ackermann zero two) three)
+(assert-equal (ackermann three zero) five)
 (assert-equal (ackermann two one) five)
+(assert-equal (ackermann one two) four)
+(assert-equal (ackermann zero three) four)
 
 (assert-equal
   ackermann
@@ -59,13 +63,16 @@
        (sub1 m)
        (ackermann/1 m (sub1 n))))))
 
-
 (assert-equal (ackermann/1 zero zero) one)
 (assert-equal (ackermann/1 one zero) two)
 (assert-equal (ackermann/1 zero one) two)
+(assert-equal (ackermann/1 two zero) three)
 (assert-equal (ackermann/1 one one) three)
-(assert-equal (ackermann/1 one two) four)
+(assert-equal (ackermann/1 zero two) three)
+(assert-equal (ackermann/1 three zero) five)
 (assert-equal (ackermann/1 two one) five)
+(assert-equal (ackermann/1 one two) four)
+(assert-equal (ackermann/1 zero three) four)
 
 ;; TODO fail:
 
