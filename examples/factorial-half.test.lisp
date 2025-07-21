@@ -3,8 +3,6 @@
 
 (import factorial-half factorial "factorial-half.lisp")
 
-factorial-half
-
 (assert-equal (factorial zero) one)
 (assert-equal (factorial one) one)
 (assert-equal (factorial two) two)

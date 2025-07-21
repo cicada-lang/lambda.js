@@ -9,10 +9,6 @@
       (ackermann (sub1 m) one)
       (ackermann (sub1 m) (ackermann m (sub1 n))))))
 
-;; TODO fail:
-
-;; ackermann
-
 (assert-equal (ackermann zero zero) one)
 (assert-equal (ackermann one zero) two)
 (assert-equal (ackermann zero one) two)
