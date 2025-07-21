@@ -1,3 +1,7 @@
+# readback
+
+remove `readback`
+
 # lazy evaluation
 
 we still can bring back lazy evaluation by lazy + box,
@@ -34,7 +38,3 @@ why top level wrap need a eta?
 ```
 
 can adding lazy evaluation help fix this?
-
-# readback
-
-be able to readback ackermann function -- maybe use occur check for all the sub-expressions
