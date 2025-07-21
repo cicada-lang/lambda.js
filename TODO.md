@@ -24,6 +24,8 @@ if not, is it related to different classes of recursive functions?
 we should try to do the same that we did for `length` functions,
 extending `ackermann` to see why what works for `length` failed.
 
+no need `ackermann`, `fibonacci` already fails.
+
 why top level wrap need a eta?
 
 ```scheme
