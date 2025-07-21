@@ -1,5 +1,0 @@
-I
-(lambda (y) x)
-(lambda (x) (f x (g x)))
-I
-I

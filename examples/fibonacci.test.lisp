@@ -7,9 +7,3 @@
 (assert-equal (fibonacci three) two)
 (assert-equal (fibonacci four) three)
 (assert-equal (fibonacci five) five)
-
-;; test readback of recursive functions
-
-;; TODO fail:
-
-;; fibonacci
