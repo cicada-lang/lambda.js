@@ -3,8 +3,8 @@ import { emptyEnv } from "../env/index.ts"
 import { equal } from "../equal/index.ts"
 import { evaluate } from "../evaluate/index.ts"
 import { formatExp } from "../format/formatExp.ts"
+import { formatValue } from "../format/formatValue.ts"
 import type { Mod } from "../mod/Mod.ts"
-import { readback } from "../readback/index.ts"
 import { same } from "../same/index.ts"
 import type { Stmt } from "../stmt/Stmt.ts"
 
@@ -79,8 +79,7 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
 
   if (stmt.kind === "Compute") {
     const value = evaluate(mod, emptyEnv(), stmt.exp)
-    const exp = readback(value)
-    console.log(formatExp(exp))
+    console.log(formatValue(value))
     return
   }
 }

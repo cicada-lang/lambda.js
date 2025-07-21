@@ -1,7 +1,3 @@
-# readback
-
-remove `readback`
-
 # lazy evaluation
 
 we still can bring back lazy evaluation by lazy + box,

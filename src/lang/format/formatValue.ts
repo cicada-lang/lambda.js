@@ -9,7 +9,8 @@ export function formatValue(value: Value): string {
 
     case "Lambda": {
       if (value.definedName === undefined) {
-        return `(lambda (${value.name}) ${value.ret})`
+        const ret = formatExp(value.ret)
+        return `(lambda (${value.name}) ${ret})`
       } else {
         return value.definedName
       }
