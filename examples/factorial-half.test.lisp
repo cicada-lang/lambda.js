@@ -1,6 +1,5 @@
-(import zero? add mul sub1 "nat-church.lisp")
+(import add mul "nat-church.lisp")
 (import zero one two three four "nat-church.lisp")
-(import if true false "bool.lisp")
 
 (import factorial-half factorial "factorial-half.lisp")
 

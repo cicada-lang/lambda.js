@@ -1,7 +1,4 @@
-(import zero? add mul sub1 "nat-church.lisp")
 (import zero one two three four five "nat-church.lisp")
-(import if true false "bool.lisp")
-
 (import fibonacci "fibonacci.lisp")
 
 (assert-equal (fibonacci zero) zero)
