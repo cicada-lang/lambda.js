@@ -4,6 +4,11 @@
 
 (import even? odd? "nat-even-odd.lisp")
 
+;; test readback of recursive functions
+
+even?
+odd?
+
 (assert-equal true (even? zero))
 (assert-equal true (even? two))
 (assert-equal true (even? four))

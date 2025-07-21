@@ -1,7 +1,6 @@
 (define (id x) x)
 
 ;; eta-equivalence
-
 (assert-equal
   (lambda (f) f)
   (lambda (f) (lambda (x) (f x))))

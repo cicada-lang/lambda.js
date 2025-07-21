@@ -5,6 +5,10 @@
 
 (import factorial-wrap factorial "factorial-wrap.lisp")
 
+;; test readback of functions
+
+factorial-wrap
+
 ;; test equivalence of functions
 
 (assert-equal

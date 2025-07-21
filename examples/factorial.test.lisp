@@ -18,3 +18,7 @@
 (assert-equal factorial (lambda (y) (factorial y)))
 (assert-equal factorial (lambda (x) (factorial x)))
 (assert-equal (lambda (x) (factorial x)) (lambda (y) (factorial y)))
+
+;; test readback of recursive functions
+
+factorial
