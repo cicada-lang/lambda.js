@@ -13,7 +13,6 @@
           (ackermann (sub1 m) one)
           (ackermann (sub1 m) (ackermann m (sub1 n))))))))
 
-
 (assert-equal ((Y ackermann-wrap) zero zero) one)
 (assert-equal ((Y ackermann-wrap) one zero) two)
 (assert-equal ((Y ackermann-wrap) zero one) two)
