@@ -1,8 +1,8 @@
 import { same } from "../same/index.ts"
-import { type Value } from "../value/index.ts"
+import { type DefinedLambda, type Value } from "../value/index.ts"
 
 export type Blaze = {
-  lhs: Value
+  lhs: DefinedLambda
   rhs: Value
 }
 
@@ -34,14 +34,18 @@ export function ctxBindName(ctx: Ctx, name: string): Ctx {
   }
 }
 
-export function ctxBlazeTrail(ctx: Ctx, lhs: Value, rhs: Value): Ctx {
+export function ctxBlazeTrail(ctx: Ctx, lhs: DefinedLambda, rhs: Value): Ctx {
   return {
     ...ctx,
     trail: [...ctx.trail, { lhs, rhs }],
   }
 }
 
-export function ctxBlazeOccurred(ctx: Ctx, lhs: Value, rhs: Value): boolean {
+export function ctxBlazeOccurred(
+  ctx: Ctx,
+  lhs: DefinedLambda,
+  rhs: Value,
+): boolean {
   for (const blaze of ctx.trail) {
     if (same(lhs, blaze.lhs) && same(rhs, blaze.rhs)) {
       return true

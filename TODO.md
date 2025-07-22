@@ -1,3 +1,5 @@
+`sameInCtx` -- use head on `DelayedApply`, but only for `DefinedLambda` in equal's context
+
 # lazy evaluation
 
 we still can bring back lazy evaluation by lazy + box,
