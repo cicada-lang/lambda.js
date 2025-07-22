@@ -1,12 +1,6 @@
-debug `applyWithDelay` by log with `formatValue`
+# later
+
 `formatValue` -- use `let` to print closure
-
-i am not sure the stack overflow error
-is due to not infinite loop
-or the complexity of lambda encoding.
-
-we should use occam-lisp.js to do test,
-with builtin instead of lambda encoding.
 
 # lazy evaluation
 
