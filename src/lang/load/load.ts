@@ -1,14 +1,11 @@
 import { ParsingError } from "@xieyuheng/x-data.js"
+import dedent from "dedent"
+import assert from "node:assert"
 import fs from "node:fs"
 import { expFreeNames } from "../exp/expFreeNames.ts"
+import { expIndirectFreeNames } from "../exp/index.ts"
 import { formatExp } from "../format/formatExp.ts"
-import {
-  createMod,
-  modFind,
-  modOwnDefs,
-  type Def,
-  type Mod,
-} from "../mod/index.ts"
+import { createMod, modFind, modOwnDefs, type Mod } from "../mod/index.ts"
 import { parseStmts } from "../parse/index.ts"
 import { globalLoadedMods } from "./globalLoadedMods.ts"
 import { handleDefine } from "./handleDefine.ts"
@@ -42,24 +39,34 @@ async function run(mod: Mod): Promise<void> {
   for (const stmt of mod.stmts) await handleDefine(mod, stmt)
   for (const stmt of mod.stmts) await handleImport(mod, stmt)
 
-  for (const def of modOwnDefs(mod).values()) postprocessDef(mod, def)
+  postprocess(mod)
 
   for (const stmt of mod.stmts) await handleEffect(mod, stmt)
 
   mod.isFinished = true
 }
 
-function postprocessDef(mod: Mod, def: Def): void {
-  def.freeNames = expFreeNames(new Set(), def.exp)
-  for (const name of def.freeNames) {
-    if (modFind(mod, name) === undefined) {
-      throw new Error(
-        [
-          `[load] I find undefined name: ${name}`,
-          `  defining: ${def.name}`,
-          `  body: ${formatExp(def.exp)}`,
-        ].join("\n"),
-      )
+function postprocess(mod: Mod): void {
+  for (const def of modOwnDefs(mod).values()) {
+    def.freeNames = expFreeNames(new Set(), def.exp)
+  }
+
+  for (const def of modOwnDefs(mod).values()) {
+    assert(def.freeNames)
+    for (const name of def.freeNames) {
+      if (!modFind(mod, name)) {
+        throw new Error(dedent`
+          [load] I find undefined name: ${name}
+            defining: ${def.name}
+            to: : ${formatExp(def.exp)}
+          `)
+      }
+    }
+  }
+
+  for (const def of modOwnDefs(mod).values()) {
+    if (expIndirectFreeNames(mod, def.exp).has(def.name)) {
+      def.isRecursive = true
     }
   }
 }

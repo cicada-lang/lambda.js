@@ -1,7 +1,3 @@
-use `RecursiveLambda` instead of `DefinedLambda`
-`markAllRecursiveFunctions`
-`sameInCtx` -- use head on `DelayedApply`, but only for `RecursiveLambda`
-
 # lazy evaluation
 
 we still can bring back lazy evaluation by lazy + box,
@@ -17,6 +13,11 @@ why?
 maybe only way to understand a reduction strategy
 is to see a lot of reduction paths.
 we need to see why current strategy can handle `Y`.
+
+# recursive lambda
+
+use `RecursiveLambda` instead of `DefinedLambda` -- i tried, but it is to slow
+`sameInCtx` -- use head on `DelayedApply`, but only for `RecursiveLambda`
 
 # later
 
