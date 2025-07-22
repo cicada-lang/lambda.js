@@ -39,6 +39,10 @@
 (assert-equal (factorial-3 three) (mul three two))
 (assert-equal (factorial-3 four) (mul four (mul three two)))
 
+(assert-not-same factorial-1 factorial-2)
+(assert-not-same factorial-1 factorial-3)
+(assert-not-same factorial-2 factorial-3)
+
 (assert-equal factorial-1 factorial-2)
 (assert-equal factorial-1 factorial-3)
 (assert-equal factorial-2 factorial-3)
