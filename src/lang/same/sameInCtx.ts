@@ -22,13 +22,13 @@ export function sameInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
     if (lambdaSameDefined(lhs, rhs)) {
       return true
     }
+
+    if (lambdaIsDefined(lhs) || lambdaIsDefined(rhs)) {
+      return false
+    }
   }
 
   if (lhs.kind === "Lambda" && !lambdaIsDefined(lhs)) {
-    if (rhs.kind === "Lambda" && lambdaIsDefined(rhs)) {
-      return false
-    }
-
     const freshName = freshen(ctx.boundNames, lhs.name)
     ctx = ctxBindName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
@@ -36,10 +36,6 @@ export function sameInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
   }
 
   if (rhs.kind === "Lambda" && !lambdaIsDefined(rhs)) {
-    if (lhs.kind === "Lambda" && lambdaIsDefined(lhs)) {
-      return false
-    }
-
     const freshName = freshen(ctx.boundNames, rhs.name)
     ctx = ctxBindName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
