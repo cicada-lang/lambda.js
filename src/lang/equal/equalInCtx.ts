@@ -15,68 +15,60 @@ import {
 
 const debug = false
 
-export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
+export function equalInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
   ctx = ctxDepthAdd1(ctx)
 
-  left = Values.lazyActiveDeep(left)
-  right = Values.lazyActiveDeep(right)
+  lhs = Values.lazyActiveDeep(lhs)
+  rhs = Values.lazyActiveDeep(rhs)
 
   if (debug) {
-    console.log("[equalInCtx]", ctx.depth, " ", formatValue(left))
-    console.log("[equalInCtx]", ctx.depth, "=", formatValue(right))
-    console.log("[equalInCtx]", "same:", same(left, right))
+    console.log("[equalInCtx]", ctx.depth, " ", formatValue(lhs))
+    console.log("[equalInCtx]", ctx.depth, "=", formatValue(rhs))
+    console.log("[equalInCtx]", "same:", same(lhs, rhs))
   }
 
-  if (same(left, right)) return true
+  if (same(lhs, rhs)) return true
 
-  if (left.kind === "NotYet" && right.kind === "NotYet") {
-    return equalNeutralInCtx(ctx, left.neutral, right.neutral)
+  if (lhs.kind === "NotYet" && rhs.kind === "NotYet") {
+    return equalNeutralInCtx(ctx, lhs.neutral, rhs.neutral)
   }
 
-  if (left.kind === "Lambda") {
-    if (lambdaIsDefined(left)) {
-      if (ctxBlazeOccurred(ctx, left, right)) {
+  if (lhs.kind === "Lambda") {
+    if (lambdaIsDefined(lhs)) {
+      if (ctxBlazeOccurred(ctx, lhs, rhs)) {
         return true
       } else {
-        ctx = ctxBlazeTrail(ctx, left, right)
+        ctx = ctxBlazeTrail(ctx, lhs, rhs)
       }
     }
 
-    const freshName = freshen(ctx.boundNames, left.name)
+    const freshName = freshen(ctx.boundNames, lhs.name)
     ctx = ctxBindName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
-    return equalInCtx(
-      ctx,
-      applyWithDelay(left, arg),
-      applyWithDelay(right, arg),
-    )
+    return equalInCtx(ctx, applyWithDelay(lhs, arg), applyWithDelay(rhs, arg))
   }
 
-  if (right.kind === "Lambda") {
-    if (lambdaIsDefined(right)) {
-      if (ctxBlazeOccurred(ctx, right, left)) {
+  if (rhs.kind === "Lambda") {
+    if (lambdaIsDefined(rhs)) {
+      if (ctxBlazeOccurred(ctx, rhs, lhs)) {
         return true
       } else {
-        ctx = ctxBlazeTrail(ctx, right, left)
+        ctx = ctxBlazeTrail(ctx, rhs, lhs)
       }
     }
 
-    const freshName = freshen(ctx.boundNames, right.name)
+    const freshName = freshen(ctx.boundNames, rhs.name)
     ctx = ctxBindName(ctx, freshName)
     const v = Neutrals.Var(freshName)
     const arg = Values.NotYet(v)
-    return equalInCtx(
-      ctx,
-      applyWithDelay(left, arg),
-      applyWithDelay(right, arg),
-    )
+    return equalInCtx(ctx, applyWithDelay(lhs, arg), applyWithDelay(rhs, arg))
   }
 
-  if (left.kind === "DelayedApply" && right.kind === "DelayedApply") {
+  if (lhs.kind === "DelayedApply" && rhs.kind === "DelayedApply") {
     if (
-      equalInCtx(ctx, left.target, right.target) &&
-      equalInCtx(ctx, left.arg, right.arg)
+      equalInCtx(ctx, lhs.target, rhs.target) &&
+      equalInCtx(ctx, lhs.arg, rhs.arg)
     ) {
       return true
     }
@@ -94,12 +86,12 @@ export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
     // }
   }
 
-  if (left.kind === "DelayedApply") {
-    return equalInCtx(ctx, applyWithDelay(left.target, left.arg), right)
+  if (lhs.kind === "DelayedApply") {
+    return equalInCtx(ctx, applyWithDelay(lhs.target, lhs.arg), rhs)
   }
 
-  if (right.kind === "DelayedApply") {
-    return equalInCtx(ctx, left, applyWithDelay(right.target, right.arg))
+  if (rhs.kind === "DelayedApply") {
+    return equalInCtx(ctx, lhs, applyWithDelay(rhs.target, rhs.arg))
   }
 
   return false

@@ -10,63 +10,63 @@ import {
 } from "../value/index.ts"
 import { ctxBindName, type Ctx } from "./Ctx.ts"
 
-export function sameInCtx(ctx: Ctx, left: Value, right: Value): boolean {
-  left = Values.lazyActiveDeep(left)
-  right = Values.lazyActiveDeep(right)
+export function sameInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
+  lhs = Values.lazyActiveDeep(lhs)
+  rhs = Values.lazyActiveDeep(rhs)
 
-  if (left.kind === "NotYet" && right.kind === "NotYet") {
-    return sameNeutralInCtx(ctx, left.neutral, right.neutral)
+  if (lhs.kind === "NotYet" && rhs.kind === "NotYet") {
+    return sameNeutralInCtx(ctx, lhs.neutral, rhs.neutral)
   }
 
-  if (left.kind === "Lambda" && right.kind === "Lambda") {
-    if (lambdaSameDefined(left, right)) {
+  if (lhs.kind === "Lambda" && rhs.kind === "Lambda") {
+    if (lambdaSameDefined(lhs, rhs)) {
       return true
     }
   }
 
-  if (left.kind === "Lambda" && !lambdaIsDefined(left)) {
-    if (right.kind === "Lambda" && lambdaIsDefined(right)) {
+  if (lhs.kind === "Lambda" && !lambdaIsDefined(lhs)) {
+    if (rhs.kind === "Lambda" && lambdaIsDefined(rhs)) {
       return false
     }
 
-    const freshName = freshen(ctx.boundNames, left.name)
+    const freshName = freshen(ctx.boundNames, lhs.name)
     ctx = ctxBindName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
-    return sameInCtx(ctx, applyWithDelay(left, arg), applyWithDelay(right, arg))
+    return sameInCtx(ctx, applyWithDelay(lhs, arg), applyWithDelay(rhs, arg))
   }
 
-  if (right.kind === "Lambda" && !lambdaIsDefined(right)) {
-    if (left.kind === "Lambda" && lambdaIsDefined(left)) {
+  if (rhs.kind === "Lambda" && !lambdaIsDefined(rhs)) {
+    if (lhs.kind === "Lambda" && lambdaIsDefined(lhs)) {
       return false
     }
 
-    const freshName = freshen(ctx.boundNames, right.name)
+    const freshName = freshen(ctx.boundNames, rhs.name)
     ctx = ctxBindName(ctx, freshName)
     const arg = Values.NotYet(Neutrals.Var(freshName))
-    return sameInCtx(ctx, applyWithDelay(left, arg), applyWithDelay(right, arg))
+    return sameInCtx(ctx, applyWithDelay(lhs, arg), applyWithDelay(rhs, arg))
   }
 
-  if (left.kind === "DelayedApply" && right.kind === "DelayedApply") {
+  if (lhs.kind === "DelayedApply" && rhs.kind === "DelayedApply") {
     if (
-      sameInCtx(ctx, left.target, right.target) &&
-      sameInCtx(ctx, left.arg, right.arg)
+      sameInCtx(ctx, lhs.target, rhs.target) &&
+      sameInCtx(ctx, lhs.arg, rhs.arg)
     ) {
       return true
     }
   }
 
   if (
-    left.kind === "DelayedApply" &&
-    !(left.target.kind === "Lambda" && lambdaIsDefined(left.target))
+    lhs.kind === "DelayedApply" &&
+    !(lhs.target.kind === "Lambda" && lambdaIsDefined(lhs.target))
   ) {
-    return sameInCtx(ctx, applyWithDelay(left.target, left.arg), right)
+    return sameInCtx(ctx, applyWithDelay(lhs.target, lhs.arg), rhs)
   }
 
   if (
-    right.kind === "DelayedApply" &&
-    !(right.target.kind === "Lambda" && lambdaIsDefined(right.target))
+    rhs.kind === "DelayedApply" &&
+    !(rhs.target.kind === "Lambda" && lambdaIsDefined(rhs.target))
   ) {
-    return sameInCtx(ctx, left, applyWithDelay(right.target, right.arg))
+    return sameInCtx(ctx, lhs, applyWithDelay(rhs.target, rhs.arg))
   }
 
   return false
