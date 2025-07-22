@@ -1,4 +1,6 @@
-`sameInCtx` -- use head on `DelayedApply`, but only for `DefinedLambda` in equal's context
+use `RecursiveLambda` instead of `DefinedLambda`
+
+`sameInCtx` -- use head on `DelayedApply`, but only for `RecursiveLambda`
 
 # lazy evaluation
 
