@@ -52,8 +52,6 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
               readbackInCtx(ctx, value.target),
               readbackInCtx(ctx, value.arg),
             )
-          } else {
-            ctx = ctxBlazeTrail(ctx, head)
           }
         }
       }
