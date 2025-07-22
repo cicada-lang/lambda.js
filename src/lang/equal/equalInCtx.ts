@@ -18,15 +18,16 @@ const debug = false
 export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
   ctx = ctxDepthAdd1(ctx)
 
+  left = Values.lazyActiveDeep(left)
+  right = Values.lazyActiveDeep(right)
+
   if (debug) {
-    console.log("[equalInCtx]", ctx.depth, "*", formatValue(left))
+    console.log("[equalInCtx]", ctx.depth, " ", formatValue(left))
     console.log("[equalInCtx]", ctx.depth, "=", formatValue(right))
+    console.log("[equalInCtx]", "same:", same(left, right))
   }
 
   if (same(left, right)) return true
-
-  left = Values.lazyActiveDeep(left)
-  right = Values.lazyActiveDeep(right)
 
   if (left.kind === "NotYet" && right.kind === "NotYet") {
     return equalNeutralInCtx(ctx, left.neutral, right.neutral)

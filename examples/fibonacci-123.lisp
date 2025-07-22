@@ -62,6 +62,8 @@
 (assert-equal (fibonacci-3 four) three)
 (assert-equal (fibonacci-3 five) five)
 
+(assert-not-same fibonacci-1 fibonacci-2)
+
 ;; TODO fail:
 
 ;; (assert-equal fibonacci-1 fibonacci-2)
