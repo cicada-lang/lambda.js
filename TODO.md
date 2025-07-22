@@ -1,6 +1,4 @@
-# later
-
-`formatValue` -- use `let` to print closure
+`delayedApplyUtils`
 
 # lazy evaluation
 
@@ -17,6 +15,10 @@ why?
 maybe only way to understand a reduction strategy
 is to see a lot of reduction paths.
 we need to see why current strategy can handle `Y`.
+
+# later
+
+`formatValue` -- use `let` to print closure
 
 # equal
 

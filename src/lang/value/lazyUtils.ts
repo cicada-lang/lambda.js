@@ -1,6 +1,6 @@
 import { evaluate } from "../evaluate/index.ts"
-import type * as Values from "../value/index.ts"
-import { type Value } from "../value/index.ts"
+import type * as Values from "./index.ts"
+import { type Value } from "./index.ts"
 
 export function lazyActive(lazy: Values.Lazy): Value {
   if (lazy.value !== undefined) {

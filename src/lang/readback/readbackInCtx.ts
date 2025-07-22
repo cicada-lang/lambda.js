@@ -39,6 +39,9 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
     }
 
     case "DelayedApply": {
+      // We should not `applyWithDelay` again,
+      // when any outer named lambda occors in this delayed-apply.
+
       if (value.target.kind === "Lambda") {
         if (lambdaIsDefined(value.target)) {
           if (ctxBlazeOccurred(ctx, value.target)) {
@@ -51,6 +54,11 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
           }
         }
       }
+
+      // return Exps.Apply(
+      //   readbackInCtx(ctx, value.target),
+      //   readbackInCtx(ctx, value.arg),
+      // )
 
       return readbackInCtx(ctx, applyWithDelay(value.target, value.arg))
     }
