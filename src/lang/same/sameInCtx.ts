@@ -72,15 +72,15 @@ export function sameInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
   return false
 }
 
-function sameNeutralInCtx(ctx: Ctx, left: Neutral, right: Neutral): boolean {
-  if (left.kind === "Var" && right.kind === "Var") {
-    return right.name === left.name
+function sameNeutralInCtx(ctx: Ctx, lhs: Neutral, rhs: Neutral): boolean {
+  if (lhs.kind === "Var" && rhs.kind === "Var") {
+    return rhs.name === lhs.name
   }
 
-  if (left.kind === "Apply" && right.kind === "Apply") {
+  if (lhs.kind === "Apply" && rhs.kind === "Apply") {
     return (
-      sameNeutralInCtx(ctx, left.target, right.target) &&
-      sameInCtx(ctx, left.arg, right.arg)
+      sameNeutralInCtx(ctx, lhs.target, rhs.target) &&
+      sameInCtx(ctx, lhs.arg, rhs.arg)
     )
   }
 

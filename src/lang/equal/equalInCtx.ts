@@ -74,12 +74,12 @@ export function equalInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
     }
 
     // if (
-    //   equalInCtx(ctx, applyWithDelay(left.target, left.arg), right) ||
-    //   equalInCtx(ctx, left, applyWithDelay(right.target, right.arg)) ||
+    //   equalInCtx(ctx, applyWithDelay(lhs.target, lhs.arg), rhs) ||
+    //   equalInCtx(ctx, lhs, applyWithDelay(rhs.target, rhs.arg)) ||
     //   equalInCtx(
     //     ctx,
-    //     applyWithDelay(left.target, left.arg),
-    //     applyWithDelay(right.target, right.arg),
+    //     applyWithDelay(lhs.target, lhs.arg),
+    //     applyWithDelay(rhs.target, rhs.arg),
     //   )
     // ) {
     //   return true
@@ -97,15 +97,15 @@ export function equalInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
   return false
 }
 
-function equalNeutralInCtx(ctx: Ctx, left: Neutral, right: Neutral): boolean {
-  if (left.kind === "Var" && right.kind === "Var") {
-    return right.name === left.name
+function equalNeutralInCtx(ctx: Ctx, lhs: Neutral, rhs: Neutral): boolean {
+  if (lhs.kind === "Var" && rhs.kind === "Var") {
+    return rhs.name === lhs.name
   }
 
-  if (left.kind === "Apply" && right.kind === "Apply") {
+  if (lhs.kind === "Apply" && rhs.kind === "Apply") {
     return (
-      equalNeutralInCtx(ctx, left.target, right.target) &&
-      equalInCtx(ctx, left.arg, right.arg)
+      equalNeutralInCtx(ctx, lhs.target, rhs.target) &&
+      equalInCtx(ctx, lhs.arg, rhs.arg)
     )
   }
 
