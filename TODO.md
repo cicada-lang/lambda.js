@@ -1,4 +1,3 @@
-compute stmt should not call `formatValue`
 `formatValue` should not call `readback` -- to be used in debug -- use `let` to print closure
 debug `applyWithDelay` by log with `formatValue`
 
