@@ -1,3 +1,27 @@
+# bug
+
+[bug] `(assert-equal fibonacci fibonacci/1)` fail
+
+- as i how understand it now, this fail,
+  because of `sameInCtx` can only handle unary function,
+  and loop forever in the case of `DelayedApply`.
+  - should be like `readbackInCtx` in the case of `DelayedApply`,
+    find the head of the `DelayedApply` to handle non unary functions.
+
+[bug] `(assert-equal ackermann ackermann/1)` fail
+
+- maybe is it possible to extend the algorithm to handle `ackermann`,
+  if not, is it related to different classes of recursive functions?
+
+[bug] why top level wrap need a eta?
+
+```scheme
+(define factorial-1 (factorial-wrap factorial-1))
+(define (factorial-1 n) ((factorial-wrap factorial-1) n))
+```
+
+- can adding lazy evaluation help fix this?
+
 # lazy evaluation
 
 we still can bring back lazy evaluation by lazy + box,
@@ -16,30 +40,14 @@ we need to see why current strategy can handle `Y`.
 
 # recursive lambda
 
-use `RecursiveLambda` instead of `DefinedLambda` -- i tried, but it is to slow
+use `RecursiveLambda` instead of `DefinedLambda`
+
+- i tried, but it is too slow
+
 `sameInCtx` -- use head on `DelayedApply`, but only for `RecursiveLambda`
+
+- maybe this can pass `fibonacci`, but not `ackermann`
 
 # later
 
 `formatValue` -- use `let` to print closure
-
-# equal
-
-be able to check equivalence of ackermann function.
-why delayed-apply is not enough for ackermann function?
-is it possible to extend the algorithm to handle it?
-if not, is it related to different classes of recursive functions?
-
-we should try to do the same that we did for `length` functions,
-extending `ackermann` to see why what works for `length` failed.
-
-no need `ackermann`, `fibonacci` already fails.
-
-why top level wrap need a eta?
-
-```scheme
-(define factorial-1 (factorial-wrap factorial-1))
-(define (factorial-1 n) ((factorial-wrap factorial-1) n))
-```
-
-can adding lazy evaluation help fix this?
