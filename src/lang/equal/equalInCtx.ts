@@ -1,5 +1,6 @@
 import { freshen } from "../../utils/name/freshen.ts"
 import { applyWithDelay } from "../evaluate/index.ts"
+import { formatValue } from "../format/index.ts"
 import { same } from "../same/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
@@ -8,10 +9,20 @@ import {
   ctxBindName,
   ctxBlazeOccurred,
   ctxBlazeTrail,
+  ctxDepthAdd1,
   type Ctx,
 } from "./Ctx.ts"
 
+const debug = false
+
 export function equalInCtx(ctx: Ctx, left: Value, right: Value): boolean {
+  ctx = ctxDepthAdd1(ctx)
+
+  if (debug) {
+    console.log("[equalInCtx]", ctx.depth, "*", formatValue(left))
+    console.log("[equalInCtx]", ctx.depth, "=", formatValue(right))
+  }
+
   if (same(left, right)) return true
 
   left = Values.lazyActiveDeep(left)

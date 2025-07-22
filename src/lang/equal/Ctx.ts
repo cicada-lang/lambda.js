@@ -9,12 +9,21 @@ export type Blaze = {
 export type Ctx = {
   boundNames: Set<string>
   trail: Array<Blaze>
+  depth: number
 }
 
 export function emptyCtx(): Ctx {
   return {
     boundNames: new Set(),
     trail: new Array(),
+    depth: 0,
+  }
+}
+
+export function ctxDepthAdd1(ctx: Ctx): Ctx {
+  return {
+    ...ctx,
+    depth: ctx.depth + 1,
   }
 }
 
@@ -26,7 +35,6 @@ export function ctxBindName(ctx: Ctx, name: string): Ctx {
 }
 
 export function ctxBlazeTrail(ctx: Ctx, lhs: Value, rhs: Value): Ctx {
-  // console.log("[ctxBlazeTrail]", formatValue(lhs), formatValue(rhs))
   return {
     ...ctx,
     trail: [...ctx.trail, { lhs, rhs }],
