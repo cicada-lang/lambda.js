@@ -1,5 +1,5 @@
-`formatValue` should not call `readback` -- to be used in debug -- use `let` to print closure
 debug `applyWithDelay` by log with `formatValue`
+`formatValue` -- use `let` to print closure
 
 i am not sure the stack overflow error
 is due to not infinite loop
