@@ -1,5 +1,6 @@
 import { freshen } from "../../utils/name/freshen.ts"
 import { applyWithDelay } from "../evaluate/index.ts"
+import { formatValue } from "../format/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
 import {
@@ -8,11 +9,20 @@ import {
   type Neutral,
   type Value,
 } from "../value/index.ts"
-import { ctxBindName, type Ctx } from "./Ctx.ts"
+import { ctxBindName, ctxDepthAdd1, type Ctx } from "./Ctx.ts"
+
+const debug = false
 
 export function sameInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
+  ctx = ctxDepthAdd1(ctx)
+
   lhs = Values.lazyActiveDeep(lhs)
   rhs = Values.lazyActiveDeep(rhs)
+
+  if (debug) {
+    console.log("[sameInCtx]", ctx.depth, " ", formatValue(lhs))
+    console.log("[sameInCtx]", ctx.depth, "=", formatValue(rhs))
+  }
 
   if (lhs.kind === "NotYet" && rhs.kind === "NotYet") {
     return sameNeutralInCtx(ctx, lhs.neutral, rhs.neutral)
@@ -51,18 +61,16 @@ export function sameInCtx(ctx: Ctx, lhs: Value, rhs: Value): boolean {
     }
   }
 
-  if (
-    lhs.kind === "DelayedApply" &&
-    !(lhs.target.kind === "Lambda" && lambdaIsDefined(lhs.target))
-  ) {
-    return sameInCtx(ctx, applyWithDelay(lhs.target, lhs.arg), rhs)
+  if (lhs.kind === "DelayedApply") {
+    if (!(lhs.target.kind === "Lambda" && lambdaIsDefined(lhs.target))) {
+      return sameInCtx(ctx, applyWithDelay(lhs.target, lhs.arg), rhs)
+    }
   }
 
-  if (
-    rhs.kind === "DelayedApply" &&
-    !(rhs.target.kind === "Lambda" && lambdaIsDefined(rhs.target))
-  ) {
-    return sameInCtx(ctx, lhs, applyWithDelay(rhs.target, rhs.arg))
+  if (rhs.kind === "DelayedApply") {
+    if (!(rhs.target.kind === "Lambda" && lambdaIsDefined(rhs.target))) {
+      return sameInCtx(ctx, lhs, applyWithDelay(rhs.target, rhs.arg))
+    }
   }
 
   return false
