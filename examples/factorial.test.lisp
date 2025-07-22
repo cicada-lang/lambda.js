@@ -10,6 +10,10 @@
 (assert-equal (factorial four) (mul four (mul three two)))
 (assert-equal (factorial five) (mul five (mul four (mul three two))))
 
+;; test readback recursive functions
+
+factorial
+
 ;; test equivalence between recursive functions
 
 (assert-same factorial factorial)

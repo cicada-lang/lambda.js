@@ -39,3 +39,12 @@
   (lambda (n)
     (if (zero? n) true
         (odd? (sub1 n)))))
+
+
+;; test readback recursive functions
+
+even?
+odd?
+
+direct-even?
+direct-odd?

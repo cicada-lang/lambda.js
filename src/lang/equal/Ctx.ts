@@ -26,6 +26,7 @@ export function ctxBindName(ctx: Ctx, name: string): Ctx {
 }
 
 export function ctxBlazeTrail(ctx: Ctx, lhs: Value, rhs: Value): Ctx {
+  // console.log("[ctxBlazeTrail]", formatValue(lhs), formatValue(rhs))
   return {
     ...ctx,
     trail: [...ctx.trail, { lhs, rhs }],

@@ -20,7 +20,11 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
 
     case "Lambda": {
       if (lambdaIsDefined(value)) {
-        return Exps.Var(value.definedName)
+        if (ctxBlazeOccurred(ctx, value)) {
+          return Exps.Var(value.definedName)
+        } else {
+          ctx = ctxBlazeTrail(ctx, value)
+        }
       }
 
       const freshName = freshen(ctx.boundNames, value.name)

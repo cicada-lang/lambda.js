@@ -1,5 +1,5 @@
-I
-(lambda (y) I)
 (lambda (x) x)
-I
-I
+(lambda (y x) x)
+(lambda (x) x)
+(lambda (x) x)
+(lambda (x) x)

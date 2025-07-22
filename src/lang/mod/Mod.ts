@@ -45,7 +45,7 @@ export function modFindValue(mod: Mod, name: string): Value | undefined {
   if (def.value) return def.value
 
   const value = evaluate(def.mod, emptyEnv(), def.exp)
-  if (value.kind === "Lambda") {
+  if (value.kind === "Lambda" && value.definedName === undefined) {
     value.definedName = def.name
   }
 
