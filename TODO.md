@@ -1,3 +1,7 @@
+compute stmt should not call `formatValue`
+`formatValue` should not call `readback` -- to be used in debug -- use `let` to print closure
+debug `applyWithDelay` by log with `formatValue`
+
 i am not sure the stack overflow error
 is due to not infinite loop
 or the complexity of lambda encoding.
