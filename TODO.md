@@ -1,5 +1,5 @@
 use `RecursiveLambda` instead of `DefinedLambda`
-
+`markAllRecursiveFunctions`
 `sameInCtx` -- use head on `DelayedApply`, but only for `RecursiveLambda`
 
 # lazy evaluation

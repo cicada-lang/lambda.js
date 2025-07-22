@@ -8,6 +8,7 @@ export type Def = {
   mod: Mod
   name: string
   exp: Exp
+  freeNames?: Set<string>
   value?: Value
 }
 
@@ -27,10 +28,6 @@ export function createMod(url: URL): Mod {
 }
 
 export function modDefine(mod: Mod, name: string, def: Def): void {
-  if (modFind(mod, name)) {
-    throw new Error(`[modDefine] I can not redefine name: ${name}`)
-  }
-
   mod.defs.set(name, def)
 }
 

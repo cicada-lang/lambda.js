@@ -33,5 +33,10 @@ async function importOne(
     )
   }
 
-  modDefine(mod, rename || name, def)
+  const localName = rename || name
+  if (modFind(mod, localName)) {
+    throw new Error(`[import] I can not redefine name: ${localName}`)
+  }
+
+  modDefine(mod, localName, def)
 }
