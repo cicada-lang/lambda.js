@@ -4,7 +4,12 @@ import * as Exps from "../exp/index.ts"
 import { type Exp } from "../exp/index.ts"
 import * as Neutrals from "../value/index.ts"
 import * as Values from "../value/index.ts"
-import { lambdaIsDefined, type Neutral, type Value } from "../value/index.ts"
+import {
+  delayedApplyHead,
+  lambdaIsDefined,
+  type Neutral,
+  type Value,
+} from "../value/index.ts"
 import {
   ctxBindName,
   ctxBlazeOccurred,
@@ -39,26 +44,19 @@ export function readbackInCtx(ctx: Ctx, value: Value): Exp {
     }
 
     case "DelayedApply": {
-      // We should not `applyWithDelay` again,
-      // when any outer named lambda occors in this delayed-apply.
-
-      if (value.target.kind === "Lambda") {
-        if (lambdaIsDefined(value.target)) {
-          if (ctxBlazeOccurred(ctx, value.target)) {
+      const head = delayedApplyHead(value)
+      if (head.kind === "Lambda") {
+        if (lambdaIsDefined(head)) {
+          if (ctxBlazeOccurred(ctx, head)) {
             return Exps.Apply(
-              Exps.Var(value.target.definedName),
+              readbackInCtx(ctx, value.target),
               readbackInCtx(ctx, value.arg),
             )
           } else {
-            ctx = ctxBlazeTrail(ctx, value.target)
+            ctx = ctxBlazeTrail(ctx, head)
           }
         }
       }
-
-      // return Exps.Apply(
-      //   readbackInCtx(ctx, value.target),
-      //   readbackInCtx(ctx, value.arg),
-      // )
 
       return readbackInCtx(ctx, applyWithDelay(value.target, value.arg))
     }

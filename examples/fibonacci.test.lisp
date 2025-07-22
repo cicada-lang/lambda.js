@@ -10,4 +10,4 @@
 
 ;; test readback
 
-;; fibonacci
+fibonacci

@@ -1,3 +1,4 @@
+export * from "./delayedApplyUtils.ts"
 export * from "./lambdaUtils.ts"
 export * from "./lazyUtils.ts"
 export * from "./Neutral.ts"
