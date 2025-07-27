@@ -1,3 +1,4 @@
 [assert-same] fail:
   lhs: id1
   rhs: id2
+

@@ -1,5 +1,4 @@
 import { ParsingError } from "@xieyuheng/x-data.js"
-import dedent from "dedent"
 import assert from "node:assert"
 import fs from "node:fs"
 import { expFreeNames } from "../exp/expFreeNames.ts"
@@ -55,11 +54,11 @@ function postprocess(mod: Mod): void {
     assert(def.freeNames)
     for (const name of def.freeNames) {
       if (!modFind(mod, name)) {
-        throw new Error(dedent`
-          [load] I find undefined name: ${name}
-            defining: ${def.name}
-            to: : ${formatExp(def.exp)}
-          `)
+        throw new Error(
+          `[load] I find undefined name: ${name}\n` +
+            `  defining: ${def.name}\n` +
+            `  to: : ${formatExp(def.exp)}\n`,
+        )
       }
     }
   }

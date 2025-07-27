@@ -1,4 +1,3 @@
-import dedent from "dedent"
 import { emptyEnv } from "../env/index.ts"
 import { equal } from "../equal/index.ts"
 import { evaluate } from "../evaluate/index.ts"
@@ -19,11 +18,11 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
       return
     }
 
-    throw new Error(dedent`
-      [assert-equal] fail:
-        lhs: ${formatExp(stmt.lhs)}
-        rhs: ${formatExp(stmt.rhs)}
-      `)
+    throw new Error(
+      `[assert-equal] fail:\n` +
+        `  lhs: ${formatExp(stmt.lhs)}\n` +
+        `  rhs: ${formatExp(stmt.rhs)}\n`,
+    )
   }
 
   if (stmt.kind === "AssertNotEqual") {
@@ -36,11 +35,11 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
       return
     }
 
-    throw new Error(dedent`
-      [assert-not-equal] fail:
-        lhs: ${formatExp(stmt.lhs)}
-        rhs: ${formatExp(stmt.rhs)}
-      `)
+    throw new Error(
+      `[assert-not-equal] fail:\n` +
+        `  lhs: ${formatExp(stmt.lhs)}\n` +
+        `  rhs: ${formatExp(stmt.rhs)}\n`,
+    )
   }
 
   if (stmt.kind === "AssertSame") {
@@ -53,11 +52,11 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
       return
     }
 
-    throw new Error(dedent`
-      [assert-same] fail:
-        lhs: ${formatExp(stmt.lhs)}
-        rhs: ${formatExp(stmt.rhs)}
-      `)
+    throw new Error(
+      `[assert-same] fail:\n` +
+        `  lhs: ${formatExp(stmt.lhs)}\n` +
+        `  rhs: ${formatExp(stmt.rhs)}\n`,
+    )
   }
 
   if (stmt.kind === "AssertNotSame") {
@@ -70,11 +69,11 @@ export async function handleEffect(mod: Mod, stmt: Stmt): Promise<void> {
       return
     }
 
-    throw new Error(dedent`
-      [assert-not-same] fail:
-        lhs: ${formatExp(stmt.lhs)}
-        rhs: ${formatExp(stmt.rhs)}
-      `)
+    throw new Error(
+      `[assert-not-same] fail:\n` +
+        `  lhs: ${formatExp(stmt.lhs)}\n` +
+        `  rhs: ${formatExp(stmt.rhs)}\n`,
+    )
   }
 
   if (stmt.kind === "Compute") {
