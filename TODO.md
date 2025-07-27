@@ -1,3 +1,5 @@
+remove "dedent"
+
 # bug
 
 [bug] `(assert-equal fibonacci fibonacci/1)` fail

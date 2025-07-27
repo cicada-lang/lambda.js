@@ -26,7 +26,7 @@ export async function load(url: URL): Promise<Mod> {
     return mod
   } catch (error) {
     if (error instanceof ParsingError) {
-      throw new Error(error.report(text))
+      throw new Error(error.report({ text }))
     }
 
     throw error
