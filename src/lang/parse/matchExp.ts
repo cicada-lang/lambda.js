@@ -5,7 +5,7 @@ import { bindsFromArray, type Bind, type Exp } from "../exp/index.ts"
 const expMatcher: X.Matcher<Exp> = X.matcherChoice<Exp>([
   X.matcher("`(lambda ,names ,exp)", ({ names, exp }) =>
     X.dataToArray(names)
-      .map(X.dataToString)
+      .map(X.symbolToString)
       .reduceRight((fn, name) => Exps.Lambda(name, fn), matchExp(exp)),
   ),
 
@@ -22,7 +22,7 @@ const expMatcher: X.Matcher<Exp> = X.matcherChoice<Exp>([
       .reduce((result, arg) => Exps.Apply(result, arg), matchExp(target)),
   ),
 
-  X.matcher("name", ({ name }) => Exps.Var(X.dataToString(name))),
+  X.matcher("name", ({ name }) => Exps.Var(X.symbolToString(name))),
 ])
 
 export function matchExp(data: X.Data): Exp {
@@ -32,7 +32,7 @@ export function matchExp(data: X.Data): Exp {
 export function matchBind(data: X.Data): Bind {
   return X.match(
     X.matcher("`(,name ,exp)", ({ name, exp }) => ({
-      name: X.dataToString(name),
+      name: X.symbolToString(name),
       exp: matchExp(exp),
     })),
     data,

@@ -7,15 +7,15 @@ import { matchExp } from "./matchExp.ts"
 const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
   X.matcher("`(define ,(cons name args) ,exp)", ({ name, args, exp }) =>
     Stmts.Define(
-      X.dataToString(name),
+      X.symbolToString(name),
       X.dataToArray(args)
-        .map(X.dataToString)
+        .map(X.symbolToString)
         .reduceRight((fn, name) => Exps.Lambda(name, fn), matchExp(exp)),
     ),
   ),
 
   X.matcher("`(define ,name ,exp)", ({ name, exp }) =>
-    Stmts.Define(X.dataToString(name), matchExp(exp)),
+    Stmts.Define(X.symbolToString(name), matchExp(exp)),
   ),
 
   X.matcher("(cons 'import body)", ({ body }) => {
@@ -52,11 +52,11 @@ function matchImportEntry(data: X.Data): Stmts.ImportEntry {
   return X.match(
     X.matcherChoice([
       X.matcher("`(rename ,name ,rename)", ({ name, rename }) => ({
-        name: X.dataToString(name),
-        rename: X.dataToString(rename),
+        name: X.symbolToString(name),
+        rename: X.symbolToString(rename),
       })),
 
-      X.matcher("name", ({ name }) => ({ name: X.dataToString(name) })),
+      X.matcher("name", ({ name }) => ({ name: X.symbolToString(name) })),
     ]),
     data,
   )
