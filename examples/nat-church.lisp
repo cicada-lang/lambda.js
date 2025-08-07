@@ -50,7 +50,7 @@
 (assert-equal (power two four) (mul four four))
 (assert-equal (power two four) (mul (mul two two) (mul two two)))
 
-(import true false if and or not "bool.lisp")
+(import "bool.lisp" true false if and or not)
 
 (define (zero? n) (iter-Nat n true (lambda (x) false)))
 
@@ -61,7 +61,7 @@
 ;; The `sub1` about is `O(n)`,
 ;; while `sub1` for Scott encoding is `O(3)`.
 
-(import cons car cdr "cons.lisp")
+(import "cons.lisp" cons car cdr)
 
 (define (shift-add1 x)
   (cons (cdr x) (add1 (cdr x))))

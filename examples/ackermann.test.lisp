@@ -1,8 +1,8 @@
-(import zero add1 sub1 zero? "nat-church.lisp")
-(import one two three four five "nat-church.lisp")
-(import if "bool.lisp")
+(import "nat-church.lisp" zero add1 sub1 zero?)
+(import "nat-church.lisp" one two three four five)
+(import "bool.lisp" if)
 
-(import ackermann "ackermann.lisp")
+(import "ackermann.lisp" ackermann)
 
 ackermann
 

@@ -1,6 +1,6 @@
-(import zero zero? add sub1 "nat-church.lisp")
-(import one "nat-church.lisp")
-(import if "bool.lisp")
+(import "nat-church.lisp" zero zero? add sub1)
+(import "nat-church.lisp" one)
+(import "bool.lisp" if)
 
 (define (fibonacci n)
   (if (zero? n)

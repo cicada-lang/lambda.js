@@ -1,7 +1,7 @@
-(import add mul "nat-church.lisp")
-(import zero one two three four five "nat-church.lisp")
+(import "nat-church.lisp" add mul)
+(import "nat-church.lisp" zero one two three four five)
 
-(import factorial "factorial.lisp")
+(import "factorial.lisp" factorial)
 
 (assert-equal (factorial zero) one)
 (assert-equal (factorial one) one)

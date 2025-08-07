@@ -18,12 +18,12 @@ const stmtMatcher: X.Matcher<Stmt> = X.matcherChoice<Stmt>([
     Stmts.Define(X.symbolToString(name), matchExp(exp)),
   ),
 
-  X.matcher("(cons 'import body)", ({ body }) => {
-    const array = X.dataToArray(body)
-    const url = array[array.length - 1]
-    const entries = array.slice(0, array.length - 1)
-    return Stmts.Import(X.dataToString(url), entries.map(matchImportEntry))
-  }),
+  X.matcher("(cons* 'import source entries)", ({ source, entries }) =>
+    Stmts.Import(
+      X.dataToString(source),
+      X.dataToArray(entries).map(matchImportEntry),
+    ),
+  ),
 
   X.matcher("`(assert-equal ,lhs ,rhs)", ({ lhs, rhs }) =>
     Stmts.AssertEqual(matchExp(lhs), matchExp(rhs)),

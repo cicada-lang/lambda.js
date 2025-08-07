@@ -1,6 +1,6 @@
-(import nil li length append "list.lisp")
-(import true "bool.lisp")
-(import zero add1 "nat-church.lisp")
+(import "list.lisp" nil li length append)
+(import "bool.lisp" true)
+(import "nat-church.lisp" zero add1)
 
 (assert-equal (length nil) zero)
 (assert-equal (length (li true nil)) (add1 zero))

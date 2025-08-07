@@ -1,6 +1,6 @@
-(import zero? add mul sub1 "nat-church.lisp")
-(import zero one two three four "nat-church.lisp")
-(import if true false "bool.lisp")
+(import "nat-church.lisp" zero? add mul sub1)
+(import "nat-church.lisp" zero one two three four)
+(import "bool.lisp" if true false)
 
 (define (factorial-1 n)
   (if (zero? n)

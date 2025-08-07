@@ -1,5 +1,5 @@
-(import true false if "bool.lisp")
-(import sub1 zero? "nat-church.lisp")
+(import "bool.lisp" true false if)
+(import "nat-church.lisp" sub1 zero?)
 
 (define (even? n)
   (if (zero? n) true

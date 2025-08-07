@@ -1,8 +1,8 @@
-(import true false if and or not "bool.lisp")
-(import zero add1 sub1 zero? "nat-church.lisp")
-(import one two three four "nat-church.lisp")
+(import "bool.lisp" true false if and or not)
+(import "nat-church.lisp" zero add1 sub1 zero?)
+(import "nat-church.lisp" one two three four)
 
-(import even? odd? "nat-even-odd.lisp")
+(import "nat-even-odd.lisp" even? odd?)
 
 (assert-equal true (even? zero))
 (assert-equal true (even? two))
@@ -23,7 +23,7 @@
 (assert-equal even? even?)
 (assert-equal odd? odd?)
 
-(import direct-even? direct-odd? "nat-even-odd.lisp")
+(import "nat-even-odd.lisp" direct-even? direct-odd?)
 
 (assert-equal even? direct-even?)
 (assert-equal odd? direct-odd?)

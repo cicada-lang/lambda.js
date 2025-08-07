@@ -1,10 +1,10 @@
-(import S K I "combinators.lisp")
+(import "combinators.lisp" S K I)
 
 (I)
 (K I)
 (S K I)
 
-(import C B "combinators.lisp")
+(import "combinators.lisp" C B)
 
 (B I I I)
 (C K I I)

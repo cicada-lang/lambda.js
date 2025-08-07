@@ -1,4 +1,4 @@
-(import Y "fixpoint.lisp")
+(import "fixpoint.lisp" Y)
 
 (define zero (lambda (base step) base))
 (define (add1 prev) (lambda (base step) (step prev)))

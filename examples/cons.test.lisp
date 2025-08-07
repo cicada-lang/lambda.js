@@ -1,5 +1,5 @@
-(import cons car cdr null null? "cons.lisp")
-(import true false "bool.lisp")
+(import "cons.lisp" cons car cdr null null?)
+(import "bool.lisp" true false)
 
 (assert-equal true (null? null))
 (assert-equal true (null (lambda (car cdr) false)))

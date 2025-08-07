@@ -10,7 +10,7 @@
 (define (rec-List target nil-case li-case)
   (target nil-case li-case))
 
-(import zero add1 "nat-church.lisp")
+(import "nat-church.lisp" zero add1)
 
 (define (length l)
   (rec-List l

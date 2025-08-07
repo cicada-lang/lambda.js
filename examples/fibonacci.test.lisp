@@ -1,5 +1,5 @@
-(import zero one two three four five "nat-church.lisp")
-(import fibonacci "fibonacci.lisp")
+(import "nat-church.lisp" zero one two three four five)
+(import "fibonacci.lisp" fibonacci)
 
 (assert-equal (fibonacci zero) zero)
 (assert-equal (fibonacci one) one)

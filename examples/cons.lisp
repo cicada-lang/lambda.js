@@ -6,7 +6,7 @@
 (define (car pair) (pair (lambda (car cdr) car)))
 (define (cdr pair) (pair (lambda (car cdr) cdr)))
 
-(import true false "bool.lisp")
+(import "bool.lisp" true false)
 
 (define (null f) true)
 (define (null? pair) (pair (lambda (car cdr) false)))

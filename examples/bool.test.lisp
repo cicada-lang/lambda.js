@@ -1,4 +1,4 @@
-(import true false if and or not "bool.lisp")
+(import "bool.lisp" true false if and or not)
 
 (assert-equal (and true false) false)
 (assert-equal (or true false) true)

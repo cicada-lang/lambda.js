@@ -1,7 +1,7 @@
-(import true false if and or not "bool.lisp")
-(import zero add1 sub1 zero? "nat-church.lisp")
-(import one two three four "nat-church.lisp")
-(import even? "nat-even.lisp")
+(import "bool.lisp" true false if and or not)
+(import "nat-church.lisp" zero add1 sub1 zero?)
+(import "nat-church.lisp" one two three four)
+(import "nat-even.lisp" even?)
 
 (define (odd? n)
   (if (zero? n) false
